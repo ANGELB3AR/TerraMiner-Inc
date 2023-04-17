@@ -8,8 +8,11 @@ using UnityEngine.AI;
 public class EmployeeMovement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
+    [SerializeField] Animator animator = null;
 
     Camera mainCamera;
+
+    readonly int walkingVelocity = Animator.StringToHash("Velocity");
 
     private void Awake()
     {
@@ -18,6 +21,8 @@ public class EmployeeMovement : MonoBehaviour
 
     private void Update()
     {
+        animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
+
         if (!Mouse.current.leftButton.wasPressedThisFrame) { return; }
 
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
