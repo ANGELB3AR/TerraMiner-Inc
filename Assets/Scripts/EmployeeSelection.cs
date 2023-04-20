@@ -21,7 +21,7 @@ public class EmployeeSelection : MonoBehaviour
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
 
-        if (hit.collider.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
+        if (hit.transform.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
         {
             selectedEmployees.Add(employee);
         }
@@ -31,7 +31,6 @@ public class EmployeeSelection : MonoBehaviour
             {
                 employeeMovement.Move(hit.point);
             }
-            
         }
     }
 }
