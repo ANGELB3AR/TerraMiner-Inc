@@ -16,7 +16,7 @@ public class EmployeeMovement : MonoBehaviour
         animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
     }
 
-    private void Move(Vector3 point)
+    public void Move(Vector3 point)
     {
         if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
 

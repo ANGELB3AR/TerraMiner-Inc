@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class EmployeeSelection : MonoBehaviour
 {
-    [SerializeField] List<GameObject> selectedEmployees = new List<GameObject>();
+    [SerializeField] List<EmployeeMovement> selectedEmployees = new List<EmployeeMovement>();
     Camera mainCamera;
 
     private void Awake()
@@ -21,6 +21,17 @@ public class EmployeeSelection : MonoBehaviour
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
 
-        //Move(hit.point);
+        if (hit.collider.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
+        {
+            selectedEmployees.Add(employee);
+        }
+        else
+        {
+            foreach (EmployeeMovement employeeMovement in selectedEmployees)
+            {
+                employeeMovement.Move(hit.point);
+            }
+            
+        }
     }
 }
