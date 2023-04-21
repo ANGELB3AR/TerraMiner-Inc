@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EmployeeMovement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
-    [SerializeField] Outline outline = null;
+
+    [SerializeField] Outline selectionOutline = null;
+    [SerializeField] Outline hoverOutline = null;
 
     readonly int walkingVelocity = Animator.StringToHash("Velocity");
 
@@ -29,6 +32,18 @@ public class EmployeeMovement : MonoBehaviour
         EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
     }
 
+    private void OnMouseEnter()
+    {
+        if (selectionOutline.enabled) { return; }
+
+        hoverOutline.enabled = true;
+    }
+
+    private void OnMouseExit()
+    {
+        hoverOutline.enabled = false;
+    }
+
     public void Move(Vector3 point)
     {
         if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
@@ -39,13 +54,13 @@ public class EmployeeMovement : MonoBehaviour
     {
         if (employee != this) { return; }
 
-        outline.enabled = true;
+        selectionOutline.enabled = true;
     }
 
     private void EmployeeSelection_OnEmployeeDeselected(EmployeeMovement employee)
     {
         if (employee != this) { return; }
 
-        outline.enabled = false;
+        selectionOutline.enabled = false;
     }
 }
