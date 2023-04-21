@@ -23,7 +23,22 @@ public class EmployeeSelection : MonoBehaviour
 
         if (hit.transform.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
         {
-            selectedEmployees.Add(employee);
+            if (Keyboard.current.ctrlKey.isPressed)
+            {
+                if (selectedEmployees.Contains(employee))
+                {
+                    selectedEmployees.Remove(employee);
+                }
+                else
+                {
+                    selectedEmployees.Add(employee);
+                }
+            }
+            else
+            {
+                selectedEmployees.Clear();
+                selectedEmployees.Add(employee);
+            }
         }
         else
         {
