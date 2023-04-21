@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class EmployeeSelection : MonoBehaviour
 {
-    [SerializeField] List<EmployeeMovement> selectedEmployees = new List<EmployeeMovement>();
+    List<EmployeeMovement> selectedEmployees = new List<EmployeeMovement>();
     Camera mainCamera;
 
     private void Awake()
