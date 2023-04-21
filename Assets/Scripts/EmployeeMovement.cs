@@ -18,6 +18,23 @@ public class EmployeeMovement : MonoBehaviour
         EmployeeSelection.OnEmployeeDeselected += EmployeeSelection_OnEmployeeDeselected;
     }
 
+    private void Update()
+    {
+        animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
+    }
+
+    private void OnDisable()
+    {
+        EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
+        EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
+    }
+
+    public void Move(Vector3 point)
+    {
+        if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
+
+        agent.SetDestination(hit.position);
+    }
     private void EmployeeSelection_OnEmployeeSelected(EmployeeMovement employee)
     {
         if (employee != this) { return; }
@@ -30,17 +47,5 @@ public class EmployeeMovement : MonoBehaviour
         if (employee != this) { return; }
 
         outline.enabled = false;
-    }
-
-    private void Update()
-    {
-        animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
-    }
-
-    public void Move(Vector3 point)
-    {
-        if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
-
-        agent.SetDestination(hit.position);
     }
 }
