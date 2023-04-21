@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class EmployeeSelection : MonoBehaviour
 {
     List<EmployeeMovement> selectedEmployees = new List<EmployeeMovement>();
     Camera mainCamera;
+
+    public static event Action<EmployeeMovement> OnEmployeeSelected;
+    public static event Action<EmployeeMovement> OnEmployeeDeselected;
 
     private void Awake()
     {
@@ -28,16 +32,22 @@ public class EmployeeSelection : MonoBehaviour
                 if (selectedEmployees.Contains(employee))
                 {
                     selectedEmployees.Remove(employee);
+                    OnEmployeeDeselected?.Invoke(employee);
                 }
                 else
                 {
-                    selectedEmployees.Add(employee);
+                    SelectEmployee(employee);
                 }
             }
             else
             {
+                foreach (EmployeeMovement employeeMovement in selectedEmployees)
+                {
+                    OnEmployeeDeselected?.Invoke(employeeMovement);
+                }
                 selectedEmployees.Clear();
-                selectedEmployees.Add(employee);
+
+                SelectEmployee(employee);
             }
         }
         else
@@ -47,5 +57,11 @@ public class EmployeeSelection : MonoBehaviour
                 employeeMovement.Move(hit.point);
             }
         }
+    }
+
+    private void SelectEmployee(EmployeeMovement employee)
+    {
+        selectedEmployees.Add(employee);
+        OnEmployeeSelected?.Invoke(employee);
     }
 }

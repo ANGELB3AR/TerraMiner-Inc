@@ -8,8 +8,29 @@ public class EmployeeMovement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
+    [SerializeField] Outline outline = null;
 
     readonly int walkingVelocity = Animator.StringToHash("Velocity");
+
+    private void OnEnable()
+    {
+        EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
+        EmployeeSelection.OnEmployeeDeselected += EmployeeSelection_OnEmployeeDeselected;
+    }
+
+    private void EmployeeSelection_OnEmployeeSelected(EmployeeMovement employee)
+    {
+        if (employee != this) { return; }
+
+        outline.enabled = true;
+    }
+
+    private void EmployeeSelection_OnEmployeeDeselected(EmployeeMovement employee)
+    {
+        if (employee != this) { return; }
+
+        outline.enabled = false;
+    }
 
     private void Update()
     {
