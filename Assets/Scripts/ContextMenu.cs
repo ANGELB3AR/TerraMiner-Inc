@@ -51,9 +51,9 @@ public class ContextMenu : MonoBehaviour
 
     private void ClearContextMenu()
     {
-        foreach (Button contextMenuButton in contextMenuButtonParent.GetChild(0))
+        for (int i = 1; i < contextMenuButtonParent.childCount; i++)
         {
-            Destroy(contextMenuButton.gameObject);
+            Destroy(contextMenuButtonParent.GetChild(i).gameObject);
         }
     }
 }
