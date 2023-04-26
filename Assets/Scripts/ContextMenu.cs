@@ -9,6 +9,7 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] Button contextMenuButtonPrefab = null;
     [SerializeField] Transform contextMenuButtonParent = null;
     [SerializeField] Canvas contextMenuCanvas = null;
+    [SerializeField] BuildingManager buildingManager = null;
 
     Camera mainCamera;
 
@@ -32,9 +33,21 @@ public class ContextMenu : MonoBehaviour
         foreach (ContextMenuButtonTypes buttonType in options.contextMenuButtonTypes)
         {
             Button contextMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
-            ActivateContextMenu();
-        }
 
+            switch (buttonType)
+            {
+                case ContextMenuButtonTypes.BuildButton:
+                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.BuildBuilding());
+                    break;
+                case ContextMenuButtonTypes.DestroyButton:
+                    break;
+                case ContextMenuButtonTypes.UpgradeButton:
+                    break;
+                default:
+                    break;
+            }
+        }
+        ActivateContextMenu();
     }
 
     void ActivateContextMenu()
