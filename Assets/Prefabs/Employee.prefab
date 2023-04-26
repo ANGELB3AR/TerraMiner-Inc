@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3153317858567926489}
   - component: {fileID: 1524172399}
   - component: {fileID: 4803966635850032849}
+  - component: {fileID: 8060623613959112556}
   m_Layer: 0
   m_Name: Employee
   m_TagString: Untagged
@@ -1370,6 +1371,19 @@ MonoBehaviour:
     - {x: 0.8273635, y: 0.49465442, z: 0.2660578}
     - {x: 0.6140792, y: 0.6752815, z: 0.40853605}
     - {x: 0.0000000026833142, y: 0.87492204, z: 0.48426384}
+--- !u!114 &8060623613959112556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5262bc174f6ed9743984e543ae53de23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <contextMenuButtonTypes>k__BackingField: 02000000
 --- !u!1001 &3153317859212487681
 PrefabInstance:
   m_ObjectHideFlags: 0
