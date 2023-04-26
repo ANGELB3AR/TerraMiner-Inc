@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public void BuildBuilding()
+    public void BuildBuilding(Building[] buildings, Transform buildLocation)
     {
-        Debug.Log("Built a builidng hypothetically");
+        foreach (Building building in buildings)
+        {
+            Instantiate(building, buildLocation.position, Quaternion.identity);
+        }
     }
 }

@@ -62,6 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <contextMenuButtonTypes>k__BackingField: 00000000
+  <buildingsAvailableToBuild>k__BackingField:
+  - {fileID: 848670501719593369, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
 --- !u!114 &695192004686400717
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class ContextMenu : MonoBehaviour
             switch (buttonType)
             {
                 case ContextMenuButtonTypes.BuildButton:
-                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.BuildBuilding());
+                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.BuildBuilding(options.buildingsAvailableToBuild, options.transform));
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
                     break;
