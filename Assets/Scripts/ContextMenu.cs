@@ -27,7 +27,8 @@ public class ContextMenu : MonoBehaviour
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
 
         if (!hit.transform.gameObject.TryGetComponent<ContextMenuOptions>(out ContextMenuOptions options)) { return; }
-        Debug.Log("Hit something with options");
+
+        ClearContextMenu();
         foreach (ContextMenuButtonTypes buttonType in options.contextMenuButtonTypes)
         {
             Button contextMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
@@ -44,6 +45,16 @@ public class ContextMenu : MonoBehaviour
     void DeactivateContextMenu()
     {
         contextMenuCanvas.enabled = false;
+
+        ClearContextMenu();
+    }
+
+    private void ClearContextMenu()
+    {
+        foreach (Button contextMenuButton in contextMenuButtonParent.GetChild(0))
+        {
+            Destroy(contextMenuButton.gameObject);
+        }
     }
 }
 

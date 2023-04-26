@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5262bc174f6ed9743984e543ae53de23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <contextMenuButtonTypes>k__BackingField: 02000000
+  <contextMenuButtonTypes>k__BackingField: 020000000100000000000000
 --- !u!1001 &3153317859212487681
 PrefabInstance:
   m_ObjectHideFlags: 0
