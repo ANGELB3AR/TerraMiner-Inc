@@ -47,10 +47,12 @@ public class ContextMenu : MonoBehaviour
             switch (buttonType)
             {
                 case ContextMenuButtonTypes.BuildButton:
-                    contextMenuButtonInstance.onClick.AddListener(() => GenerateBuildMenu(options.buildingsAvailableToBuild, options.transform));
+                    contextMenuButtonInstance.onClick.AddListener(() => GenerateBuildMenu(options.buildingsAvailableToBuild, options.transform.position));
                     contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
+                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.DestroyBuilding(hit.transform.GetComponent<Building>()));
+                    contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "DESTROY";
                     break;
                 case ContextMenuButtonTypes.UpgradeButton:
                     break;
@@ -61,7 +63,7 @@ public class ContextMenu : MonoBehaviour
         ActivateContextMenu();
     }
 
-    void GenerateBuildMenu(Building[] buildingsAvailableToBuild, Transform locationToPlaceBuilding)
+    void GenerateBuildMenu(Building[] buildingsAvailableToBuild, Vector3 locationToPlaceBuilding)
     {
         ClearContextMenu();
         contextMenuTitleText.text = "Build Menu";

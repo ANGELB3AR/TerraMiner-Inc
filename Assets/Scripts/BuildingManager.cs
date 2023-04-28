@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public void PlaceBuilding(Building building, Transform buildLocation)
+    public void PlaceBuilding(Building building, Vector3 buildLocation)
     {
-        Instantiate(building, buildLocation.position, Quaternion.identity);
+        Instantiate(building, buildLocation, Quaternion.identity);
+    }
+
+    public void DestroyBuilding(Building buildingToDestroy)
+    {
+        Destroy(buildingToDestroy.gameObject);
     }
 }
