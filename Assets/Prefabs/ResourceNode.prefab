@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5262bc174f6ed9743984e543ae53de23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <contextMenuTitle>k__BackingField: Resource Node
   <contextMenuButtonTypes>k__BackingField: 00000000
   <buildingsAvailableToBuild>k__BackingField:
   - {fileID: 848670501719593369, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}

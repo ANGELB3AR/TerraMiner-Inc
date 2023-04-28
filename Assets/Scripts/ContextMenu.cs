@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] Button contextMenuButtonPrefab = null;
     [SerializeField] Transform contextMenuButtonParent = null;
     [SerializeField] Canvas contextMenuCanvas = null;
+    [SerializeField] TextMeshProUGUI contextMenuTitleText = null;
     [SerializeField] BuildingManager buildingManager = null;
 
     Camera mainCamera;
@@ -30,6 +32,9 @@ public class ContextMenu : MonoBehaviour
         if (!hit.transform.gameObject.TryGetComponent<ContextMenuOptions>(out ContextMenuOptions options)) { return; }
 
         ClearContextMenu();
+
+        contextMenuTitleText.text = options.contextMenuTitle;
+
         foreach (ContextMenuButtonTypes buttonType in options.contextMenuButtonTypes)
         {
             Button contextMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
@@ -37,7 +42,8 @@ public class ContextMenu : MonoBehaviour
             switch (buttonType)
             {
                 case ContextMenuButtonTypes.BuildButton:
-                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.BuildBuilding(options.buildingsAvailableToBuild, options.transform));
+                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(options.buildingsAvailableToBuild, options.transform));
+                    contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
                     break;

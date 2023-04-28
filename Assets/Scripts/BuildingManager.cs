@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public void BuildBuilding(Building[] buildings, Transform buildLocation)
+    public void PlaceBuilding(Building[] buildings, Transform buildLocation)
     {
         foreach (Building building in buildings)
         {

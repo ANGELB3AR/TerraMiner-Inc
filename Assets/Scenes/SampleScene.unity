@@ -997,6 +997,7 @@ MonoBehaviour:
   contextMenuButtonPrefab: {fileID: 7164329160493864039, guid: 6e25194b94dd15a4aba86e5f1cbd924c, type: 3}
   contextMenuButtonParent: {fileID: 744153299}
   contextMenuCanvas: {fileID: 28240399}
+  contextMenuTitleText: {fileID: 732758550}
   buildingManager: {fileID: 1710817607}
 --- !u!4 &1860011269
 Transform:
