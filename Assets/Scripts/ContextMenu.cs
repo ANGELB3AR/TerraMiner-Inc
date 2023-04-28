@@ -28,7 +28,11 @@ public class ContextMenu : MonoBehaviour
 
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
+        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) 
+        {
+            DeactivateContextMenu();
+            return; 
+        }
 
         if (!hit.transform.gameObject.TryGetComponent<ContextMenuOptions>(out ContextMenuOptions options)) { return; }
 
