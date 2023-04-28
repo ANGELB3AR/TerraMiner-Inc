@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -42,7 +43,7 @@ public class ContextMenu : MonoBehaviour
             switch (buttonType)
             {
                 case ContextMenuButtonTypes.BuildButton:
-                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(options.buildingsAvailableToBuild, options.transform));
+                    contextMenuButtonInstance.onClick.AddListener(() => GenerateBuildMenu(options.buildingsAvailableToBuild, options.transform));
                     contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
@@ -54,6 +55,18 @@ public class ContextMenu : MonoBehaviour
             }
         }
         ActivateContextMenu();
+    }
+
+    void GenerateBuildMenu(Building[] buildingsAvailableToBuild, Transform locationToPlaceBuilding)
+    {
+        ClearContextMenu();
+        contextMenuTitleText.text = "Build Menu";
+        foreach (Building building in buildingsAvailableToBuild)
+        {
+            Button buildingMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
+            buildingMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(building, locationToPlaceBuilding));
+            buildingMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = building.name;
+        }
     }
 
     void ActivateContextMenu()

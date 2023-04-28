@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7414668505262017511}
   - component: {fileID: 848670501719593369}
   m_Layer: 0
-  m_Name: ResourceExtractionBuilding
+  m_Name: ResourceExtractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
