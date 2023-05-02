@@ -17,44 +17,28 @@ public class EmployeeSelection : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (!Mouse.current.leftButton.wasPressedThisFrame) { return; }
+        InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
+    }
 
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+    private void OnDisable()
+    {
+        InputReader.LeftClickHitEmployee -= InputReader_LeftClickHitEmployee;
+    }
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) { return; }
-
-        if (hit.transform.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
+    private void InputReader_LeftClickHitEmployee(EmployeeMovement employee)
+    {
+        if (Keyboard.current.ctrlKey.isPressed)
         {
-            if (Keyboard.current.ctrlKey.isPressed)
+            if (selectedEmployees.Contains(employee))
             {
-                if (selectedEmployees.Contains(employee))
-                {
-                    selectedEmployees.Remove(employee);
-                    OnEmployeeDeselected?.Invoke(employee);
-                }
-                else
-                {
-                    SelectEmployee(employee);
-                }
+                selectedEmployees.Remove(employee);
+                OnEmployeeDeselected?.Invoke(employee);
             }
             else
             {
-                foreach (EmployeeMovement employeeMovement in selectedEmployees)
-                {
-                    OnEmployeeDeselected?.Invoke(employeeMovement);
-                }
-                selectedEmployees.Clear();
-
                 SelectEmployee(employee);
-            }
-        }
-        else
-        {
-            foreach (EmployeeMovement employeeMovement in selectedEmployees)
-            {
-                employeeMovement.Move(hit.point);
             }
         }
     }
@@ -63,5 +47,21 @@ public class EmployeeSelection : MonoBehaviour
     {
         selectedEmployees.Add(employee);
         OnEmployeeSelected?.Invoke(employee);
+    }
+
+    void ClearSelectedEmployees()
+    {
+        foreach (EmployeeMovement employeeMovement in selectedEmployees)
+        {
+            OnEmployeeDeselected?.Invoke(employeeMovement);
+        }
+        selectedEmployees.Clear();
+    }
+    void MoveSelectedEmployees(RaycastHit hit)
+    {
+        foreach (EmployeeMovement employeeMovement in selectedEmployees)
+        {
+            employeeMovement.Move(hit.point);
+        }
     }
 }
