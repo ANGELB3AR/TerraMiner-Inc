@@ -21,12 +21,14 @@ public class EmployeeSelection : MonoBehaviour
     {
         InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
         InputReader.LeftClickHitTerrain += InputReader_LeftClickHitTerrain;
+        InputReader.LeftClickHitNothing += InputReader_LeftClickHitNothing;
     }
 
     private void OnDisable()
     {
         InputReader.LeftClickHitEmployee -= InputReader_LeftClickHitEmployee;
         InputReader.LeftClickHitTerrain -= InputReader_LeftClickHitTerrain;
+        InputReader.LeftClickHitNothing += InputReader_LeftClickHitNothing;
     }
 
     private void InputReader_LeftClickHitEmployee(EmployeeMovement employee)
@@ -53,6 +55,11 @@ public class EmployeeSelection : MonoBehaviour
     private void InputReader_LeftClickHitTerrain(Vector3 position)
     {
         MoveSelectedEmployees(position);
+    }
+
+    private void InputReader_LeftClickHitNothing()
+    {
+        ClearSelectedEmployees();
     }
 
     private void SelectEmployee(EmployeeMovement employee)

@@ -22,20 +22,30 @@ public class ContextMenu : MonoBehaviour
         DeactivateContextMenu();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (!Mouse.current.rightButton.wasPressedThisFrame) { return; }
+        InputReader.RightClickHitContextItem += InputReader_RightClickHitContextItem;
+        InputReader.RightClickHitTerrain += InputReader_RightClickHitTerrain;
 
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        InputReader.RightClickHitNothing += DeactivateContextMenu;
+        InputReader.LeftClickHitNothing += DeactivateContextMenu;
+        InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
+        InputReader.LeftClickHitTerrain += InputReader_LeftClickHitTerrain;
+    }
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) 
-        {
-            DeactivateContextMenu();
-            return; 
-        }
+    private void OnDisable()
+    {
+        InputReader.RightClickHitContextItem -= InputReader_RightClickHitContextItem;
+        InputReader.RightClickHitTerrain -= InputReader_RightClickHitTerrain;
 
-        if (!hit.transform.gameObject.TryGetComponent<ContextMenuOptions>(out ContextMenuOptions options)) { return; }
+        InputReader.RightClickHitNothing -= DeactivateContextMenu;
+        InputReader.LeftClickHitNothing -= DeactivateContextMenu;
+        InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
+        InputReader.LeftClickHitTerrain += InputReader_LeftClickHitTerrain;
+    }
 
+    private void InputReader_RightClickHitContextItem(ContextMenuOptions options)
+    {
         ClearContextMenu();
 
         contextMenuTitleText.text = options.contextMenuTitle;
@@ -51,7 +61,7 @@ public class ContextMenu : MonoBehaviour
                     contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
-                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.DestroyBuilding(hit.transform.GetComponent<Building>()));
+                    contextMenuButtonInstance.onClick.AddListener(() => buildingManager.DestroyBuilding(options.GetComponent<Building>()));
                     contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "DESTROY";
                     break;
                 case ContextMenuButtonTypes.UpgradeButton:
@@ -62,6 +72,31 @@ public class ContextMenu : MonoBehaviour
         }
         ActivateContextMenu();
     }
+
+    private void InputReader_RightClickHitTerrain(ContextMenuOptions options, Vector3 position)
+    {
+        ClearContextMenu();
+
+        contextMenuTitleText.text = options.contextMenuTitle;
+
+        Button contextMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
+
+        contextMenuButtonInstance.onClick.AddListener(() => GenerateBuildMenu(options.buildingsAvailableToBuild, position));
+        contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
+
+        ActivateContextMenu();
+    }
+
+    private void InputReader_LeftClickHitTerrain(Vector3 obj)
+    {
+        DeactivateContextMenu();
+    }
+
+    private void InputReader_LeftClickHitEmployee(EmployeeMovement obj)
+    {
+        DeactivateContextMenu();
+    }
+
 
     void GenerateBuildMenu(Building[] buildingsAvailableToBuild, Vector3 locationToPlaceBuilding)
     {

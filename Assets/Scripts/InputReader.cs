@@ -12,6 +12,11 @@ public class InputReader : MonoBehaviour
     public static event Action LeftClickHitButton;
     public static event Action<Vector3> LeftClickHitTerrain;
     public static event Action<EmployeeMovement> LeftClickHitEmployee;
+    public static event Action LeftClickHitNothing;
+
+    public static event Action<ContextMenuOptions> RightClickHitContextItem;
+    public static event Action<ContextMenuOptions, Vector3> RightClickHitTerrain;
+    public static event Action RightClickHitNothing;
 
     private void Awake()
     {
@@ -30,19 +35,18 @@ public class InputReader : MonoBehaviour
                 {
                     LeftClickHitButton?.Invoke();
                 }
-                if (hit.collider.gameObject.GetComponent<Terrain>())
+                else if (hit.collider.gameObject.GetComponent<Terrain>())
                 {
-                    Debug.Log("Hit terrain");
                     LeftClickHitTerrain?.Invoke(hit.point);
                 }
-                if (hit.collider.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
+                else if (hit.collider.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
                 {
                     LeftClickHitEmployee?.Invoke(employee);
                 }
             }
             else
             {
-                Debug.Log("Left click hit nothing");
+                LeftClickHitNothing?.Invoke();
             }
         }
         else
@@ -52,11 +56,18 @@ public class InputReader : MonoBehaviour
                 Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
-                    Debug.Log($"Right click hit {hit.transform.gameObject.name}");
+                    if (hit.collider.gameObject.GetComponent<Terrain>())
+                    {
+                        RightClickHitTerrain?.Invoke(hit.collider.gameObject.GetComponent<ContextMenuOptions>(), hit.point);
+                    }
+                    else if (hit.collider.gameObject.TryGetComponent<ContextMenuOptions>(out ContextMenuOptions options))
+                    {
+                        RightClickHitContextItem?.Invoke(options);
+                    }
                 }
                 else
                 {
-                    Debug.Log("Right click hit nothing");
+                    RightClickHitNothing?.Invoke();
                 }
             }
         }
