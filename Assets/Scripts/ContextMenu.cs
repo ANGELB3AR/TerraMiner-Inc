@@ -92,7 +92,7 @@ public class ContextMenu : MonoBehaviour
         DeactivateContextMenu();
     }
 
-    private void InputReader_LeftClickHitEmployee(EmployeeMovement obj)
+    private void InputReader_LeftClickHitEmployee(Employee obj)
     {
         DeactivateContextMenu();
     }

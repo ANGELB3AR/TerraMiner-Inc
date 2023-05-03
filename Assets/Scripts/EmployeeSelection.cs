@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 public class EmployeeSelection : MonoBehaviour
 {
-    List<EmployeeMovement> selectedEmployees = new List<EmployeeMovement>();
+    List<Employee> selectedEmployees = new List<Employee>();
     Camera mainCamera;
 
-    public static event Action<EmployeeMovement> OnEmployeeSelected;
-    public static event Action<EmployeeMovement> OnEmployeeDeselected;
+    public static event Action<Employee> OnEmployeeSelected;
+    public static event Action<Employee> OnEmployeeDeselected;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class EmployeeSelection : MonoBehaviour
         InputReader.LeftClickHitNothing += InputReader_LeftClickHitNothing;
     }
 
-    private void InputReader_LeftClickHitEmployee(EmployeeMovement employee)
+    private void InputReader_LeftClickHitEmployee(Employee employee)
     {
         if (Keyboard.current.ctrlKey.isPressed)
         {
@@ -62,7 +62,7 @@ public class EmployeeSelection : MonoBehaviour
         ClearSelectedEmployees();
     }
 
-    private void SelectEmployee(EmployeeMovement employee)
+    private void SelectEmployee(Employee employee)
     {
         selectedEmployees.Add(employee);
         OnEmployeeSelected?.Invoke(employee);
@@ -70,17 +70,17 @@ public class EmployeeSelection : MonoBehaviour
 
     void ClearSelectedEmployees()
     {
-        foreach (EmployeeMovement employeeMovement in selectedEmployees)
+        foreach (Employee employee in selectedEmployees)
         {
-            OnEmployeeDeselected?.Invoke(employeeMovement);
+            OnEmployeeDeselected?.Invoke(employee);
         }
         selectedEmployees.Clear();
     }
     void MoveSelectedEmployees(Vector3 positionToMove)
     {
-        foreach (EmployeeMovement employeeMovement in selectedEmployees)
+        foreach (Employee employee in selectedEmployees)
         {
-            employeeMovement.Move(positionToMove);
+            employee.GetComponent<EmployeeMovement>().Move(positionToMove);
         }
     }
 }

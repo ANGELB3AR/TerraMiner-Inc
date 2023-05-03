@@ -31,14 +31,14 @@ public class Employee : MonoBehaviour
         hoverOutline.enabled = false;
     }
 
-    private void EmployeeSelection_OnEmployeeSelected(EmployeeMovement employee)
+    private void EmployeeSelection_OnEmployeeSelected(Employee employee)
     {
         if (employee != this) { return; }
 
         selectionOutline.enabled = true;
     }
 
-    private void EmployeeSelection_OnEmployeeDeselected(EmployeeMovement employee)
+    private void EmployeeSelection_OnEmployeeDeselected(Employee employee)
     {
         if (employee != this) { return; }
 
