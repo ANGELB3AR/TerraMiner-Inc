@@ -20,11 +20,13 @@ public class EmployeeSelection : MonoBehaviour
     private void OnEnable()
     {
         InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
+        InputReader.LeftClickHitTerrain += InputReader_LeftClickHitTerrain;
     }
 
     private void OnDisable()
     {
         InputReader.LeftClickHitEmployee -= InputReader_LeftClickHitEmployee;
+        InputReader.LeftClickHitTerrain -= InputReader_LeftClickHitTerrain;
     }
 
     private void InputReader_LeftClickHitEmployee(EmployeeMovement employee)
@@ -41,6 +43,16 @@ public class EmployeeSelection : MonoBehaviour
                 SelectEmployee(employee);
             }
         }
+        else
+        {
+            ClearSelectedEmployees();
+            SelectEmployee(employee);
+        }
+    }
+
+    private void InputReader_LeftClickHitTerrain(Vector3 position)
+    {
+        MoveSelectedEmployees(position);
     }
 
     private void SelectEmployee(EmployeeMovement employee)
@@ -57,11 +69,11 @@ public class EmployeeSelection : MonoBehaviour
         }
         selectedEmployees.Clear();
     }
-    void MoveSelectedEmployees(RaycastHit hit)
+    void MoveSelectedEmployees(Vector3 positionToMove)
     {
         foreach (EmployeeMovement employeeMovement in selectedEmployees)
         {
-            employeeMovement.Move(hit.point);
+            employeeMovement.Move(positionToMove);
         }
     }
 }

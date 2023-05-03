@@ -10,7 +10,7 @@ public class InputReader : MonoBehaviour
     Camera mainCamera;
 
     public static event Action LeftClickHitButton;
-    public static event Action LeftClickHitTerrain;
+    public static event Action<Vector3> LeftClickHitTerrain;
     public static event Action<EmployeeMovement> LeftClickHitEmployee;
 
     private void Awake()
@@ -32,7 +32,8 @@ public class InputReader : MonoBehaviour
                 }
                 if (hit.collider.gameObject.GetComponent<Terrain>())
                 {
-                    LeftClickHitTerrain?.Invoke();
+                    Debug.Log("Hit terrain");
+                    LeftClickHitTerrain?.Invoke(hit.point);
                 }
                 if (hit.collider.gameObject.TryGetComponent<EmployeeMovement>(out EmployeeMovement employee))
                 {
