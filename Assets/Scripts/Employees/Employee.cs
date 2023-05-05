@@ -29,6 +29,8 @@ public class Employee : MonoBehaviour
         InitializeState();
     }
 
+    #region Highlighting
+
     private void OnMouseEnter()
     {
         if (selectionOutline.enabled) { return; }
@@ -54,6 +56,16 @@ public class Employee : MonoBehaviour
 
         selectionOutline.enabled = false;
     }
+
+    #endregion
+
+    #region Public Methods
+
+
+
+    #endregion
+
+    #region State Machine
 
     private void Update()
     {
@@ -129,4 +141,6 @@ public class Employee : MonoBehaviour
         Building,
         Transporting
     }
+
+    #endregion
 }
