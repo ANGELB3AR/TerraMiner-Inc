@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class Employee : MonoBehaviour
 {
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
+
+    EmployeeState currentState;
+    EmployeeState previousState;
 
     private void OnEnable()
     {
@@ -17,6 +21,12 @@ public class Employee : MonoBehaviour
     {
         EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
         EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
+    }
+
+    private void Start()
+    {
+        currentState = EmployeeState.Idling;
+        InitializeState();
     }
 
     private void OnMouseEnter()
@@ -43,5 +53,80 @@ public class Employee : MonoBehaviour
         if (employee != this) { return; }
 
         selectionOutline.enabled = false;
+    }
+
+    private void Update()
+    {
+        ProcessState();
+    }
+
+    void SwitchState(EmployeeState newState)
+    {
+        ExitState();
+
+        previousState = currentState;
+        currentState = newState;
+
+        InitializeState();
+    }
+
+    void InitializeState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                break;
+            case EmployeeState.Building:
+                break;
+            case EmployeeState.Transporting:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ProcessState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                break;
+            case EmployeeState.Building:
+                break;
+            case EmployeeState.Transporting:
+                break;
+            default:
+                break;
+        }
+    }
+
+    void ExitState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                break;
+            case EmployeeState.Building:
+                break;
+            case EmployeeState.Transporting:
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public enum EmployeeState
+    {
+        Idling,
+        Fighting,
+        Building,
+        Transporting
     }
 }
