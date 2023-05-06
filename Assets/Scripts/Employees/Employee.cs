@@ -16,6 +16,8 @@ public class Employee : MonoBehaviour
     Vector3 positionToMove;
     Building buildingToBuild;
 
+    public int buildingSkill { get; private set; } = 1;
+
     private void OnEnable()
     {
         EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
