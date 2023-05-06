@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4501a7ef0a284db3f30a00339b60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 3153317858567926490}
   selectionOutline: {fileID: 1524172399}
   hoverOutline: {fileID: 4803966635850032849}
 --- !u!114 &3153317858567926490

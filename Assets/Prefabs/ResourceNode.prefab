@@ -64,7 +64,7 @@ MonoBehaviour:
   <contextMenuTitle>k__BackingField: Resource Node
   <contextMenuButtonTypes>k__BackingField: 00000000
   <buildingsAvailableToBuild>k__BackingField:
-  - {fileID: 848670501719593369, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+  - {fileID: 2865977347966641732, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
 --- !u!114 &695192004686400717
 MonoBehaviour:
   m_ObjectHideFlags: 0

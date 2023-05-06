@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class Employee : MonoBehaviour
 {
+    [SerializeField] EmployeeMovement movement = null;
+
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
 
     EmployeeState currentState;
     EmployeeState previousState;
+
+    Vector3 positionToMove;
+    Building buildingToBuild;
 
     private void OnEnable()
     {
@@ -61,7 +66,13 @@ public class Employee : MonoBehaviour
 
     #region Public Methods
 
+    public void BuildBuilding(Building building, Vector3 location)
+    {
+        SwitchState(EmployeeState.Building);
 
+        buildingToBuild = building;
+        positionToMove = location;
+    }
 
     #endregion
 
@@ -91,6 +102,7 @@ public class Employee : MonoBehaviour
             case EmployeeState.Fighting:
                 break;
             case EmployeeState.Building:
+                movement.Move(positionToMove);
                 break;
             case EmployeeState.Transporting:
                 break;
@@ -108,6 +120,10 @@ public class Employee : MonoBehaviour
             case EmployeeState.Fighting:
                 break;
             case EmployeeState.Building:
+                if (buildingToBuild.GetBuildCompleteStatus())
+                {
+                    SwitchState(EmployeeState.Idling);
+                }
                 break;
             case EmployeeState.Transporting:
                 break;
