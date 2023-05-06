@@ -715,6 +715,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1422365171743656098, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
+      propertyPath: <buildingSkill>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3153317858567926492, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1053,6 +1057,7 @@ MonoBehaviour:
   contextMenuCanvas: {fileID: 28240399}
   contextMenuTitleText: {fileID: 732758550}
   buildingManager: {fileID: 1710817607}
+  employeeSelection: {fileID: 261026162}
 --- !u!4 &1860011269
 Transform:
   m_ObjectHideFlags: 0
@@ -1145,6 +1150,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1422365171743656098, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
+      propertyPath: <buildingSkill>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3153317858567926492, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_RootOrder
       value: 1

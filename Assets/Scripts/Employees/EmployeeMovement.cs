@@ -23,4 +23,9 @@ public class EmployeeMovement : MonoBehaviour
 
         agent.SetDestination(hit.position);
     }
+
+    public void StopMoving()
+    {
+        agent.ResetPath();
+    }
 }

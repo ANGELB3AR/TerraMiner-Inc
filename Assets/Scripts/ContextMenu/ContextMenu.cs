@@ -12,7 +12,9 @@ public class ContextMenu : MonoBehaviour
     [SerializeField] Transform contextMenuButtonParent = null;
     [SerializeField] Canvas contextMenuCanvas = null;
     [SerializeField] TextMeshProUGUI contextMenuTitleText = null;
+
     [SerializeField] BuildingManager buildingManager = null;
+    [SerializeField] EmployeeSelection employeeSelection = null;
 
     Camera mainCamera;
 
@@ -106,6 +108,7 @@ public class ContextMenu : MonoBehaviour
         {
             Button buildingMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
             buildingMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(building, locationToPlaceBuilding));
+            buildingMenuButtonInstance.onClick.AddListener(() => employeeSelection.SendEmployeesToConstructBuilding(building, locationToPlaceBuilding));
             buildingMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = building.name;
         }
     }

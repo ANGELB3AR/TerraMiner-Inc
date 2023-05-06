@@ -10,13 +10,17 @@ public class Employee : MonoBehaviour
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
 
-    EmployeeState currentState;
+    [SerializeField] EmployeeState currentState;  // Deserialize when finished testing
     EmployeeState previousState;
 
     Vector3 positionToMove;
-    Building buildingToBuild;
+    Building buildingToConstruct;
+    bool isConstructingBuilding = false;
 
-    public int buildingSkill { get; private set; } = 1;
+    [field:SerializeField] public int buildingSkill { get; private set; } = 1;
+
+    public static event Action<Employee, Building> OnEmployeeStartedConstruction;
+    public static event Action<Employee, Building> OnEmployeeStoppedConstruction;
 
     private void OnEnable()
     {
@@ -68,12 +72,13 @@ public class Employee : MonoBehaviour
 
     #region Public Methods
 
-    public void BuildBuilding(Building building, Vector3 location)
+    public void ConstructBuilding(Building building, Vector3 location)
     {
-        SwitchState(EmployeeState.Building);
-
-        buildingToBuild = building;
+        Debug.Log(building);
+        buildingToConstruct = building;
         positionToMove = location;
+
+        SwitchState(EmployeeState.Building);
     }
 
     #endregion
@@ -122,7 +127,15 @@ public class Employee : MonoBehaviour
             case EmployeeState.Fighting:
                 break;
             case EmployeeState.Building:
-                if (buildingToBuild.GetBuildCompleteStatus())
+                //Debug.Log(buildingToConstruct.transform.position);
+                //Debug.Log(Vector3.Distance(gameObject.transform.position, buildingToConstruct.transform.position));
+                if (Vector3.Distance(gameObject.transform.position, positionToMove) <= buildingToConstruct.ConstructingDistance && !isConstructingBuilding)
+                {
+                    OnEmployeeStartedConstruction?.Invoke(this, buildingToConstruct);
+                    isConstructingBuilding = true;
+                }
+
+                if (buildingToConstruct.GetConstructionCompleteStatus())
                 {
                     SwitchState(EmployeeState.Idling);
                 }
@@ -143,6 +156,9 @@ public class Employee : MonoBehaviour
             case EmployeeState.Fighting:
                 break;
             case EmployeeState.Building:
+                OnEmployeeStoppedConstruction?.Invoke(this, buildingToConstruct);
+                isConstructingBuilding = false;
+                movement.StopMoving();
                 break;
             case EmployeeState.Transporting:
                 break;

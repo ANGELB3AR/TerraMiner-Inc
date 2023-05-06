@@ -83,4 +83,12 @@ public class EmployeeSelection : MonoBehaviour
             employee.GetComponent<EmployeeMovement>().Move(positionToMove);
         }
     }
+
+    public void SendEmployeesToConstructBuilding(Building building, Vector3 location)
+    {
+        foreach (Employee employee in selectedEmployees)
+        {
+            employee.ConstructBuilding(building, location);
+        }
+    }
 }
