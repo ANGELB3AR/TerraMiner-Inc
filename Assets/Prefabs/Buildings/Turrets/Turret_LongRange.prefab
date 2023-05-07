@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2036039211421900583, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: originalMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2327458849244726759, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_Name
       value: Turret_LongRange

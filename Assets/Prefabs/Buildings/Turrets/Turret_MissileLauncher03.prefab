@@ -78,6 +78,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_MissileLauncher03
       objectReference: {fileID: 0}
+    - target: {fileID: 6051293425814824896, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051293425814824896, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7907880900988562697, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_RootOrder
       value: 0

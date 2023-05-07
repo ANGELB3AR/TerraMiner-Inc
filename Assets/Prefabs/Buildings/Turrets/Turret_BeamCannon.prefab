@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2036039211421900583, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: originalMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
+    - target: {fileID: 2036039211421900583, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: renderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036039211421900583, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: renderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 9065293247127017088}
     - target: {fileID: 2327458849244726759, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_Name
       value: Turret_BeamCannon
@@ -137,5 +149,10 @@ PrefabInstance:
 --- !u!4 &9048465477483307404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4314073569283862, guid: 535e935da08dc87499ca1cd6a751877c, type: 3}
+  m_PrefabInstance: {fileID: 9051611594741968538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9065293247127017088 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23552518699497498, guid: 535e935da08dc87499ca1cd6a751877c, type: 3}
   m_PrefabInstance: {fileID: 9051611594741968538}
   m_PrefabAsset: {fileID: 0}

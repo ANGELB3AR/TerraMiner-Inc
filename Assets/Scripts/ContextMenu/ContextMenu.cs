@@ -107,6 +107,7 @@ public class ContextMenu : MonoBehaviour
         {
             Button buildingMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
             buildingMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(building, locationToPlaceBuilding));
+            buildingMenuButtonInstance.onClick.AddListener(() => DeactivateContextMenu());
             buildingMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = building.name;
         }
     }

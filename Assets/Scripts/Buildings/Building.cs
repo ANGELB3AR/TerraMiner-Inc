@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    [SerializeField] float maxBuildProgress = 100f;
+    [SerializeField] float maxConstructionProgress = 100f;
 
     bool isConstructionComplete = false;
     float currentConstructionProgress = 0f;
     int totalBuildSkill = 0;
     float currentConstructionSpeed = 1f;
 
-    [field:SerializeField] public float ConstructingDistance { get; private set; } = 1f;
+    [field:SerializeField] public float ConstructingDistance { get; private set; } = 2f;
 
     public bool GetConstructionCompleteStatus()
     {
         return isConstructionComplete;
+    }
+
+    public float GetMaxConstructionProgress()
+    {
+        return maxConstructionProgress;
+    }
+
+    public float GetCurrentConstructionProgress()
+    {
+        return currentConstructionProgress;
     }
 
     private void OnEnable()
@@ -33,6 +43,7 @@ public class Building : MonoBehaviour
     void AddEmployeeSkill(Employee employee, Building building)
     {
         if (building != this) { return; }
+
         totalBuildSkill += employee.buildingSkill;
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
@@ -47,14 +58,13 @@ public class Building : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Total build skill: " + totalBuildSkill);
         if (isConstructionComplete) { return; }
         if (totalBuildSkill == 0) { return; }
 
         currentConstructionProgress += currentConstructionSpeed * Time.deltaTime;
-        currentConstructionProgress = Mathf.Clamp(currentConstructionProgress, 0f, maxBuildProgress);
+        currentConstructionProgress = Mathf.Clamp(currentConstructionProgress, 0f, maxConstructionProgress);
 
-        if (currentConstructionProgress != 100f) { return; }
+        if (currentConstructionProgress != maxConstructionProgress) { return; }
 
         isConstructionComplete = true;
     }
