@@ -63,6 +63,7 @@ public class ContextMenu : MonoBehaviour
                     break;
                 case ContextMenuButtonTypes.DestroyButton:
                     contextMenuButtonInstance.onClick.AddListener(() => buildingManager.DestroyBuilding(options.GetComponent<Building>()));
+                    contextMenuButtonInstance.onClick.AddListener(() => DeactivateContextMenu());
                     contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "DESTROY";
                     break;
                 case ContextMenuButtonTypes.UpgradeButton:
@@ -71,7 +72,7 @@ public class ContextMenu : MonoBehaviour
                     break;
             }
         }
-        ActivateContextMenu();
+        ActivateContextMenu(options.transform.position);
     }
 
     private void InputReader_RightClickHitTerrain(ContextMenuOptions options, Vector3 position)
@@ -85,7 +86,7 @@ public class ContextMenu : MonoBehaviour
         contextMenuButtonInstance.onClick.AddListener(() => GenerateBuildMenu(options.buildingsAvailableToBuild, position));
         contextMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = "BUILD";
 
-        ActivateContextMenu();
+        ActivateContextMenu(options.transform.position);
     }
 
     private void InputReader_LeftClickHitTerrain(Vector3 obj)
@@ -112,8 +113,10 @@ public class ContextMenu : MonoBehaviour
         }
     }
 
-    void ActivateContextMenu()
+    void ActivateContextMenu(Vector3 position)
     {
+        contextMenuCanvas.GetComponent<RectTransform>().anchoredPosition = mainCamera.WorldToViewportPoint(position);
+
         contextMenuCanvas.enabled = true;
     }
 
