@@ -84,11 +84,11 @@ public class EmployeeSelection : MonoBehaviour
         }
     }
 
-    public void SendEmployeesToConstructBuilding(Building building, Vector3 location)
+    public void SendEmployeesToConstructBuilding(Building building)
     {
         foreach (Employee employee in selectedEmployees)
         {
-            employee.ConstructBuilding(building, location);
+            employee.ConstructBuilding(building);
         }
     }
 }

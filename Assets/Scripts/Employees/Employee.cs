@@ -10,7 +10,7 @@ public class Employee : MonoBehaviour
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
 
-    [SerializeField] EmployeeState currentState;  // Deserialize when finished testing
+    EmployeeState currentState;
     EmployeeState previousState;
 
     Vector3 positionToMove;
@@ -72,11 +72,10 @@ public class Employee : MonoBehaviour
 
     #region Public Methods
 
-    public void ConstructBuilding(Building building, Vector3 location)
+    public void ConstructBuilding(Building building)
     {
-        Debug.Log(building);
         buildingToConstruct = building;
-        positionToMove = location;
+        positionToMove = building.transform.position;
 
         SwitchState(EmployeeState.Building);
     }
@@ -127,8 +126,6 @@ public class Employee : MonoBehaviour
             case EmployeeState.Fighting:
                 break;
             case EmployeeState.Building:
-                //Debug.Log(buildingToConstruct.transform.position);
-                //Debug.Log(Vector3.Distance(gameObject.transform.position, buildingToConstruct.transform.position));
                 if (Vector3.Distance(gameObject.transform.position, positionToMove) <= buildingToConstruct.ConstructingDistance && !isConstructingBuilding)
                 {
                     OnEmployeeStartedConstruction?.Invoke(this, buildingToConstruct);

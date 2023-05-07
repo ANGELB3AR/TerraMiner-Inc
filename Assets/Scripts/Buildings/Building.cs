@@ -7,7 +7,7 @@ public class Building : MonoBehaviour
     [SerializeField] float maxBuildProgress = 100f;
 
     bool isConstructionComplete = false;
-    [SerializeField] float currentConstructionProgress = 0f;  // Deserialize when finished testing
+    float currentConstructionProgress = 0f;
     int totalBuildSkill = 0;
     float currentConstructionSpeed = 1f;
 
@@ -32,9 +32,7 @@ public class Building : MonoBehaviour
 
     void AddEmployeeSkill(Employee employee, Building building)
     {
-        Debug.Log("Adding employee skill");
         if (building != this) { return; }
-        Debug.Log("Employee skill added");
         totalBuildSkill += employee.buildingSkill;
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
@@ -49,7 +47,7 @@ public class Building : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(totalBuildSkill);
+        Debug.Log("Total build skill: " + totalBuildSkill);
         if (isConstructionComplete) { return; }
         if (totalBuildSkill == 0) { return; }
 
