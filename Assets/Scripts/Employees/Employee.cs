@@ -80,6 +80,13 @@ public class Employee : MonoBehaviour
         SwitchState(EmployeeState.Building);
     }
 
+    public void MoveToPoint(Vector3 point)
+    {
+        positionToMove = point;
+
+        SwitchState(EmployeeState.Walking);
+    }
+
     #endregion
 
     #region State Machine
@@ -112,6 +119,9 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Transporting:
                 break;
+            case EmployeeState.Walking:
+                movement.Move(positionToMove);
+                break;
             default:
                 break;
         }
@@ -139,6 +149,8 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Transporting:
                 break;
+            case EmployeeState.Walking:
+                break;
             default:
                 break;
         }
@@ -159,6 +171,8 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Transporting:
                 break;
+            case EmployeeState.Walking:
+                break;
             default:
                 break;
         }
@@ -170,7 +184,8 @@ public class Employee : MonoBehaviour
         Idling,
         Fighting,
         Building,
-        Transporting
+        Transporting,
+        Walking
     }
 
     #endregion

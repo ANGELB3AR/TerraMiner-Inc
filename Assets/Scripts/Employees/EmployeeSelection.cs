@@ -80,7 +80,7 @@ public class EmployeeSelection : MonoBehaviour
     {
         foreach (Employee employee in selectedEmployees)
         {
-            employee.GetComponent<EmployeeMovement>().Move(positionToMove);
+            employee.MoveToPoint(positionToMove);
         }
     }
 
