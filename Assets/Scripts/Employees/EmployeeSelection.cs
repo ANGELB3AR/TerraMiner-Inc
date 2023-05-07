@@ -21,6 +21,7 @@ public class EmployeeSelection : MonoBehaviour
     {
         InputReader.LeftClickHitEmployee += InputReader_LeftClickHitEmployee;
         InputReader.LeftClickHitTerrain += InputReader_LeftClickHitTerrain;
+        InputReader.LeftClickHitBuilding += InputReader_LeftClickHitBuilding;
         InputReader.LeftClickHitNothing += InputReader_LeftClickHitNothing;
     }
 
@@ -28,7 +29,8 @@ public class EmployeeSelection : MonoBehaviour
     {
         InputReader.LeftClickHitEmployee -= InputReader_LeftClickHitEmployee;
         InputReader.LeftClickHitTerrain -= InputReader_LeftClickHitTerrain;
-        InputReader.LeftClickHitNothing += InputReader_LeftClickHitNothing;
+        InputReader.LeftClickHitBuilding -= InputReader_LeftClickHitBuilding;
+        InputReader.LeftClickHitNothing -= InputReader_LeftClickHitNothing;
     }
 
     private void InputReader_LeftClickHitEmployee(Employee employee)
@@ -55,6 +57,16 @@ public class EmployeeSelection : MonoBehaviour
     private void InputReader_LeftClickHitTerrain(Vector3 position)
     {
         MoveSelectedEmployees(position);
+    }
+
+    private void InputReader_LeftClickHitBuilding(Building building)
+    {
+        if (!building.GetConstructionCompleteStatus())
+        {
+            SendEmployeesToConstructBuilding(building);
+        }
+
+        // Add logic for when building construction is already complete
     }
 
     private void InputReader_LeftClickHitNothing()

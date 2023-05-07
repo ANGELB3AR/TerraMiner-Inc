@@ -12,6 +12,7 @@ public class InputReader : MonoBehaviour
     public static event Action LeftClickHitButton;
     public static event Action<Vector3> LeftClickHitTerrain;
     public static event Action<Employee> LeftClickHitEmployee;
+    public static event Action<Building> LeftClickHitBuilding;
     public static event Action LeftClickHitNothing;
 
     public static event Action<ContextMenuOptions> RightClickHitContextItem;
@@ -42,6 +43,10 @@ public class InputReader : MonoBehaviour
                 else if (hit.collider.gameObject.TryGetComponent<Employee>(out Employee employee))
                 {
                     LeftClickHitEmployee?.Invoke(employee);
+                }
+                else if (hit.collider.gameObject.TryGetComponent<Building>(out Building building))
+                {
+                    LeftClickHitBuilding?.Invoke(building);
                 }
             }
             else
