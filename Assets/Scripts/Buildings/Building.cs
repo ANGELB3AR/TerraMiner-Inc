@@ -5,6 +5,8 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     [SerializeField] float maxConstructionProgress = 100f;
+    [SerializeField] string buildingName = null;
+    [SerializeField] Sprite buildingIcon = null;
 
     bool isConstructionComplete = false;
     float currentConstructionProgress = 0f;
@@ -26,6 +28,16 @@ public class Building : MonoBehaviour
     public float GetCurrentConstructionProgress()
     {
         return currentConstructionProgress;
+    }
+
+    public string GetBuildingName()
+    {
+        return buildingName;
+    }
+
+    public Sprite GetBuildingIcon()
+    {
+        return buildingIcon;
     }
 
     private void OnEnable()

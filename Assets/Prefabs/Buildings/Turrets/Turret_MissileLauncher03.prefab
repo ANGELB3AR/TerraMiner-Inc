@@ -86,6 +86,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: c32d9cd2bd9e88a41a0d1a7e14d53304, type: 3}
+    - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: name
+      value: Missile Launcher x19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: c32d9cd2bd9e88a41a0d1a7e14d53304, type: 3}
+    - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: ML19
+      objectReference: {fileID: 0}
     - target: {fileID: 7907880900988562697, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_RootOrder
       value: 0

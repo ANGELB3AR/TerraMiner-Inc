@@ -108,9 +108,13 @@ public class ContextMenu : MonoBehaviour
         foreach (Building building in buildingsAvailableToBuild)
         {
             Button buildingMenuButtonInstance = Instantiate(buildMenuButtonPrefab, contextMenuButtonParent);
+
             buildingMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(building, locationToPlaceBuilding));
             buildingMenuButtonInstance.onClick.AddListener(() => DeactivateContextMenu());
-            buildingMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = building.name;
+
+            BuildMenuButton buildingMenuButton = buildingMenuButtonInstance.GetComponent<BuildMenuButton>();
+            buildingMenuButton.SetBuildingNameText(building.GetBuildingName());
+            buildingMenuButton.SetBuildingIconImage(building.GetBuildingIcon());
         }
     }
 
