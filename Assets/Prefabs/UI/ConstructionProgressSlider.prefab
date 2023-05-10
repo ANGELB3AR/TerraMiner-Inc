@@ -251,7 +251,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5749344052685788546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   constructionProgressSlider: {fileID: 9202478111394635343}
-  renderers: []
   originalMaterial: {fileID: 0}
   underConstructionMaterial: {fileID: 2100000, guid: eb9c062e3ea09bb4cb3fc67732453d3e, type: 2}
 --- !u!1 &4784478870484500809

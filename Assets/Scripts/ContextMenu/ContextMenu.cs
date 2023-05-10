@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class ContextMenu : MonoBehaviour
 {
     [SerializeField] Button contextMenuButtonPrefab = null;
+    [SerializeField] Button buildMenuButtonPrefab = null;
     [SerializeField] Transform contextMenuButtonParent = null;
     [SerializeField] Canvas contextMenuCanvas = null;
     [SerializeField] TextMeshProUGUI contextMenuTitleText = null;
@@ -106,7 +107,7 @@ public class ContextMenu : MonoBehaviour
         contextMenuTitleText.text = "Build Menu";
         foreach (Building building in buildingsAvailableToBuild)
         {
-            Button buildingMenuButtonInstance = Instantiate(contextMenuButtonPrefab, contextMenuButtonParent);
+            Button buildingMenuButtonInstance = Instantiate(buildMenuButtonPrefab, contextMenuButtonParent);
             buildingMenuButtonInstance.onClick.AddListener(() => buildingManager.PlaceBuilding(building, locationToPlaceBuilding));
             buildingMenuButtonInstance.onClick.AddListener(() => DeactivateContextMenu());
             buildingMenuButtonInstance.GetComponentInChildren<TextMeshProUGUI>().text = building.name;
@@ -115,7 +116,10 @@ public class ContextMenu : MonoBehaviour
 
     void ActivateContextMenu(Vector3 position)
     {
-        contextMenuCanvas.GetComponent<RectTransform>().anchoredPosition = mainCamera.WorldToViewportPoint(position);
+        Vector3 screenPos = mainCamera.WorldToViewportPoint(position);
+        Vector3 uiPos = new Vector3(screenPos.x, Screen.height - screenPos.y, screenPos.z);
+
+        contextMenuCanvas.transform.position = screenPos;
 
         contextMenuCanvas.enabled = true;
     }

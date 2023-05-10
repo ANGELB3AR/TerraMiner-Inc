@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3160660005043544853}
+  - {fileID: 4316623807945950684}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,7 +85,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.74
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &5134715363323991434
+--- !u!1001 &6303207244201833283
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -104,10 +104,6 @@ PrefabInstance:
     - target: {fileID: 3807688156916204588, guid: b54961bdbf745af4e86700fd53378c71, type: 3}
       propertyPath: m_Name
       value: ConstructionProgressSlider
-      objectReference: {fileID: 0}
-    - target: {fileID: 4038960330985088277, guid: b54961bdbf745af4e86700fd53378c71, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7826913020416456351, guid: b54961bdbf745af4e86700fd53378c71, type: 3}
       propertyPath: m_Pivot.x
@@ -198,8 +194,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b54961bdbf745af4e86700fd53378c71, type: 3}
---- !u!224 &3160660005043544853 stripped
+--- !u!224 &4316623807945950684 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7826913020416456351, guid: b54961bdbf745af4e86700fd53378c71, type: 3}
-  m_PrefabInstance: {fileID: 5134715363323991434}
+  m_PrefabInstance: {fileID: 6303207244201833283}
   m_PrefabAsset: {fileID: 0}
