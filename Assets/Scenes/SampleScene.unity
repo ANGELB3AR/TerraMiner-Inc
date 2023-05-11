@@ -814,6 +814,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
+--- !u!1001 &1224983696
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251424, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251438, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: m_Name
+      value: Alien_Biter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
 --- !u!1001 &1589263955
 PrefabInstance:
   m_ObjectHideFlags: 0
