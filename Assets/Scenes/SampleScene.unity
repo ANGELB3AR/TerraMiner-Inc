@@ -1225,6 +1225,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alien_Quad
       objectReference: {fileID: 0}
+    - target: {fileID: 7945492407712181927, guid: e116a21af37c8294e89d886e61f79ee0, type: 3}
+      propertyPath: maxCoordinates.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945492407712181927, guid: e116a21af37c8294e89d886e61f79ee0, type: 3}
+      propertyPath: maxCoordinates.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7945492407712181928, guid: e116a21af37c8294e89d886e61f79ee0, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2979,6 +2987,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alien_Biter
       objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251439, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: maxCoordinates.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 109377736092251439, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
+      propertyPath: maxCoordinates.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 694686676172352834, guid: 91120ef0980f527469ce9cecc6ec9ca3, type: 3}
       propertyPath: m_Controller
       value: 
@@ -4338,7 +4354,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3153317858567926492, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3153317858567926492, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5584,7 +5600,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1847723721
 MonoBehaviour:

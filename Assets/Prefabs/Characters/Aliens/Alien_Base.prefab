@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6988346850499098585}
   animator: {fileID: 0}
+  minCoordinates: {x: 0, y: 0}
+  maxCoordinates: {x: 25, y: 25}
+  awarenessDistance: 10
+  attackDistance: 2.5
 --- !u!195 &6988346850499098585
 NavMeshAgent:
   m_ObjectHideFlags: 0
