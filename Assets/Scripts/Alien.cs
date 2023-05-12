@@ -7,9 +7,18 @@ public class Alien : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
+
+    [Header("Settings")]
+    [Tooltip("Minimum x- and z- coordinates alien can travel to")]
     [SerializeField] Vector2 minCoordinates;
+
+    [Tooltip("Maximum x- and z- coordinates alien can travel to")]
     [SerializeField] Vector2 maxCoordinates;
+
+    [Tooltip("Maximum distance alien can detect targets")]
     [SerializeField] float awarenessDistance = 1f;
+
+    [Tooltip("Maximum distance alien can attack target")]
     [SerializeField] float attackDistance = 1f;
 
     Employee attackTarget = null;

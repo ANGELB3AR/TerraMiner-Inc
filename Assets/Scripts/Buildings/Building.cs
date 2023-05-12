@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Maximum time to construct building (seconds)")]
     [SerializeField] float maxConstructionProgress = 100f;
+
+    [Tooltip("Player-friendly building name to appear on menus")]
     [SerializeField] string buildingName = null;
+
+    [Tooltip("Icon representing building to appear on menus")]
     [SerializeField] Sprite buildingIcon = null;
 
     bool isConstructionComplete = false;
