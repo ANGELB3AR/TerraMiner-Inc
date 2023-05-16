@@ -10,12 +10,10 @@ public class ConstructionProgressUI : MonoBehaviour
     [SerializeField] Material underConstructionMaterial = null;
 
     Building building = null;
-    Camera mainCamera = null;
     List<Renderer> renderers = new List<Renderer>();
 
     private void Awake()
     {
-        mainCamera = Camera.main;
         building = GetComponentInParent<Building>();
 
         constructionProgressSlider.value = 0f;
@@ -46,10 +44,5 @@ public class ConstructionProgressUI : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-    }
-
-    private void LateUpdate()
-    {
-        transform.forward = mainCamera.transform.forward;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1672772697939566022}
   - component: {fileID: 9202478111394635343}
   m_Layer: 5
-  m_Name: ConstructionProgressSlider
+  m_Name: HealthBarSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 4038960330985088277}
   - component: {fileID: 5749344052685788546}
   - component: {fileID: 5045038600595702591}
+  - component: {fileID: 7849729113745174678}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -279,6 +280,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57f5aa132279a5848a0a6fcaa1a7e417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarSlider: {fileID: 9202478111394635343}
+--- !u!114 &7849729113745174678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807688156916204588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389eef5cde2de15468096203daa80240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4784478870484500809
