@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1053770058209067167, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053770058209067167, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911814722291859725, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 7767629552332237754}
     - target: {fileID: 2553157176844453440, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_Height
       value: 1.55

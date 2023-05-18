@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Alien : MonoBehaviour
 {
-    [SerializeField] NavMeshAgent agent = null;
+    [SerializeField] Movement movement = null;
     [SerializeField] Animator animator = null;
     [SerializeField] HitboxHandler hitbox = null;
 
@@ -28,7 +28,6 @@ public class Alien : MonoBehaviour
     Employee attackTarget = null;
     Building sabotageTarget = null;
 
-    readonly int walkingVelocity = Animator.StringToHash("Velocity");
     readonly int attack = Animator.StringToHash("Attack1");
 
     private void Start()
@@ -40,8 +39,6 @@ public class Alien : MonoBehaviour
 
     private void Update()
     {
-        animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
-        
         if (attackTarget == null && sabotageTarget == null)
         {
             CheckForTargets();
@@ -83,12 +80,12 @@ public class Alien : MonoBehaviour
 
         if (!NavMesh.SamplePosition(location, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { ChooseRandomPlaceToWander(); }
 
-        agent.SetDestination(hit.position);
+        movement.Move(hit.position);
     }
 
     void ChaseTarget()
     {
-        agent.SetDestination(attackTarget.transform.position);
+        movement.Move(attackTarget.transform.position);
 
         if (Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance)
         {
@@ -103,7 +100,7 @@ public class Alien : MonoBehaviour
 
     void SabotageTarget()
     {
-        agent.SetDestination(sabotageTarget.transform.position);
+        movement.Move(sabotageTarget.transform.position);
 
         if (Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance)
         {

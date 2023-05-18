@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Employee : MonoBehaviour
 {
-    [SerializeField] EmployeeMovement movement = null;
+    [SerializeField] Movement movement = null;
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
 

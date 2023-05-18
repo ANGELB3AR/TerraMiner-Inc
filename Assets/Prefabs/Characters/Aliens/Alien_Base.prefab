@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6988346850499098585}
   - component: {fileID: 2553157176844453440}
   - component: {fileID: 5949427508353817555}
+  - component: {fileID: 1911814722291859725}
   m_Layer: 0
   m_Name: Alien_Base
   m_TagString: Untagged
@@ -48,13 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92d981fc9667624294f4bd2faaf1868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 6988346850499098585}
+  movement: {fileID: 1911814722291859725}
   animator: {fileID: 0}
-  fighter: {fileID: 0}
+  hitbox: {fileID: 0}
   minCoordinates: {x: 0, y: 0}
   maxCoordinates: {x: 25, y: 25}
   awarenessDistance: 10
   attackDistance: 2.5
+  attackDamage: 1
 --- !u!195 &6988346850499098585
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -113,6 +115,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &1911814722291859725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368491831125893231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc1bcd0327bd5441b8de7bc693b7b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 6988346850499098585}
+  animator: {fileID: 0}
 --- !u!1001 &1884494127493362389
 PrefabInstance:
   m_ObjectHideFlags: 0

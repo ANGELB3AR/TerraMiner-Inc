@@ -5,7 +5,7 @@ using System;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class EmployeeMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
