@@ -7,6 +7,7 @@ public class Alien : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
+    [SerializeField] HitboxHandler hitbox = null;
 
     [Header("Settings")]
     [Tooltip("Minimum x- and z- coordinates alien can travel to")]
@@ -21,7 +22,8 @@ public class Alien : MonoBehaviour
     [Tooltip("Maximum distance alien can attack target")]
     [SerializeField] float attackDistance = 1f;
 
-    public int attackDamage { get; private set; } = 5;
+    [Tooltip("Amount of damage dealt by attack")]
+    [SerializeField] int attackDamage = 1;
 
     Employee attackTarget = null;
     Building sabotageTarget = null;
@@ -32,6 +34,8 @@ public class Alien : MonoBehaviour
     private void Start()
     {
         ChooseRandomPlaceToWander();
+
+        hitbox.SetAttackDamage(attackDamage);
     }
 
     private void Update()

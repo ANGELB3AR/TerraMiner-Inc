@@ -1396,15 +1396,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8209f0dbcfe0490489bfaa9bd6399716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtBoxCollider: {fileID: 8623224604211154481}
+  hitboxCollider: {fileID: 0}
 --- !u!4 &694686676179893560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 475830, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
-  m_PrefabInstance: {fileID: 694686676179582862}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &8623224604211154481 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 9083721755239608767, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3403559141431383361
@@ -1441,7 +1436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3368491831125893217, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3368491831125893217, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1484,6 +1479,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 1224983698}
+    - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: fighter
       value: 
       objectReference: {fileID: 1224983698}
@@ -1493,11 +1492,11 @@ PrefabInstance:
       objectReference: {fileID: 694686676172352834}
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: maxCoordinates.x
-      value: 100
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: maxCoordinates.y
-      value: 100
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3368491831125893231, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_Name
