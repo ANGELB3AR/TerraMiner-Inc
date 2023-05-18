@@ -1369,39 +1369,29 @@ PrefabInstance:
     - {fileID: 11421266, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 157950, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1224983698}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
 --- !u!95 &694686676172352834 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9589452, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &694686676179687280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 157950, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
-  m_PrefabInstance: {fileID: 694686676179582862}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1224983698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694686676179687280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8209f0dbcfe0490489bfaa9bd6399716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitboxCollider: {fileID: 0}
 --- !u!4 &694686676179893560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 475830, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5326889379144864712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4632212195992300614, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
+  m_PrefabInstance: {fileID: 694686676179582862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8209f0dbcfe0490489bfaa9bd6399716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3403559141431383361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1485,11 +1475,7 @@ PrefabInstance:
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: hitbox
       value: 
-      objectReference: {fileID: 1224983698}
-    - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
-      propertyPath: fighter
-      value: 
-      objectReference: {fileID: 1224983698}
+      objectReference: {fileID: 5326889379144864712}
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: animator
       value: 

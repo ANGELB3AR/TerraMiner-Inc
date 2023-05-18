@@ -95,6 +95,7 @@ public class Alien : MonoBehaviour
 
     void AttackTarget()
     {
+        transform.LookAt(attackTarget.transform);
         animator.SetTrigger(attack);
     }
 
