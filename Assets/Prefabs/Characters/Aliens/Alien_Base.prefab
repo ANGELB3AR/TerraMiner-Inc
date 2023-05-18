@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6988346850499098585}
   animator: {fileID: 0}
+  fighter: {fileID: 0}
   minCoordinates: {x: 0, y: 0}
   maxCoordinates: {x: 25, y: 25}
   awarenessDistance: 10

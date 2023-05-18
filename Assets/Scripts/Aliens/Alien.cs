@@ -21,6 +21,8 @@ public class Alien : MonoBehaviour
     [Tooltip("Maximum distance alien can attack target")]
     [SerializeField] float attackDistance = 1f;
 
+    public int attackDamage { get; private set; } = 5;
+
     Employee attackTarget = null;
     Building sabotageTarget = null;
 
@@ -80,14 +82,19 @@ public class Alien : MonoBehaviour
         agent.SetDestination(hit.position);
     }
 
-    void AttackTarget()
+    void ChaseTarget()
     {
         agent.SetDestination(attackTarget.transform.position);
 
         if (Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance)
         {
-            animator.SetTrigger(attack);
+            AttackTarget();
         }
+    }
+
+    void AttackTarget()
+    {
+        animator.SetTrigger(attack);
     }
 
     void SabotageTarget()

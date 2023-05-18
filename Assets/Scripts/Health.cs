@@ -22,6 +22,13 @@ public class Health : MonoBehaviour
         return currentHealth;
     }
 
+    private void Start()
+    {
+        currentHealth = maxHealth;
+
+        OnHealthUpdated?.Invoke(currentHealth, maxHealth);
+    }
+
     public void DealDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
