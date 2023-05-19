@@ -11,20 +11,29 @@ public class Hitbox : MonoBehaviour
 
     public event Action OnAttackLanded;
 
-    private void Start()
+    private void OnEnable()
     {
-        DeactivateHitbox();
+        AnimationEventHandler.OnHitboxActivated += ActivateHitbox;
+        AnimationEventHandler.OnHitboxDeactivated += DeactivateHitbox;
     }
 
-    // Called from Animation Event
-    public void ActivateHitbox()
+    private void OnDisable()
     {
+        AnimationEventHandler.OnHitboxActivated -= ActivateHitbox;
+        AnimationEventHandler.OnHitboxDeactivated -= DeactivateHitbox;
+    }
+
+    public void ActivateHitbox(Collider collider)
+    {
+        if (collider != hitboxCollider) { return; }
+
         hitboxCollider.enabled = true;
     }
 
-    // Called from Animation Event
-    public void DeactivateHitbox()
+    public void DeactivateHitbox(Collider collider)
     {
+        if (collider != hitboxCollider) { return; }
+
         hitboxCollider.enabled = false;
     }
 
@@ -35,12 +44,10 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger detected");
         if (other.gameObject.TryGetComponent<Health>(out Health health))
         {
             attackee = health;
             OnAttackLanded?.Invoke();
-            Debug.Log("Attacked triggered on " + other.gameObject.name);
         }
     }
 }

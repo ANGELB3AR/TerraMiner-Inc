@@ -1364,6 +1364,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: aa12e45ef93479f478b21de223b8da06, type: 2}
+    - target: {fileID: 7773225181551097060, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 8623224604211154481}
     m_RemovedComponents:
     - {fileID: 14365128, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
     - {fileID: 11421266, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
@@ -1381,17 +1385,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 475830, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5326889379144864712 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4632212195992300614, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
+--- !u!135 &8623224604211154481 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 9083721755239608767, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8209f0dbcfe0490489bfaa9bd6399716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3403559141431383361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1472,10 +1470,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
-      propertyPath: hitbox
-      value: 
-      objectReference: {fileID: 5326889379144864712}
     - target: {fileID: 3368491831125893230, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: animator
       value: 
