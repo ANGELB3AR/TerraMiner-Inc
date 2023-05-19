@@ -25,27 +25,95 @@ public class Alien : MonoBehaviour
     Employee attackTarget = null;
     Building sabotageTarget = null;
 
+    AlienState currentState;
+    AlienState previousState;
+
     readonly int attack = Animator.StringToHash("Attack1");
 
     private void Start()
     {
-        ChooseRandomPlaceToWander();
+
+    }
+
+    void SwitchState(AlienState newState)
+    {
+        ExitState();
+
+        previousState = currentState;
+        currentState = newState;
+
+        EnterState();
+    }
+
+    void EnterState()
+    {
+        switch (currentState)
+        {
+            case AlienState.Wandering:
+                break;
+            case AlienState.Sabotaging:
+                break;
+            case AlienState.Fighting:
+                break;
+            case AlienState.Impact:
+                break;
+            case AlienState.Dying:
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()
     {
-        if (attackTarget == null && sabotageTarget == null)
+        switch (currentState)
         {
-            CheckForTargets();
+            case AlienState.Wandering:
+                break;
+            case AlienState.Sabotaging:
+                break;
+            case AlienState.Fighting:
+                break;
+            case AlienState.Impact:
+                break;
+            case AlienState.Dying:
+                break;
+            default:
+                break;
         }
-        
-        if (attackTarget == null) { return; }
 
-        AttackTarget();
 
-        if (sabotageTarget == null) { return; }
+        //if (attackTarget == null && sabotageTarget == null)
+        //{
+        //    CheckForTargets();
+        //}
 
-        SabotageTarget();
+        //if (attackTarget == null) { return; }
+
+        //AttackTarget();
+
+        //if (sabotageTarget == null) { return; }
+
+        //SabotageTarget();
+    }
+
+    void ExitState()
+    {
+        switch (currentState)
+        {
+            case AlienState.Wandering:
+                break;
+            case AlienState.Sabotaging:
+                break;
+            case AlienState.Fighting:
+                break;
+            case AlienState.Impact:
+                break;
+            case AlienState.Dying:
+                break;
+            default:
+                break;
+        }
     }
 
     void CheckForTargets()
@@ -131,5 +199,12 @@ public class Alien : MonoBehaviour
         - IF EQUIPMENT DESTROYED THEN WANDER AGAIN
      */
 
-
+    public enum AlienState
+    {
+        Wandering,
+        Sabotaging,
+        Fighting,
+        Impact,
+        Dying
+    }
 }
