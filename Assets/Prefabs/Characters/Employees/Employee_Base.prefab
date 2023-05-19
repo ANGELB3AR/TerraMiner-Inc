@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4803966635850032849}
   - component: {fileID: 8060623613959112556}
   - component: {fileID: 2057202073063564351}
+  - component: {fileID: 1724006748923438398}
   - component: {fileID: 8012214030526103289}
   m_Layer: 0
   m_Name: Employee_Base
@@ -1417,6 +1418,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &1724006748923438398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e1d86be7c90054baf0649bc22f8241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &8012214030526103289
 Rigidbody:
   m_ObjectHideFlags: 0

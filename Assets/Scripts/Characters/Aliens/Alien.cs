@@ -7,7 +7,7 @@ public class Alien : MonoBehaviour
 {
     [SerializeField] Movement movement = null;
     [SerializeField] Animator animator = null;
-    [SerializeField] HitboxHandler hitbox = null;
+    [SerializeField] Attacker attacker = null;
 
     [Header("Settings")]
     [Tooltip("Minimum x- and z- coordinates alien can travel to")]
@@ -22,9 +22,6 @@ public class Alien : MonoBehaviour
     [Tooltip("Maximum distance alien can attack target")]
     [SerializeField] float attackDistance = 1f;
 
-    [Tooltip("Amount of damage dealt by attack")]
-    [SerializeField] int attackDamage = 1;
-
     Employee attackTarget = null;
     Building sabotageTarget = null;
 
@@ -33,8 +30,6 @@ public class Alien : MonoBehaviour
     private void Start()
     {
         ChooseRandomPlaceToWander();
-
-        hitbox.SetAttackDamage(attackDamage);
     }
 
     private void Update()
@@ -78,7 +73,10 @@ public class Alien : MonoBehaviour
     {
         Vector3 location = new Vector3(Random.Range(minCoordinates.x, maxCoordinates.x), 0f, Random.Range(minCoordinates.y, maxCoordinates.y));
 
-        if (!NavMesh.SamplePosition(location, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { ChooseRandomPlaceToWander(); }
+        if (!NavMesh.SamplePosition(location, out NavMeshHit hit, 1f, NavMesh.AllAreas)) 
+        { 
+            ChooseRandomPlaceToWander(); 
+        }
 
         movement.Move(hit.position);
     }
@@ -86,9 +84,11 @@ public class Alien : MonoBehaviour
     void ChaseTarget()
     {
         movement.Move(attackTarget.transform.position);
+        animator.ResetTrigger(attack);
 
-        if (Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance)
+        if (IsWithinAttackRange())
         {
+            movement.StopMoving();
             AttackTarget();
         }
     }
@@ -97,6 +97,11 @@ public class Alien : MonoBehaviour
     {
         transform.LookAt(attackTarget.transform);
         animator.SetTrigger(attack);
+
+        if (!IsWithinAttackRange())
+        {
+            ChaseTarget();
+        }
     }
 
     void SabotageTarget()
@@ -107,6 +112,11 @@ public class Alien : MonoBehaviour
         {
             animator.SetTrigger(attack);
         }
+    }
+
+    bool IsWithinAttackRange()
+    {
+        return Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance;
     }
 
     /*
