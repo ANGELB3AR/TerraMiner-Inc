@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public bool IsAlive { get; private set; } = true;
+
     [SerializeField] int maxHealth = 100;
 
     int currentHealth;
 
     public event Action<int, int> OnHealthUpdated;
     public event Action OnDied;
+    public event Action OnDamageTaken;
 
     public int GetMaxHealth()
     {
@@ -35,6 +38,7 @@ public class Health : MonoBehaviour
         Mathf.Clamp(currentHealth, 0, maxHealth);
 
         OnHealthUpdated?.Invoke(currentHealth, maxHealth);
+        OnDamageTaken?.Invoke();
 
         if (currentHealth != 0) { return; }
 
@@ -51,6 +55,7 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+        IsAlive = false;
         OnDied?.Invoke();
     }
 }

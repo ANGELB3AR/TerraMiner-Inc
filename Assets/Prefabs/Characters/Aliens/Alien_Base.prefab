@@ -54,9 +54,10 @@ MonoBehaviour:
   movement: {fileID: 1911814722291859725}
   animator: {fileID: 0}
   attacker: {fileID: 5415556678112160762}
+  health: {fileID: 5949427508353817555}
   minCoordinates: {x: 0, y: 0}
   maxCoordinates: {x: 25, y: 25}
-  awarenessDistance: 10
+  awarenessDistance: 5
   attackDistance: 2.5
 --- !u!195 &6988346850499098585
 NavMeshAgent:
@@ -178,6 +179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3368491831125893217}
     m_Modifications:
+    - target: {fileID: 945780180105912492, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1493135846716715594, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -186,13 +191,29 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2127203062649247486, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3807688156916204588, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3807688156916204588, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4038960330985088277, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784478870484500809, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695277078586022968, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7826913020416456351, guid: bc5f1acd7a9b4ae4b915c6997c2e7e32, type: 3}
       propertyPath: m_Pivot.x

@@ -8,6 +8,7 @@ public class Alien : MonoBehaviour
     [SerializeField] Movement movement = null;
     [SerializeField] Animator animator = null;
     [SerializeField] Attacker attacker = null;
+    [SerializeField] Health health = null;
 
     [Header("Settings")]
     [Tooltip("Minimum x- and z- coordinates alien can travel to")]
@@ -28,13 +29,49 @@ public class Alien : MonoBehaviour
     AlienState currentState;
     AlienState previousState;
 
+    public enum AlienState
+    {
+        Wandering,
+        Sabotaging,
+        Fighting,
+        Impact,
+        Dying
+    }
+
     readonly int attack = Animator.StringToHash("Attack1");
+    readonly int impact = Animator.StringToHash("Impact");
+    readonly int isDead = Animator.StringToHash("IsDead");
+
+    private void OnEnable()
+    {
+        health.OnDamageTaken += Health_OnDamageTaken;
+        health.OnDied += Health_OnDied;
+    }
+
+    private void OnDisable()
+    {
+        health.OnDamageTaken -= Health_OnDamageTaken;
+        health.OnDied -= Health_OnDied;
+    }
 
     private void Start()
     {
-
+        SwitchState(AlienState.Wandering);
     }
 
+    private void Update()
+    {
+        if (!health.IsAlive) { return; }
+
+        ProcessState();
+        CheckForTargets();
+
+        if (attackTarget != null || sabotageTarget != null) { return; }
+
+        SwitchState(AlienState.Wandering);
+    }
+
+    #region State Machine
     void SwitchState(AlienState newState)
     {
         ExitState();
@@ -50,51 +87,68 @@ public class Alien : MonoBehaviour
         switch (currentState)
         {
             case AlienState.Wandering:
+                ChooseRandomPlaceToWander();
                 break;
             case AlienState.Sabotaging:
+                SabotageTarget();
                 break;
             case AlienState.Fighting:
+                if (attackTarget == null)
+                {
+                    CheckForTargets();
+                }
+                ChaseTarget();
                 break;
             case AlienState.Impact:
+                animator.SetTrigger(impact);
                 break;
             case AlienState.Dying:
+                if (health.IsAlive) 
+                {
+                    SwitchState(AlienState.Wandering);
+                    return;
+                }
+                animator.SetBool(isDead, true);
                 break;
             default:
                 break;
         }
     }
 
-    private void Update()
+    private void ProcessState()
     {
         switch (currentState)
         {
             case AlienState.Wandering:
+                if (movement.hasReachedDestination)
+                {
+                    WaitToWander();
+                    ChooseRandomPlaceToWander();
+                }
                 break;
             case AlienState.Sabotaging:
                 break;
             case AlienState.Fighting:
+                if (attackTarget == null)
+                {
+                    CheckForTargets();
+                }
+
+                if (attackTarget == null && sabotageTarget == null)
+                {
+                    SwitchState(AlienState.Wandering);
+                }
                 break;
             case AlienState.Impact:
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Impact")) { return; }
+                if (!health.IsAlive) { return; }
+                SwitchState(AlienState.Fighting);
                 break;
             case AlienState.Dying:
                 break;
             default:
                 break;
         }
-
-
-        //if (attackTarget == null && sabotageTarget == null)
-        //{
-        //    CheckForTargets();
-        //}
-
-        //if (attackTarget == null) { return; }
-
-        //AttackTarget();
-
-        //if (sabotageTarget == null) { return; }
-
-        //SabotageTarget();
     }
 
     void ExitState()
@@ -108,12 +162,27 @@ public class Alien : MonoBehaviour
             case AlienState.Fighting:
                 break;
             case AlienState.Impact:
+                animator.ResetTrigger(impact);
                 break;
             case AlienState.Dying:
                 break;
             default:
                 break;
         }
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void Health_OnDamageTaken()
+    {
+        SwitchState(AlienState.Impact);
+    }
+
+    private void Health_OnDied()
+    {
+        SwitchState(AlienState.Dying);
     }
 
     void CheckForTargets()
@@ -125,12 +194,14 @@ public class Alien : MonoBehaviour
             if (target.TryGetComponent<Employee>(out Employee employee))
             {
                 attackTarget = employee;
+                SwitchState(AlienState.Fighting);
                 return;
             }
 
             else if (target.TryGetComponent<Building>(out Building building))
             {
                 sabotageTarget = building;
+                SwitchState(AlienState.Sabotaging);
                 return;
             }
         }
@@ -187,24 +258,10 @@ public class Alien : MonoBehaviour
         return Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance;
     }
 
-    /*
-     WANDERING
-        - IF COME ACROSS BUILDING THEN START DESTROYING IT
-        - IF COME ACROSS EMPLOYEE THEN ATTACK
-     FIGHTING
-        - IF TARGET DIES THEN FIND NEW TARGET
-            - IF NO NEW TARGETS THEN WANDER AGAIN
-    SABOTAGING
-        - IF ATTACKED THEN FIGHT BACK
-        - IF EQUIPMENT DESTROYED THEN WANDER AGAIN
-     */
-
-    public enum AlienState
+    IEnumerator WaitToWander()
     {
-        Wandering,
-        Sabotaging,
-        Fighting,
-        Impact,
-        Dying
+        yield return new WaitForSeconds(5);
     }
+
+    #endregion
 }

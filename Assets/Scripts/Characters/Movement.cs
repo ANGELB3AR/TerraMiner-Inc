@@ -10,11 +10,15 @@ public class Movement : MonoBehaviour
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
 
+    public bool hasReachedDestination { get; private set; }
+
     readonly int walkingVelocity = Animator.StringToHash("Velocity");
 
     private void Update()
     {
         animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
+
+        hasReachedDestination = (agent.pathStatus == NavMeshPathStatus.PathComplete) ? true : false;
     }
 
     public void Move(Vector3 point)
