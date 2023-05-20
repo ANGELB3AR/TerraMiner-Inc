@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     {
         animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
 
-        hasReachedDestination = (agent.pathStatus == NavMeshPathStatus.PathComplete) ? true : false;
+        hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, 0)) ? true : false;
     }
 
     public void Move(Vector3 point)

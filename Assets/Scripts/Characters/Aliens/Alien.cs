@@ -66,16 +66,21 @@ public class Alien : MonoBehaviour
         ProcessState();
         CheckForTargets();
 
-        if (attackTarget != null || sabotageTarget != null) { return; }
-
-        SwitchState(AlienState.Wandering);
+        if (attackTarget != null && currentState != AlienState.Fighting)
+        {
+            SwitchState(AlienState.Fighting);
+        }
+        else if (sabotageTarget != null && currentState != AlienState.Sabotaging)
+        {
+            SwitchState(AlienState.Sabotaging);
+        }
     }
 
     #region State Machine
     void SwitchState(AlienState newState)
     {
         ExitState();
-
+        Debug.Log($"{gameObject.name} is switch to {newState} state");
         previousState = currentState;
         currentState = newState;
 
@@ -120,23 +125,17 @@ public class Alien : MonoBehaviour
         switch (currentState)
         {
             case AlienState.Wandering:
-                if (movement.hasReachedDestination)
-                {
-                    WaitToWander();
-                    ChooseRandomPlaceToWander();
-                }
+                if (!movement.hasReachedDestination) { return; }
+                if (attackTarget != null || sabotageTarget != null) { return; }
+                
+                ChooseRandomPlaceToWander();
                 break;
             case AlienState.Sabotaging:
                 break;
             case AlienState.Fighting:
-                if (attackTarget == null)
+                if (attackTarget != null)
                 {
-                    CheckForTargets();
-                }
-
-                if (attackTarget == null && sabotageTarget == null)
-                {
-                    SwitchState(AlienState.Wandering);
+                    ChaseTarget();
                 }
                 break;
             case AlienState.Impact:
@@ -160,6 +159,7 @@ public class Alien : MonoBehaviour
             case AlienState.Sabotaging:
                 break;
             case AlienState.Fighting:
+                animator.ResetTrigger(attack);
                 break;
             case AlienState.Impact:
                 animator.ResetTrigger(impact);
@@ -194,17 +194,33 @@ public class Alien : MonoBehaviour
             if (target.TryGetComponent<Employee>(out Employee employee))
             {
                 attackTarget = employee;
+                if (currentState == AlienState.Fighting) { return; }
+
                 SwitchState(AlienState.Fighting);
                 return;
             }
+            else
+            {
+                attackTarget = null;
+            }
 
-            else if (target.TryGetComponent<Building>(out Building building))
+            if (target.TryGetComponent<Building>(out Building building))
             {
                 sabotageTarget = building;
+                if (currentState == AlienState.Sabotaging) { return; }
+
                 SwitchState(AlienState.Sabotaging);
                 return;
             }
+            else
+            {
+                sabotageTarget = null;
+            }
         }
+        
+        if (currentState == AlienState.Wandering) { return; }
+
+        SwitchState(AlienState.Wandering);
         return;
     }
 
@@ -256,11 +272,6 @@ public class Alien : MonoBehaviour
     bool IsWithinAttackRange()
     {
         return Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance;
-    }
-
-    IEnumerator WaitToWander()
-    {
-        yield return new WaitForSeconds(5);
     }
 
     #endregion
