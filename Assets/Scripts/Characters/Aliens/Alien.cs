@@ -74,6 +74,10 @@ public class Alien : MonoBehaviour
         {
             SwitchState(AlienState.Sabotaging);
         }
+        else if (attackTarget == null && sabotageTarget == null && currentState != AlienState.Wandering)
+        {
+            SwitchState(AlienState.Wandering);
+        }
     }
 
     #region State Machine
