@@ -12,17 +12,21 @@ public class Fighter : MonoBehaviour
     bool isFiring = false;
     bool isReloading = false;
     float currentTime = 0f;
-    float timeSinceLastShotFired = 0f;
+    float timeSinceLastShotFired = Mathf.Infinity;
     int shotsFiredSinceLastReload = 0;
+
+    GameObject weapon = null;
+    WeaponPrefab weaponPrefab = null;
+    Transform projectileSpawnPoint = null;
 
 
     readonly int fireSingle = Animator.StringToHash("FireSingle");
     readonly int fireBurst = Animator.StringToHash("FireBurst");
     readonly int fireContinuous = Animator.StringToHash("FireContinuous");
 
-    private void OnDisable()
+    private void Start()
     {
-        currentWeapon.OnWeaponFired -= CurrentWeapon_OnWeaponFired;
+        EquipWeapon(currentWeapon);
     }
 
     private void Update()
@@ -30,28 +34,31 @@ public class Fighter : MonoBehaviour
         currentTime = Time.deltaTime;
 
         if (!isFiring) { return; }
-        if (!AbleToFireWeapon()) { return; }
+        if (!AbleToFireWeapon()) 
+        {
+            //animator.ResetTrigger(fireSingle);
+            //animator.ResetTrigger(fireBurst);
+            //animator.ResetTrigger(fireContinuous);
+            return; 
+        }
 
-        currentWeapon.Fire();
+        Fire();
     }
 
     void EquipWeapon(Weapon newWeapon)
     {
         currentWeapon = newWeapon;
-        currentWeapon.weaponPrefab.transform.parent = weaponSlot;
-
-        currentWeapon.projectileSpawnPoint = currentWeapon.weaponPrefab.transform.GetChild(-1);
+        
+        weapon = Instantiate(currentWeapon.weaponPrefab.gameObject, weaponSlot);
+        weaponPrefab = weapon.GetComponent<WeaponPrefab>();
+        projectileSpawnPoint = weaponPrefab.GetProjectileSpawnPoint();
 
         shotsFiredSinceLastReload = 0;
-
-        currentWeapon.OnWeaponFired += CurrentWeapon_OnWeaponFired;
     }
 
     void UnequipWeapon()
     {
         currentWeapon = null;
-
-        currentWeapon.OnWeaponFired -= CurrentWeapon_OnWeaponFired;
     }
 
     private void CurrentWeapon_OnWeaponFired()
@@ -60,6 +67,26 @@ public class Fighter : MonoBehaviour
         currentTime = 0;
 
         shotsFiredSinceLastReload++;
+
+        HandleFiringAnimation();
+    }
+
+    private void HandleFiringAnimation()
+    {
+        switch (currentWeapon.recoilType)
+        {
+            case Weapon.RecoilType.Single:
+                animator.SetTrigger(fireSingle);
+                break;
+            case Weapon.RecoilType.Burst:
+                animator.SetTrigger(fireBurst);
+                break;
+            case Weapon.RecoilType.Continuous:
+                animator.SetTrigger(fireContinuous);
+                break;
+            default:
+                break;
+        }
     }
 
     bool AbleToFireWeapon()
@@ -73,17 +100,27 @@ public class Fighter : MonoBehaviour
             return false; 
         }
 
-
         return true;
     }
 
     private IEnumerator ReloadWeapon()
     {
+        isReloading = true;
         yield return new WaitForSeconds(currentWeapon.timeBetweenClips);
+
+        isReloading = false;
+        shotsFiredSinceLastReload = 0;
     }
 
     public void FireWeapon(bool status)
     {
         isFiring = status;
+    }
+
+    void Fire()
+    {
+        Instantiate(currentWeapon.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+
+        Debug.Log("WeaponFired");
     }
 }

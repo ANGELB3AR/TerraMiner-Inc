@@ -76,7 +76,6 @@ public class Employee : MonoBehaviour
         if (!health.IsAlive) { return; }
 
         ProcessState();
-        CheckForTargets();
     }
 
     #region State Machine
@@ -125,6 +124,7 @@ public class Employee : MonoBehaviour
         switch (currentState)
         {
             case EmployeeState.Idling:
+                CheckForTargets();
                 break;
             case EmployeeState.Fighting:
                 ChaseTarget();
@@ -144,11 +144,13 @@ public class Employee : MonoBehaviour
             case EmployeeState.Transporting:
                 break;
             case EmployeeState.Walking:
+                if (!movement.hasReachedDestination) { return; }
+                SwitchState(EmployeeState.Idling);
                 break;
             case EmployeeState.Impact:
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Impact")) { return; }
                 if (!health.IsAlive) { return; }
-                SwitchState(EmployeeState.Fighting);
+                SwitchState(previousState);
                 break;
             case EmployeeState.Dying:
                 break;
@@ -175,6 +177,7 @@ public class Employee : MonoBehaviour
             case EmployeeState.Transporting:
                 break;
             case EmployeeState.Walking:
+                movement.StopMoving();
                 break;
             case EmployeeState.Impact:
                 animator.ResetTrigger(impact);
@@ -218,6 +221,12 @@ public class Employee : MonoBehaviour
                 return;
             }
         }
+
+        if (currentState != EmployeeState.Idling)
+        {
+            SwitchState(EmployeeState.Idling);
+        }
+
         return;
     }
 
@@ -227,6 +236,7 @@ public class Employee : MonoBehaviour
 
         if (IsWithinAttackRange())
         {
+            movement.StopMoving();
             ShootAtTarget();
         }
     }

@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float speed = 10f;
+    [SerializeField] int damage = 5;
+    [SerializeField] float lifetime = 5f;
+
+    private void Update()
     {
-        
+        transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
+
+        if (Time.deltaTime >= lifetime)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.collider.TryGetComponent<Health>(out Health health))
+        {
+            health.DealDamage(damage);
+        }
+
+        Destroy(gameObject);
     }
 }

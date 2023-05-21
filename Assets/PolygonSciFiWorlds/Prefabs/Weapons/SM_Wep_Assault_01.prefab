@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 33330864238540290}
   - component: {fileID: 23360696180868136}
   - component: {fileID: 64409098824678216}
+  - component: {fileID: 3143410605881874711}
   m_Layer: 0
   m_Name: SM_Wep_Assault_01
   m_TagString: Untagged
@@ -275,8 +276,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818088191277850}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.3801586, y: -0.633134, z: 0.46608186, w: 0.48722532}
+  m_LocalPosition: {x: 0.011, y: 0.017, z: -0.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -286,7 +287,7 @@ Transform:
   - {fileID: 8728189357412605007}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.694, y: -95.338, z: 73.535}
 --- !u!33 &33330864238540290
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -359,6 +360,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43540790851472154, guid: e043d4b59dbb0e445b43f2ef0739b478, type: 2}
+--- !u!114 &3143410605881874711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818088191277850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1785facabc1d849974a2f8758d57c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnPoint: {fileID: 8728189357412605007}
 --- !u!1 &1960381399689765716
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960381399689765716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.034, z: 0.605}
+  m_LocalPosition: {x: 0, y: 0.034, z: 0.674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

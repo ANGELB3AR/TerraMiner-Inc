@@ -16,20 +16,11 @@ public class Weapon : ScriptableObject
     public int roundsInClip;
     public float timeBetweenClips;
     [HideInInspector] public Transform projectileSpawnPoint;
-
-    public event Action OnWeaponFired;
     
     public enum RecoilType
     {
         Single,
         Burst,
         Continuous
-    }
-
-    public void Fire()
-    {
-        Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-
-        OnWeaponFired?.Invoke();
     }
 }
