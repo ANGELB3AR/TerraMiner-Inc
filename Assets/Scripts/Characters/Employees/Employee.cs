@@ -165,6 +165,7 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Fighting:
                 animator.SetBool(isAiming, false);
+                fighter.FireWeapon(false);
                 break;
             case EmployeeState.Building:
                 OnEmployeeStoppedConstruction?.Invoke(this, buildingToConstruct);
@@ -179,7 +180,6 @@ public class Employee : MonoBehaviour
                 animator.ResetTrigger(impact);
                 break;
             case EmployeeState.Dying:
-
                 break;
             default:
                 break;
@@ -235,7 +235,7 @@ public class Employee : MonoBehaviour
     {
         transform.LookAt(currentTarget.transform);
 
-        fighter.FireWeapon();
+        fighter.FireWeapon(true);
     }
 
     bool IsWithinAttackRange()
