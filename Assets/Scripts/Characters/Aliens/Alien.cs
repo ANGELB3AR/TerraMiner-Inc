@@ -33,7 +33,7 @@ public class Alien : MonoBehaviour
     {
         Wandering,
         Sabotaging,
-        Fighting,
+        Attacking,
         Impact,
         Dying
     }
@@ -66,9 +66,9 @@ public class Alien : MonoBehaviour
         ProcessState();
         CheckForTargets();
 
-        if (attackTarget != null && currentState != AlienState.Fighting)
+        if (attackTarget != null && currentState != AlienState.Attacking)
         {
-            SwitchState(AlienState.Fighting);
+            SwitchState(AlienState.Attacking);
         }
         else if (sabotageTarget != null && currentState != AlienState.Sabotaging)
         {
@@ -101,7 +101,7 @@ public class Alien : MonoBehaviour
             case AlienState.Sabotaging:
                 SabotageTarget();
                 break;
-            case AlienState.Fighting:
+            case AlienState.Attacking:
                 if (attackTarget == null)
                 {
                     CheckForTargets();
@@ -136,7 +136,7 @@ public class Alien : MonoBehaviour
                 break;
             case AlienState.Sabotaging:
                 break;
-            case AlienState.Fighting:
+            case AlienState.Attacking:
                 if (attackTarget != null)
                 {
                     ChaseTarget();
@@ -145,7 +145,7 @@ public class Alien : MonoBehaviour
             case AlienState.Impact:
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Impact")) { return; }
                 if (!health.IsAlive) { return; }
-                SwitchState(AlienState.Fighting);
+                SwitchState(AlienState.Attacking);
                 break;
             case AlienState.Dying:
                 break;
@@ -162,7 +162,7 @@ public class Alien : MonoBehaviour
                 break;
             case AlienState.Sabotaging:
                 break;
-            case AlienState.Fighting:
+            case AlienState.Attacking:
                 animator.ResetTrigger(attack);
                 break;
             case AlienState.Impact:
@@ -198,9 +198,9 @@ public class Alien : MonoBehaviour
             if (target.TryGetComponent<Employee>(out Employee employee))
             {
                 attackTarget = employee;
-                if (currentState == AlienState.Fighting) { return; }
+                if (currentState == AlienState.Attacking) { return; }
 
-                SwitchState(AlienState.Fighting);
+                SwitchState(AlienState.Attacking);
                 return;
             }
             else
@@ -237,12 +237,12 @@ public class Alien : MonoBehaviour
             ChooseRandomPlaceToWander(); 
         }
 
-        movement.Move(hit.position);
+        movement.MoveToPoint(hit.position);
     }
 
     void ChaseTarget()
     {
-        movement.Move(attackTarget.transform.position);
+        movement.MoveToPoint(attackTarget.transform.position);
         animator.ResetTrigger(attack);
 
         if (IsWithinAttackRange())
@@ -265,7 +265,7 @@ public class Alien : MonoBehaviour
 
     void SabotageTarget()
     {
-        movement.Move(sabotageTarget.transform.position);
+        movement.MoveToPoint(sabotageTarget.transform.position);
 
         if (Vector3.Distance(transform.position, attackTarget.transform.position) <= attackDistance)
         {

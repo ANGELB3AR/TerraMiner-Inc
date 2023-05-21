@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
         hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, 0)) ? true : false;
     }
 
-    public void Move(Vector3 point)
+    public void MoveToPoint(Vector3 point)
     {
         if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
 

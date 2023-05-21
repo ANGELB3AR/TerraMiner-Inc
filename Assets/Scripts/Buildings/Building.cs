@@ -62,7 +62,7 @@ public class Building : MonoBehaviour
     {
         if (building != this) { return; }
 
-        totalBuildSkill += employee.buildingSkill;
+        totalBuildSkill += employee.GetConstructionSkill();
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
 
@@ -70,7 +70,7 @@ public class Building : MonoBehaviour
     {
         if (building != this) { return; }
 
-        totalBuildSkill -= employee.buildingSkill;
+        totalBuildSkill -= employee.GetConstructionSkill();
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
 

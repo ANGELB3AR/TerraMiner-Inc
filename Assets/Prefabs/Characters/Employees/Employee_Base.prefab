@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3153317858567926491}
   - component: {fileID: 1422365171743656098}
   - component: {fileID: 3153317858567926490}
+  - component: {fileID: -365083827237010316}
   - component: {fileID: 3153317858567926489}
   - component: {fileID: 1524172399}
   - component: {fileID: 4803966635850032849}
   - component: {fileID: 8060623613959112556}
   - component: {fileID: 2057202073063564351}
-  - component: {fileID: 1724006748923438398}
   - component: {fileID: 8012214030526103289}
   m_Layer: 0
   m_Name: Employee_Base
@@ -77,10 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e4501a7ef0a284db3f30a00339b60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3067802551985163751}
   movement: {fileID: 3153317858567926490}
+  fighter: {fileID: -365083827237010316}
+  health: {fileID: 2057202073063564351}
   selectionOutline: {fileID: 1524172399}
   hoverOutline: {fileID: 4803966635850032849}
-  <buildingSkill>k__BackingField: 1
+  awarenessDistance: 5
+  constructionSkill: 1
 --- !u!114 &3153317858567926490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +112,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.09529778
+      value: 1.0031556
+      inSlope: -4.039713
+      outSlope: -4.039713
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07453695
+    - serializedVersion: 3
       time: 1.5
       value: 4
       inSlope: 2
@@ -119,6 +132,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-365083827237010316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70cc9b8605fc4c4d9657cc08badb72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3067802551985163751}
 --- !u!136 &3153317858567926489
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1442,19 +1468,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
---- !u!114 &1724006748923438398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3153317858567926493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e1d86be7c90054baf0649bc22f8241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 1
 --- !u!54 &8012214030526103289
 Rigidbody:
   m_ObjectHideFlags: 0

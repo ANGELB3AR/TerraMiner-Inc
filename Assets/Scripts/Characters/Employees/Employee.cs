@@ -5,9 +5,21 @@ using UnityEngine;
 
 public class Employee : MonoBehaviour
 {
+    [Header("Components")]
+    [SerializeField] Animator animator = null;
     [SerializeField] Movement movement = null;
+    [SerializeField] Fighter fighter = null;
+    [SerializeField] Health health = null;
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
+
+    [Header("Settings")]
+    [Tooltip("Maximum distance employee can detect targets")]
+    [SerializeField] float awarenessDistance = 5f;
+    [SerializeField] float attackRange = 10f;
+
+    [Header("Stats")]
+    [SerializeField] int constructionSkill = 1;
 
     EmployeeState currentState;
     EmployeeState previousState;
@@ -15,8 +27,22 @@ public class Employee : MonoBehaviour
     Vector3 positionToMove;
     Building buildingToConstruct;
     bool isConstructingBuilding = false;
+    Alien currentTarget = null;
 
-    [field:SerializeField] public int buildingSkill { get; private set; } = 1;
+    readonly int isAiming = Animator.StringToHash("IsAiming");
+    readonly int impact = Animator.StringToHash("Impact");
+    readonly int isDead = Animator.StringToHash("IsDead");
+
+    public enum EmployeeState
+    {
+        Idling,
+        Fighting,
+        Building,
+        Transporting,
+        Walking,
+        Impact,
+        Dying
+    }
 
     public static event Action<Employee, Building> OnEmployeeStartedConstruction;
     public static event Action<Employee, Building> OnEmployeeStoppedConstruction;
@@ -25,12 +51,18 @@ public class Employee : MonoBehaviour
     {
         EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
         EmployeeSelection.OnEmployeeDeselected += EmployeeSelection_OnEmployeeDeselected;
+
+        health.OnDamageTaken += Health_OnDamageTaken;
+        health.OnDied += Health_OnDied;
     }
 
     private void OnDisable()
     {
         EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
         EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
+
+        health.OnDamageTaken -= Health_OnDamageTaken;
+        health.OnDied -= Health_OnDied;
     }
 
     private void Start()
@@ -38,6 +70,204 @@ public class Employee : MonoBehaviour
         currentState = EmployeeState.Idling;
         InitializeState();
     }
+
+    private void Update()
+    {
+        if (!health.IsAlive) { return; }
+
+        ProcessState();
+        CheckForTargets();
+    }
+
+    #region State Machine
+
+    void SwitchState(EmployeeState newState)
+    {
+        ExitState();
+
+        previousState = currentState;
+        currentState = newState;
+
+        InitializeState();
+    }
+
+    void InitializeState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                animator.SetBool(isAiming, true);
+                CheckForTargets();
+                break;
+            case EmployeeState.Building:
+                movement.MoveToPoint(positionToMove);
+                break;
+            case EmployeeState.Transporting:
+                break;
+            case EmployeeState.Walking:
+                movement.MoveToPoint(positionToMove);
+                break;
+            case EmployeeState.Impact:
+                animator.SetTrigger(impact);
+                break;
+            case EmployeeState.Dying:
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ProcessState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                ChaseTarget();
+                break;
+            case EmployeeState.Building:
+                if (Vector3.Distance(gameObject.transform.position, positionToMove) <= buildingToConstruct.ConstructingDistance && !isConstructingBuilding)
+                {
+                    OnEmployeeStartedConstruction?.Invoke(this, buildingToConstruct);
+                    isConstructingBuilding = true;
+                }
+
+                if (buildingToConstruct.GetConstructionCompleteStatus())
+                {
+                    SwitchState(EmployeeState.Idling);
+                }
+                break;
+            case EmployeeState.Transporting:
+                break;
+            case EmployeeState.Walking:
+                break;
+            case EmployeeState.Impact:
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Impact")) { return; }
+                if (!health.IsAlive) { return; }
+                SwitchState(EmployeeState.Fighting);
+                break;
+            case EmployeeState.Dying:
+                break;
+            default:
+                break;
+        }
+    }
+
+    void ExitState()
+    {
+        switch (currentState)
+        {
+            case EmployeeState.Idling:
+                break;
+            case EmployeeState.Fighting:
+                animator.SetBool(isAiming, false);
+                break;
+            case EmployeeState.Building:
+                OnEmployeeStoppedConstruction?.Invoke(this, buildingToConstruct);
+                isConstructingBuilding = false;
+                movement.StopMoving();
+                break;
+            case EmployeeState.Transporting:
+                break;
+            case EmployeeState.Walking:
+                break;
+            case EmployeeState.Impact:
+                animator.ResetTrigger(impact);
+                break;
+            case EmployeeState.Dying:
+
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    #endregion
+
+    #region Private Methods
+
+    private void Health_OnDamageTaken()
+    {
+        SwitchState(EmployeeState.Impact);
+    }
+
+    private void Health_OnDied()
+    {
+        animator.SetBool(isDead, true);
+        SwitchState(EmployeeState.Dying);
+    }
+
+    private void CheckForTargets()
+    {
+        Collider[] possibleTargets = Physics.OverlapSphere(transform.position, awarenessDistance);
+
+        foreach (Collider target in possibleTargets)
+        {
+            if (target.TryGetComponent<Alien>(out Alien alien))
+            {
+                currentTarget = alien;
+
+                if (currentState == EmployeeState.Fighting) { return; }
+
+                SwitchState(EmployeeState.Fighting);
+                return;
+            }
+        }
+        return;
+    }
+
+    void ChaseTarget()
+    {
+        movement.MoveToPoint(currentTarget.transform.position);
+
+        if (IsWithinAttackRange())
+        {
+            ShootAtTarget();
+        }
+    }
+
+    private void ShootAtTarget()
+    {
+        transform.LookAt(currentTarget.transform);
+
+        fighter.FireWeapon();
+    }
+
+    bool IsWithinAttackRange()
+    {
+        return Vector3.Distance(transform.position, currentTarget.transform.position) <= attackRange;
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    public int GetConstructionSkill()
+    {
+        return constructionSkill;
+    }
+
+    public void ConstructBuilding(Building building)
+    {
+        buildingToConstruct = building;
+        positionToMove = building.transform.position;
+
+        SwitchState(EmployeeState.Building);
+    }
+
+    public void MoveToPoint(Vector3 point)
+    {
+        positionToMove = point;
+
+        SwitchState(EmployeeState.Walking);
+    }
+
+    #endregion
 
     #region Highlighting
 
@@ -65,126 +295,6 @@ public class Employee : MonoBehaviour
         if (employee != this) { return; }
 
         selectionOutline.enabled = false;
-    }
-
-    #endregion
-
-    #region Public Methods
-
-    public void ConstructBuilding(Building building)
-    {
-        buildingToConstruct = building;
-        positionToMove = building.transform.position;
-
-        SwitchState(EmployeeState.Building);
-    }
-
-    public void MoveToPoint(Vector3 point)
-    {
-        positionToMove = point;
-
-        SwitchState(EmployeeState.Walking);
-    }
-
-    #endregion
-
-    #region State Machine
-
-    private void Update()
-    {
-        ProcessState();
-    }
-
-    void SwitchState(EmployeeState newState)
-    {
-        ExitState();
-
-        previousState = currentState;
-        currentState = newState;
-
-        InitializeState();
-    }
-
-    void InitializeState()
-    {
-        switch (currentState)
-        {
-            case EmployeeState.Idling:
-                break;
-            case EmployeeState.Fighting:
-                break;
-            case EmployeeState.Building:
-                movement.Move(positionToMove);
-                break;
-            case EmployeeState.Transporting:
-                break;
-            case EmployeeState.Walking:
-                movement.Move(positionToMove);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void ProcessState()
-    {
-        switch (currentState)
-        {
-            case EmployeeState.Idling:
-                break;
-            case EmployeeState.Fighting:
-                break;
-            case EmployeeState.Building:
-                if (Vector3.Distance(gameObject.transform.position, positionToMove) <= buildingToConstruct.ConstructingDistance && !isConstructingBuilding)
-                {
-                    OnEmployeeStartedConstruction?.Invoke(this, buildingToConstruct);
-                    isConstructingBuilding = true;
-                }
-
-                if (buildingToConstruct.GetConstructionCompleteStatus())
-                {
-                    SwitchState(EmployeeState.Idling);
-                }
-                break;
-            case EmployeeState.Transporting:
-                break;
-            case EmployeeState.Walking:
-                break;
-            default:
-                break;
-        }
-    }
-
-    void ExitState()
-    {
-        switch (currentState)
-        {
-            case EmployeeState.Idling:
-                break;
-            case EmployeeState.Fighting:
-                break;
-            case EmployeeState.Building:
-                OnEmployeeStoppedConstruction?.Invoke(this, buildingToConstruct);
-                isConstructingBuilding = false;
-                movement.StopMoving();
-                break;
-            case EmployeeState.Transporting:
-                break;
-            case EmployeeState.Walking:
-                break;
-            default:
-                break;
-        }
-    }
-
-
-    public enum EmployeeState
-    {
-        Idling,
-        Fighting,
-        Building,
-        Transporting,
-        Walking
     }
 
     #endregion
