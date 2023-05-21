@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
 
+    [SerializeField] AnimationCurve movementCurve;
+
     public bool hasReachedDestination { get; private set; }
 
     readonly int walkingVelocity = Animator.StringToHash("Velocity");
@@ -17,6 +19,8 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
+
+        agent.acceleration = movementCurve.Evaluate(agent.velocity.magnitude);
 
         hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, 0)) ? true : false;
     }
