@@ -1261,6 +1261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475830}
   - component: {fileID: 9589452}
+  - component: {fileID: 2224705289076146367}
   m_Layer: 0
   m_Name: Biter
   m_TagString: Untagged
@@ -1305,6 +1306,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &2224705289076146367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e89d4648c29a364db2494cec048a343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 0}
 --- !u!1 &158630
 GameObject:
   m_ObjectHideFlags: 0

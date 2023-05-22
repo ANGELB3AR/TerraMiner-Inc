@@ -9,6 +9,7 @@ public class AnimationEventHandler : MonoBehaviour
 
     public static event Action<Collider> OnHitboxActivated;
     public static event Action<Collider> OnHitboxDeactivated;
+    public event Action OnAttackAttempted;
 
     public void ActivateHitbox()
     {
@@ -19,4 +20,11 @@ public class AnimationEventHandler : MonoBehaviour
     {
         OnHitboxDeactivated?.Invoke(hitbox);
     }
+
+
+    public void AttemptAttack()
+    {
+        OnAttackAttempted?.Invoke();
+    }
+
 }
