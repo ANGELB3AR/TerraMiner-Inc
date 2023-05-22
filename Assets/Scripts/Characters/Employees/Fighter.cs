@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class Fighter : MonoBehaviour
 {
     [SerializeField] Animator animator = null;
     [SerializeField] Weapon currentWeapon = null;
     [SerializeField] Transform weaponSlot = null;
+    [SerializeField] Rig aimRig = null;
+    [SerializeField] Transform aimTarget = null;
+    [SerializeField] Vector3 aimOffset = new Vector3();
 
     bool isFiring = false;
     bool isReloading = false;
@@ -18,6 +22,7 @@ public class Fighter : MonoBehaviour
     GameObject weapon = null;
     WeaponPrefab weaponPrefab = null;
     Transform projectileSpawnPoint = null;
+    Alien currentTarget = null;
 
 
     readonly int fireSingle = Animator.StringToHash("FireSingle");
@@ -34,6 +39,9 @@ public class Fighter : MonoBehaviour
         currentTime = Time.deltaTime;
 
         if (!isFiring) { return; }
+
+        aimTarget.transform.position = currentTarget.transform.position + aimOffset;
+
         if (!AbleToFireWeapon()) 
         {
             //animator.ResetTrigger(fireSingle);
@@ -115,6 +123,16 @@ public class Fighter : MonoBehaviour
     public void FireWeapon(bool status)
     {
         isFiring = status;
+    }
+
+    public void SetCurrentTarget(Alien target)
+    {
+        currentTarget = target;
+    }
+
+    public Alien GetCurrentTarget()
+    {
+        return currentTarget;
     }
 
     void Fire()

@@ -27,7 +27,7 @@ public class Employee : MonoBehaviour
     Vector3 positionToMove;
     Building buildingToConstruct;
     bool isConstructingBuilding = false;
-    Alien currentTarget = null;
+    
 
     readonly int isAiming = Animator.StringToHash("IsAiming");
     readonly int impact = Animator.StringToHash("Impact");
@@ -213,7 +213,7 @@ public class Employee : MonoBehaviour
         {
             if (target.TryGetComponent<Alien>(out Alien alien))
             {
-                currentTarget = alien;
+                fighter.SetCurrentTarget(alien);
 
                 if (currentState == EmployeeState.Fighting) { return; }
 
@@ -232,7 +232,7 @@ public class Employee : MonoBehaviour
 
     void ChaseTarget()
     {
-        movement.MoveToPoint(currentTarget.transform.position);
+        movement.MoveToPoint(fighter.GetCurrentTarget().transform.position);
 
         if (IsWithinAttackRange())
         {
@@ -243,14 +243,14 @@ public class Employee : MonoBehaviour
 
     private void ShootAtTarget()
     {
-        transform.LookAt(currentTarget.transform);
+        transform.LookAt(fighter.GetCurrentTarget().transform);
 
         fighter.FireWeapon(true);
     }
 
     bool IsWithinAttackRange()
     {
-        return Vector3.Distance(transform.position, currentTarget.transform.position) <= attackRange;
+        return Vector3.Distance(transform.position, fighter.GetCurrentTarget().transform.position) <= attackRange;
     }
 
     #endregion
