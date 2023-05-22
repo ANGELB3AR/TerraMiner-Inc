@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1911814722291859725}
   - component: {fileID: 5415556678112160762}
   - component: {fileID: 1899703865280778518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Alien_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 1
+  attackDistance: 0.5
 --- !u!54 &1899703865280778518
 Rigidbody:
   m_ObjectHideFlags: 0

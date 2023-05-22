@@ -6,9 +6,26 @@ public class Attacker : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt by attack")]
     [SerializeField] int attackDamage = 1;
+    [Tooltip("Maximum distance that attack can hit target")]
     [SerializeField] float attackDistance = 0.5f;
 
     GameObject currentTarget = null;
+    AnimationEventHandler animationEventHandler;
+
+    private void Awake()
+    {
+        animationEventHandler = GetComponentInChildren<AnimationEventHandler>();
+    }
+
+    private void OnEnable()
+    {
+        animationEventHandler.OnAttackAttempted += AttemptToAttackTarget;
+    }
+
+    private void OnDisable()
+    {
+        animationEventHandler.OnAttackAttempted -= AttemptToAttackTarget;
+    }
 
     public void SetCurrentTarget(GameObject newTarget)
     {

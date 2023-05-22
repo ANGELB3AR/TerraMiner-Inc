@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5966846084378753267}
   - component: {fileID: 967562744019834768}
   - component: {fileID: 2865977347966641732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ResourceExtractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

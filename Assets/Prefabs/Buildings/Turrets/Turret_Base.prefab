@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7599197416286141645}
   - component: {fileID: 2393079985910795849}
   - component: {fileID: 3850177551468003006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxConstructionProgress: 10
+  buildingName: 
+  buildingIcon: {fileID: 0}
   <ConstructingDistance>k__BackingField: 2
 --- !u!114 &2393079985910795849
 MonoBehaviour:
