@@ -198,6 +198,8 @@ public class Alien : MonoBehaviour
             if (target.TryGetComponent<Employee>(out Employee employee))
             {
                 attackTarget = employee;
+                attacker.SetCurrentTarget(attackTarget.gameObject);
+
                 if (currentState == AlienState.Attacking) { return; }
 
                 SwitchState(AlienState.Attacking);
@@ -211,6 +213,8 @@ public class Alien : MonoBehaviour
             if (target.TryGetComponent<Building>(out Building building))
             {
                 sabotageTarget = building;
+                attacker.SetCurrentTarget(sabotageTarget.gameObject);
+
                 if (currentState == AlienState.Sabotaging) { return; }
 
                 SwitchState(AlienState.Sabotaging);

@@ -1367,11 +1367,12 @@ PrefabInstance:
     - target: {fileID: 7773225181551097060, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
       propertyPath: hitbox
       value: 
-      objectReference: {fileID: 8623224604211154481}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 14365128, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
     - {fileID: 11421266, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6570988952241711141, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
@@ -1383,11 +1384,6 @@ Animator:
 --- !u!4 &694686676179893560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 475830, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
-  m_PrefabInstance: {fileID: 694686676179582862}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &8623224604211154481 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 9083721755239608767, guid: 9f38cf5573dadb241a8672513e5a9502, type: 3}
   m_PrefabInstance: {fileID: 694686676179582862}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3403559141431383361

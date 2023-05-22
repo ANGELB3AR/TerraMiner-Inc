@@ -6,26 +6,21 @@ public class Attacker : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt by attack")]
     [SerializeField] int attackDamage = 1;
+    [SerializeField] float attackDistance = 0.5f;
 
-    Hitbox hitbox = null;
+    GameObject currentTarget = null;
 
-    private void Awake()
+    public void SetCurrentTarget(GameObject newTarget)
     {
-        hitbox = GetComponentInChildren<Hitbox>();
+        currentTarget = newTarget;
     }
 
-    private void OnEnable()
+    void AttemptToAttackTarget()
     {
-        hitbox.OnAttackLanded += Hitbox_OnAttackLanded;
-    }
+        if (currentTarget == null) { return; }
+        if (!currentTarget.TryGetComponent<Health>(out Health targetHealth)) { return; }
+        if (Vector3.Distance(transform.position, currentTarget.transform.position) !<= attackDistance) { return; }
 
-    private void OnDisable()
-    {
-        hitbox.OnAttackLanded -= Hitbox_OnAttackLanded;
-    }
-
-    private void Hitbox_OnAttackLanded()
-    {
-        hitbox.DealDamage(attackDamage);
+        targetHealth.DealDamage(attackDamage);
     }
 }
