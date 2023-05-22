@@ -18,9 +18,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.TryGetComponent<Health>(out Health health))
+        if (other.TryGetComponent<Health>(out Health health))
         {
             health.DealDamage(damage);
         }

@@ -98,6 +98,7 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Fighting:
                 animator.SetBool(isAiming, true);
+                fighter.SetAimRigWeight(1f);
                 CheckForTargets();
                 break;
             case EmployeeState.Building:
@@ -167,6 +168,7 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Fighting:
                 animator.SetBool(isAiming, false);
+                fighter.SetAimRigWeight(0f);
                 fighter.FireWeapon(false);
                 break;
             case EmployeeState.Building:
@@ -232,13 +234,14 @@ public class Employee : MonoBehaviour
 
     void ChaseTarget()
     {
-        movement.MoveToPoint(fighter.GetCurrentTarget().transform.position);
-
         if (IsWithinAttackRange())
         {
             movement.StopMoving();
             ShootAtTarget();
+            return;
         }
+
+        movement.MoveToPoint(fighter.GetCurrentTarget().transform.position);
     }
 
     private void ShootAtTarget()

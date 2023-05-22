@@ -39,6 +39,7 @@ public class Fighter : MonoBehaviour
         currentTime = Time.deltaTime;
 
         if (!isFiring) { return; }
+        if (currentTarget == null) { return; }
 
         aimTarget.transform.position = currentTarget.transform.position + aimOffset;
 
@@ -135,10 +136,13 @@ public class Fighter : MonoBehaviour
         return currentTarget;
     }
 
+    public void SetAimRigWeight(float weight)
+    {
+        aimRig.weight = weight;
+    }
+
     void Fire()
     {
         Instantiate(currentWeapon.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-
-        Debug.Log("WeaponFired");
     }
 }

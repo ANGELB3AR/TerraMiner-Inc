@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
 
         agent.acceleration = movementCurve.Evaluate(agent.velocity.magnitude);
 
-        hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, 0)) ? true : false;
+        hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, Mathf.Epsilon)) ? true : false;
     }
 
     public void MoveToPoint(Vector3 point)
@@ -30,10 +30,12 @@ public class Movement : MonoBehaviour
         if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
 
         agent.SetDestination(hit.position);
+        agent.updateRotation = true;
     }
 
     public void StopMoving()
     {
         agent.ResetPath();
+        agent.updateRotation = false;
     }
 }
