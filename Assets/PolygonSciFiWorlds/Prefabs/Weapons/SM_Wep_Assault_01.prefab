@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1785facabc1d849974a2f8758d57c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnPoint: {fileID: 8728189357412605007}
+  raycastOrigin: {fileID: 8728189357412605007}
 --- !u!1 &1960381399689765716
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8728189357412605007}
   m_Layer: 0
-  m_Name: ProjectileSpawnPoint
+  m_Name: RaycastOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,7 +397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960381399689765716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.034, z: 0.674}
+  m_LocalPosition: {x: 0, y: 0.046, z: 0.667}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

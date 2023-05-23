@@ -36,8 +36,10 @@ public class Attacker : MonoBehaviour
     {
         if (currentTarget == null) { return; }
         if (!currentTarget.TryGetComponent<Health>(out Health targetHealth)) { return; }
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) !<= attackDistance) { return; }
-
-        targetHealth.DealDamage(attackDamage);
+        
+        if (Vector3.Distance(transform.position, currentTarget.transform.position) <= attackDistance)
+        {
+            targetHealth.DealDamage(attackDamage);
+        }
     }
 }

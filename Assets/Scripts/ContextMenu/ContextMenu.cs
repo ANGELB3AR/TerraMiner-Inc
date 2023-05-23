@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class ContextMenu : MonoBehaviour
+public class ContextMenuItem : MonoBehaviour
 {
     [SerializeField] Button contextMenuButtonPrefab = null;
     [SerializeField] Button buildMenuButtonPrefab = null;

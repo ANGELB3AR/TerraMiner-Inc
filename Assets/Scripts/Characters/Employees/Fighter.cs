@@ -2,32 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
 
 public class Fighter : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] Animator animator = null;
-    [SerializeField] Weapon currentWeapon = null;
+    [Header("Weapon")]
+    [SerializeField] WeaponSO currentWeapon = null;
     [SerializeField] Transform weaponSlot = null;
+    [Header("Aiming")]
     [SerializeField] Rig aimRig = null;
     [SerializeField] Transform aimTarget = null;
     [SerializeField] Vector3 aimOffset = new Vector3();
 
     bool isFiring = false;
-    bool isReloading = false;
-    float currentTime = 0f;
-    float timeSinceLastShotFired = Mathf.Infinity;
-    int shotsFiredSinceLastReload = 0;
 
     GameObject weapon = null;
-    WeaponPrefab weaponPrefab = null;
-    Transform projectileSpawnPoint = null;
+    RaycastWeapon weaponPrefab = null;
     Alien currentTarget = null;
-
 
     readonly int fireSingle = Animator.StringToHash("FireSingle");
     readonly int fireBurst = Animator.StringToHash("FireBurst");
     readonly int fireContinuous = Animator.StringToHash("FireContinuous");
+
 
     private void Start()
     {
@@ -36,89 +35,25 @@ public class Fighter : MonoBehaviour
 
     private void Update()
     {
-        currentTime = Time.deltaTime;
-
         if (!isFiring) { return; }
         if (currentTarget == null) { return; }
 
         aimTarget.transform.position = currentTarget.transform.position + aimOffset;
-
-        if (!AbleToFireWeapon()) 
-        {
-            //animator.ResetTrigger(fireSingle);
-            //animator.ResetTrigger(fireBurst);
-            //animator.ResetTrigger(fireContinuous);
-            return; 
-        }
-
-        Fire();
+        weaponPrefab.Fire();
     }
 
-    void EquipWeapon(Weapon newWeapon)
+    void EquipWeapon(WeaponSO newWeapon)
     {
         currentWeapon = newWeapon;
-        
         weapon = Instantiate(currentWeapon.weaponPrefab.gameObject, weaponSlot);
-        weaponPrefab = weapon.GetComponent<WeaponPrefab>();
-        projectileSpawnPoint = weaponPrefab.GetProjectileSpawnPoint();
+        weaponPrefab = weapon.GetComponent<RaycastWeapon>();
 
-        shotsFiredSinceLastReload = 0;
+        weaponPrefab.Initialize(currentWeapon);
     }
 
     void UnequipWeapon()
     {
         currentWeapon = null;
-    }
-
-    private void CurrentWeapon_OnWeaponFired()
-    {
-        timeSinceLastShotFired = currentTime;
-        currentTime = 0;
-
-        shotsFiredSinceLastReload++;
-
-        HandleFiringAnimation();
-    }
-
-    private void HandleFiringAnimation()
-    {
-        switch (currentWeapon.recoilType)
-        {
-            case Weapon.RecoilType.Single:
-                animator.SetTrigger(fireSingle);
-                break;
-            case Weapon.RecoilType.Burst:
-                animator.SetTrigger(fireBurst);
-                break;
-            case Weapon.RecoilType.Continuous:
-                animator.SetTrigger(fireContinuous);
-                break;
-            default:
-                break;
-        }
-    }
-
-    bool AbleToFireWeapon()
-    {
-        if (isReloading) { return false; }
-        if (timeSinceLastShotFired < currentWeapon.timeBetweenShots) { return false; }
-        
-        if (shotsFiredSinceLastReload == currentWeapon.roundsInClip) 
-        {
-            ReloadWeapon();
-            return false; 
-        }
-
-        return true;
-    }
-
-    private IEnumerator ReloadWeapon()
-    {
-        isReloading = true;
-        yield return new WaitForSeconds(currentWeapon.timeBetweenClips);
-
-        isReloading = false;
-        shotsFiredSinceLastReload = 0;
     }
 
     public void FireWeapon(bool status)
@@ -129,6 +64,7 @@ public class Fighter : MonoBehaviour
     public void SetCurrentTarget(Alien target)
     {
         currentTarget = target;
+        aimOffset = new Vector3(0f, target.GetComponent<NavMeshAgent>().height / 2, 0f);
     }
 
     public Alien GetCurrentTarget()
@@ -139,10 +75,5 @@ public class Fighter : MonoBehaviour
     public void SetAimRigWeight(float weight)
     {
         aimRig.weight = weight;
-    }
-
-    void Fire()
-    {
-        Instantiate(currentWeapon.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
     }
 }
