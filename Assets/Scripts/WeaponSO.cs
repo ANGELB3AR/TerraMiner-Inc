@@ -12,15 +12,12 @@ public class WeaponSO : ScriptableObject
 
     [Header("Setup")]
     public int damageAmount;
-    public RecoilType recoilType;
     public float timeBetweenShots;
     public int roundsInClip;
     public float timeBetweenClips;
-    
-    public enum RecoilType
-    {
-        Single,
-        Burst,
-        Continuous
-    }
+
+    [Header("Effects")]
+    public ParticleSystem muzzleFlashEffect = null;
+    public ParticleSystem hitEffect = null;
+    public TrailRenderer tracerEffect = null;
 }

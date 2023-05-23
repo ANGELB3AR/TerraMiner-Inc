@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,9 +48,9 @@ public class RaycastWeapon : MonoBehaviour
         bulletsRemainingInClip = weaponSO.roundsInClip;
     }
 
-    public void Fire()
+    public bool Fire()
     {
-        if (!readyToFire) { return; }
+        if (!readyToFire) { return false; }
         
         ray.origin = raycastOrigin.position;
         ray.direction = raycastOrigin.forward;
@@ -58,12 +59,25 @@ public class RaycastWeapon : MonoBehaviour
         bulletCooldown = weaponSO.timeBetweenShots;
         bulletsRemainingInClip--;
 
-        if (!Physics.Raycast(ray, out hitInfo)) { return; }
+        HandleWeaponEffects();
+
+        if (!Physics.Raycast(ray, out hitInfo)) { return true; }
 
         Debug.DrawLine(raycastOrigin.position, hitInfo.point, Color.red);
 
-        if (!hitInfo.collider.gameObject.TryGetComponent<Health>(out Health targetHealth)) { return; }
+        if (!hitInfo.collider.gameObject.TryGetComponent<Health>(out Health targetHealth)) { return true; }
         
         targetHealth.DealDamage(weaponSO.damageAmount);
+
+        return true;
+    }
+
+    private void HandleWeaponEffects()
+    {
+        var muzzleFlash = Instantiate(weaponSO.muzzleFlashEffect.gameObject, raycastOrigin.position, Quaternion.identity);
+        var hitEffect = Instantiate(weaponSO.hitEffect.gameObject, hitInfo.point, Quaternion.identity);
+        hitEffect.transform.forward = hitInfo.normal;
+        var tracer = Instantiate(weaponSO.tracerEffect.gameObject, raycastOrigin.position, Quaternion.identity);
+        tracer.transform.position = hitInfo.point;
     }
 }

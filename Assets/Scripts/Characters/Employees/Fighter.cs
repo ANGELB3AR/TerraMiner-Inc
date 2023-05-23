@@ -23,10 +23,7 @@ public class Fighter : MonoBehaviour
     RaycastWeapon weaponPrefab = null;
     Alien currentTarget = null;
 
-    readonly int fireSingle = Animator.StringToHash("FireSingle");
-    readonly int fireBurst = Animator.StringToHash("FireBurst");
-    readonly int fireContinuous = Animator.StringToHash("FireContinuous");
-
+    readonly int fire = Animator.StringToHash("Fire");
 
     private void Start()
     {
@@ -39,7 +36,15 @@ public class Fighter : MonoBehaviour
         if (currentTarget == null) { return; }
 
         aimTarget.transform.position = currentTarget.transform.position + aimOffset;
-        weaponPrefab.Fire();
+        
+        if (weaponPrefab.Fire())
+        {
+            animator.SetTrigger(fire);
+        }
+        else
+        {
+            animator.ResetTrigger(fire);
+        }
     }
 
     void EquipWeapon(WeaponSO newWeapon)
