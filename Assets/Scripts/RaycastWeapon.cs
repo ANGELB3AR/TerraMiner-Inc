@@ -15,6 +15,9 @@ public class RaycastWeapon : MonoBehaviour
     float bulletCooldown;
     float clipCooldown;
     int bulletsRemainingInClip;
+    ParticleSystem muzzleFlashEffect;
+    ParticleSystem bulletHitEffect;
+    TrailRenderer tracerEffect;
 
     private void Update()
     {
@@ -46,6 +49,10 @@ public class RaycastWeapon : MonoBehaviour
         bulletCooldown = weaponSO.timeBetweenShots;
         clipCooldown = weaponSO.timeBetweenClips;
         bulletsRemainingInClip = weaponSO.roundsInClip;
+
+        muzzleFlashEffect = Instantiate(weaponSO.muzzleFlashEffect, raycastOrigin);
+        bulletHitEffect = Instantiate(weaponSO.hitEffect, hitInfo.point, Quaternion.identity);
+        tracerEffect = Instantiate(weaponSO.tracerEffect, raycastOrigin.position, Quaternion.identity);
     }
 
     public bool Fire()
@@ -63,10 +70,8 @@ public class RaycastWeapon : MonoBehaviour
 
         if (!Physics.Raycast(ray, out hitInfo)) { return true; }
 
-        Debug.DrawLine(raycastOrigin.position, hitInfo.point, Color.red);
-
         if (!hitInfo.collider.gameObject.TryGetComponent<Health>(out Health targetHealth)) { return true; }
-        
+        // SWAP OUT HIT EFFECT WITH BLOOD SPLATTER EFFECT IF ALIEN IS HIT
         targetHealth.DealDamage(weaponSO.damageAmount);
 
         return true;
@@ -74,10 +79,16 @@ public class RaycastWeapon : MonoBehaviour
 
     private void HandleWeaponEffects()
     {
-        var muzzleFlash = Instantiate(weaponSO.muzzleFlashEffect.gameObject, raycastOrigin.position, Quaternion.identity);
-        var hitEffect = Instantiate(weaponSO.hitEffect.gameObject, hitInfo.point, Quaternion.identity);
-        hitEffect.transform.forward = hitInfo.normal;
-        var tracer = Instantiate(weaponSO.tracerEffect.gameObject, raycastOrigin.position, Quaternion.identity);
-        tracer.transform.position = hitInfo.point;
+        muzzleFlashEffect.Emit(1);
+
+        bulletHitEffect.transform.position = hitInfo.point;
+        bulletHitEffect.transform.forward = hitInfo.normal;
+        bulletHitEffect.Emit(1);
+
+        tracerEffect.transform.position = hitInfo.point;
+
+        tracerEffect.emitting = false;
+        tracerEffect.transform.position = raycastOrigin.position;
+        tracerEffect.emitting = true;
     }
 }
