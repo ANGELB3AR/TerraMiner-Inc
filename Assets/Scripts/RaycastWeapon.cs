@@ -52,7 +52,7 @@ public class RaycastWeapon : MonoBehaviour
 
         muzzleFlashEffect = Instantiate(weaponSO.muzzleFlashEffect, raycastOrigin);
         bulletHitEffect = Instantiate(weaponSO.hitEffect, hitInfo.point, Quaternion.identity);
-        tracerEffect = Instantiate(weaponSO.tracerEffect, raycastOrigin.position, Quaternion.identity);
+        
     }
 
     public bool Fire()
@@ -85,10 +85,8 @@ public class RaycastWeapon : MonoBehaviour
         bulletHitEffect.transform.forward = hitInfo.normal;
         bulletHitEffect.Emit(1);
 
+        tracerEffect = Instantiate(weaponSO.tracerEffect, raycastOrigin.position, Quaternion.identity);
+        tracerEffect.AddPosition(ray.origin);
         tracerEffect.transform.position = hitInfo.point;
-
-        tracerEffect.emitting = false;
-        tracerEffect.transform.position = raycastOrigin.position;
-        tracerEffect.emitting = true;
     }
 }
