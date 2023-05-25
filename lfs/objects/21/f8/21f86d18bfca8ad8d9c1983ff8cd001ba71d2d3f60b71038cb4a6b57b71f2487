@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4262a7eb0a4ee9f4f8958aefba52c18d, type: 3}
+  m_Name: AR01
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1818088191277850, guid: 2511cb1fb2483184baa8421de342583c, type: 3}
+  projectilePrefab: {fileID: 2224293154684345075, guid: 677dcc2cec2bb1f45805dc479975e4cb, type: 3}
+  damageAmount: 5
+  timeBetweenShots: 0.5
+  roundsInClip: 30
+  timeBetweenClips: 5
+  muzzleFlashEffect: {fileID: 19800000, guid: c854ee6c38522cf49a539f74603accd8, type: 3}
+  hitEffect: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  tracerEffect: {fileID: 1360689011168682103, guid: d50e65439ba5dfc4fa7cfa8ac5204955, type: 3}

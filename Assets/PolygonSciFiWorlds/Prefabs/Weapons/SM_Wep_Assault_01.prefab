@@ -374,9 +374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
   raycastOrigin: {fileID: 8728189357412605007}
-  muzzleFlashEffect: {fileID: 19800000, guid: e680339cc268dec44b9aab624842a53c, type: 3}
-  hitEffect: {fileID: 0}
-  tracerEffect: {fileID: 0}
 --- !u!1 &1960381399689765716
 GameObject:
   m_ObjectHideFlags: 0

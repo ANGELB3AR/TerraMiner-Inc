@@ -3160,10 +3160,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3067802551985163751, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Elbow_R'\n\tTransform 'Hand_R'\n\tTransform
-        'Elbow_R'\n\tTransform 'Hand_R'\n\tTransform 'Elbow_R'\n\tTransform 'Hand_R'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3153317858567926489, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
       propertyPath: m_IsTrigger

@@ -17,6 +17,8 @@ public class Employee : MonoBehaviour
     [Tooltip("Maximum distance employee can detect targets")]
     [SerializeField] float awarenessDistance = 5f;
     [SerializeField] float attackRange = 10f;
+    [Range(0, 360)]
+    [SerializeField] float lookSpeed = 15f;
 
     [Header("Stats")]
     [SerializeField] int constructionSkill = 1;
@@ -98,7 +100,7 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Fighting:
                 animator.SetBool(isAiming, true);
-                fighter.SetAimRigWeight(1f);
+                fighter.SetAimRigWeights(true);
                 CheckForTargets();
                 break;
             case EmployeeState.Building:
@@ -168,7 +170,7 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeState.Fighting:
                 animator.SetBool(isAiming, false);
-                fighter.SetAimRigWeight(0f);
+                fighter.SetAimRigWeights(false);
                 fighter.FireWeapon(false);
                 break;
             case EmployeeState.Building:
@@ -246,7 +248,9 @@ public class Employee : MonoBehaviour
 
     private void ShootAtTarget()
     {
-        transform.LookAt(fighter.GetCurrentTarget().transform);
+        Vector3 lookDirection = fighter.GetCurrentTarget().transform.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, lookSpeed * Time.deltaTime);
 
         fighter.FireWeapon(true);
     }
