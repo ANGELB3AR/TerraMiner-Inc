@@ -266,6 +266,8 @@ public class Employee : MonoBehaviour
 
     bool IsWithinAttackRange()
     {
+        if (fighter.GetCurrentTarget() == null) { return false; }
+
         return Vector3.Distance(transform.position, fighter.GetCurrentTarget().transform.position) <= attackRange;
     }
 
