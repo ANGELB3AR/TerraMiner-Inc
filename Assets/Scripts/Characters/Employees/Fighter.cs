@@ -24,9 +24,11 @@ public class Fighter : MonoBehaviour
 
     GameObject weapon = null;
     RaycastWeapon weaponPrefab = null;
-    Alien currentTarget = null;
+    Health currentTarget = null;
 
     readonly int fire = Animator.StringToHash("Fire");
+
+    public event Action OnTargetKilled;
 
     private void Start()
     {
@@ -36,6 +38,11 @@ public class Fighter : MonoBehaviour
     private void Update()
     {
         if (!isFiring) { return; }
+        if (!currentTarget.IsAlive)
+        {
+            OnTargetKilled?.Invoke();
+            currentTarget = null;
+        }
         if (currentTarget == null) { return; }
 
         aimTarget.transform.position = currentTarget.transform.position + aimOffset;
@@ -71,13 +78,18 @@ public class Fighter : MonoBehaviour
 
     public void SetCurrentTarget(Alien target)
     {
-        currentTarget = target;
+        currentTarget = target.GetComponent<Health>();
         aimOffset = new Vector3(0f, target.GetComponent<NavMeshAgent>().height / 2, 0f);
     }
 
     public Alien GetCurrentTarget()
     {
-        return currentTarget;
+        if (!currentTarget.IsAlive)
+        {
+            return null;
+        }
+
+        return currentTarget.GetComponent<Alien>();
     }
 
     public void SetAimRigWeights(bool isAiming)

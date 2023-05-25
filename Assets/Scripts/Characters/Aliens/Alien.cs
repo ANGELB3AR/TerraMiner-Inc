@@ -115,6 +115,7 @@ public class Alien : MonoBehaviour
                 break;
             case AlienState.Dying:
                 animator.SetBool(isDead, true);
+                this.enabled = false;
                 break;
             default:
                 break;

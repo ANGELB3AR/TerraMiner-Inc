@@ -56,6 +56,8 @@ public class Employee : MonoBehaviour
 
         health.OnDamageTaken += Health_OnDamageTaken;
         health.OnDied += Health_OnDied;
+
+        fighter.OnTargetKilled += Fighter_OnTargetKilled;
     }
 
     private void OnDisable()
@@ -65,6 +67,8 @@ public class Employee : MonoBehaviour
 
         health.OnDamageTaken -= Health_OnDamageTaken;
         health.OnDied -= Health_OnDied;
+
+        fighter.OnTargetKilled -= Fighter_OnTargetKilled;
     }
 
     private void Start()
@@ -207,6 +211,11 @@ public class Employee : MonoBehaviour
     {
         animator.SetBool(isDead, true);
         SwitchState(EmployeeState.Dying);
+    }
+
+    private void Fighter_OnTargetKilled()
+    {
+        SwitchState(EmployeeState.Idling);
     }
 
     private void CheckForTargets()
