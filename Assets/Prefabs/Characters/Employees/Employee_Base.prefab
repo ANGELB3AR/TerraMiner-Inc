@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 3153317858567926491}
   animator: {fileID: 3067802551985163751}
+  health: {fileID: 2057202073063564351}
   movementCurve:
     serializedVersion: 2
     m_Curve:
