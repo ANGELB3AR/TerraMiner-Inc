@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent = null;
     [SerializeField] Animator animator = null;
+    [SerializeField] Health health = null;
 
     [SerializeField] AnimationCurve movementCurve;
 
@@ -18,6 +19,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        if (!health.IsAlive) { return; }
+
         animator.SetFloat(walkingVelocity, agent.velocity.magnitude);
 
         agent.acceleration = movementCurve.Evaluate(agent.velocity.magnitude);

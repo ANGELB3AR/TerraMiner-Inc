@@ -55,6 +55,8 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+        if (!IsAlive) { return; }
+
         IsAlive = false;
         OnDied?.Invoke();
     }

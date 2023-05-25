@@ -109,14 +109,11 @@ public class Alien : MonoBehaviour
                 ChaseTarget();
                 break;
             case AlienState.Impact:
+                if (!health.IsAlive) { return; }
+                movement.StopMoving();
                 animator.SetTrigger(impact);
                 break;
             case AlienState.Dying:
-                if (health.IsAlive) 
-                {
-                    SwitchState(AlienState.Wandering);
-                    return;
-                }
                 animator.SetBool(isDead, true);
                 break;
             default:

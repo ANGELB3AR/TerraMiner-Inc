@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attacker : MonoBehaviour
 {
+    [SerializeField] Transform attackRaycastOrigin;
     [Tooltip("Amount of damage dealt by attack")]
     [SerializeField] int attackDamage = 1;
     [Tooltip("Maximum distance that attack can hit target")]
@@ -11,6 +12,7 @@ public class Attacker : MonoBehaviour
 
     GameObject currentTarget = null;
     AnimationEventHandler animationEventHandler;
+    Ray ray;
 
     private void Awake()
     {
@@ -19,12 +21,12 @@ public class Attacker : MonoBehaviour
 
     private void OnEnable()
     {
-        animationEventHandler.OnAttackAttempted += AttemptToAttackTarget;
+        animationEventHandler.OnAttackAttempted += Attack;
     }
 
     private void OnDisable()
     {
-        animationEventHandler.OnAttackAttempted -= AttemptToAttackTarget;
+        animationEventHandler.OnAttackAttempted -= Attack;
     }
 
     public void SetCurrentTarget(GameObject newTarget)
@@ -32,14 +34,14 @@ public class Attacker : MonoBehaviour
         currentTarget = newTarget;
     }
 
-    void AttemptToAttackTarget()
+    void Attack()
     {
-        if (currentTarget == null) { return; }
-        if (!currentTarget.TryGetComponent<Health>(out Health targetHealth)) { return; }
-        
-        if (Vector3.Distance(transform.position, currentTarget.transform.position) <= attackDistance)
-        {
-            targetHealth.DealDamage(attackDamage);
-        }
+        ray.origin = attackRaycastOrigin.position;
+        ray.direction = attackRaycastOrigin.forward;
+
+        if (!Physics.Raycast(ray, out RaycastHit hitInfo, attackDistance)) { return; }
+        if (!hitInfo.collider.TryGetComponent<Health>(out Health health)) { return; }
+
+        health.DealDamage(attackDamage);
     }
 }
