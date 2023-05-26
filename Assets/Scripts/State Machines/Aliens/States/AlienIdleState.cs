@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmployeeIdleState : EmployeeBaseState
+public class AlienIdleState : AlienBaseState
 {
-    public EmployeeIdleState(EmployeeStateMachine stateMachine) : base(stateMachine) { }
+    public AlienIdleState(AlienStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
