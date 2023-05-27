@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3368491831125893217}
-  - component: {fileID: 3368491831125893230}
-  - component: {fileID: 6988346850499098585}
-  - component: {fileID: 2553157176844453440}
+  - component: {fileID: 3225363421314374080}
   - component: {fileID: 5949427508353817555}
   - component: {fileID: 1911814722291859725}
   - component: {fileID: 5415556678112160762}
+  - component: {fileID: 6988346850499098585}
+  - component: {fileID: 2553157176844453440}
   - component: {fileID: 1899703865280778518}
   m_Layer: 7
   m_Name: Alien_Base
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3368491831125893230
+--- !u!114 &3225363421314374080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,62 +49,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3368491831125893231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92d981fc9667624294f4bd2faaf1868, type: 3}
+  m_Script: {fileID: 11500000, guid: ee4bc4a672cb32841ae4eae642da9419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 1911814722291859725}
-  animator: {fileID: 0}
-  attacker: {fileID: 5415556678112160762}
-  health: {fileID: 5949427508353817555}
-  minCoordinates: {x: 0, y: 0}
-  maxCoordinates: {x: 25, y: 25}
-  awarenessDistance: 5
-  attackDistance: 2.5
---- !u!195 &6988346850499098585
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3368491831125893231}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!136 &2553157176844453440
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3368491831125893231}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  <Movement>k__BackingField: {fileID: 1911814722291859725}
+  <Animator>k__BackingField: {fileID: 0}
+  <Attacker>k__BackingField: {fileID: 5415556678112160762}
+  <Health>k__BackingField: {fileID: 5949427508353817555}
+  <MinWanderWaitTime>k__BackingField: 1
+  <MaxWanderWaitTime>k__BackingField: 3
+  <MinWanderCoordinates>k__BackingField: {x: 0, y: 0}
+  <MaxWanderCoordinates>k__BackingField: {x: 25, y: 25}
+  <AwarenessDistance>k__BackingField: 5
 --- !u!114 &5949427508353817555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +127,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRaycastOrigin: {fileID: 5501453877382139566}
   attackDamage: 1
-  attackDistance: 0.5
+--- !u!195 &6988346850499098585
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368491831125893231}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &2553157176844453440
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368491831125893231}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1899703865280778518
 Rigidbody:
   m_ObjectHideFlags: 0

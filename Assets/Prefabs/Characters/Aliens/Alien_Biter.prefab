@@ -1422,6 +1422,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3225363421314374080, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: <Animator>k__BackingField
+      value: 
+      objectReference: {fileID: 694686676172352834}
     - target: {fileID: 3368491831125893217, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1501,6 +1505,10 @@ PrefabInstance:
     - target: {fileID: 4000008556802532919, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415556678112160762, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
+      propertyPath: attackDamage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5501453877382139566, guid: 7367ee49dd2b46d4d9fec25e653efc45, type: 3}
       propertyPath: m_LocalPosition.y

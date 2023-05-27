@@ -8,9 +8,9 @@ public class Attacker : MonoBehaviour
     [Tooltip("Amount of damage dealt by attack")]
     [SerializeField] int attackDamage = 1;
     [Tooltip("Maximum distance that attack can hit target")]
-    [SerializeField] float attackDistance = 0.5f;
+    public float attackRange { get; private set; } = 0.5f;
 
-    GameObject currentTarget = null;
+    Health currentTarget = null;
     AnimationEventHandler animationEventHandler;
     Ray ray;
 
@@ -31,7 +31,13 @@ public class Attacker : MonoBehaviour
 
     public void SetCurrentTarget(GameObject newTarget)
     {
-        currentTarget = newTarget;
+        if (!newTarget.TryGetComponent<Health>(out Health targetHealth)) { return; }
+        currentTarget = targetHealth;
+    }
+
+    public Health GetCurrentTarget()
+    {
+        return currentTarget;
     }
 
     void Attack()
@@ -39,9 +45,13 @@ public class Attacker : MonoBehaviour
         ray.origin = attackRaycastOrigin.position;
         ray.direction = attackRaycastOrigin.forward;
 
-        if (!Physics.Raycast(ray, out RaycastHit hitInfo, attackDistance)) { return; }
+        if (!Physics.Raycast(ray, out RaycastHit hitInfo, attackRange)) { return; }
         if (!hitInfo.collider.TryGetComponent<Health>(out Health health)) { return; }
 
         health.DealDamage(attackDamage);
+
+        if (currentTarget.IsAlive) { return; }
+
+        currentTarget = null;
     }
 }
