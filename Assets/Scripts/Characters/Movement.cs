@@ -28,12 +28,14 @@ public class Movement : MonoBehaviour
         hasReachedDestination = (Mathf.Approximately(agent.remainingDistance, Mathf.Epsilon)) ? true : false;
     }
 
-    public void MoveToPoint(Vector3 point)
+    public bool MoveToPoint(Vector3 point)
     {
-        if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
+        if (!NavMesh.SamplePosition(point, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return false; }
 
         agent.SetDestination(hit.position);
         agent.updateRotation = true;
+
+        return true;
     }
 
     public void StopMoving()

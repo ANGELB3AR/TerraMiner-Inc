@@ -18,13 +18,9 @@ public class AlienWanderingState : AlienBaseState
             stateMachine.SwitchState(new AlienIdlingState(stateMachine));
         }
 
-        if (CheckForTargetEmployees())
+        if (CheckForTargets())
         {
             stateMachine.SwitchState(new AlienChasingState(stateMachine));
-        }
-        else if (CheckForTargetBuildings())
-        {
-            stateMachine.SwitchState(new AlienSabotagingState(stateMachine));
         }
     }
 
@@ -37,6 +33,9 @@ public class AlienWanderingState : AlienBaseState
             0f,
             Random.Range(stateMachine.MinWanderCoordinates.y, stateMachine.MaxWanderCoordinates.y));
         
-        stateMachine.Movement.MoveToPoint(location);
+        if (!stateMachine.Movement.MoveToPoint(location))
+        {
+            WanderToNewRandomizedLocation();
+        }
     }
 }

@@ -15,33 +15,81 @@ public abstract class AlienBaseState : State
         this.stateMachine = stateMachine;
     }
 
-    public bool CheckForTargetEmployees()
+    //public bool CheckForTargetEmployees()
+    //{
+    //    Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
+
+    //    foreach (Collider target in possibleTargets)
+    //    {
+    //        if (target.TryGetComponent<Employee>(out Employee employee))
+    //        {
+    //            stateMachine.Attacker.SetCurrentTarget(employee.gameObject);
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
+
+    //public bool CheckForTargetBuildings()
+    //{
+    //    Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
+
+    //    foreach (Collider target in possibleTargets)
+    //    {
+    //        if (target.TryGetComponent<Building>(out Building building))
+    //        {
+    //            stateMachine.Attacker.SetCurrentTarget(building.gameObject);
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
+
+    public bool CheckForTargets()
     {
         Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
 
-        foreach (Collider target in possibleTargets)
-        {
-            if (target.TryGetComponent<Employee>(out Employee employee))
-            {
-                stateMachine.Attacker.SetCurrentTarget(employee.gameObject);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool CheckForTargetBuildings()
-    {
-        Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
+        GameObject nearestTarget = null;
+        float nearestTargetDistance = float.MaxValue;
 
         foreach (Collider target in possibleTargets)
         {
-            if (target.TryGetComponent<Building>(out Building building))
+            if (target.gameObject.layer == LayerMask.NameToLayer("Employee"))
             {
-                stateMachine.Attacker.SetCurrentTarget(building.gameObject);
-                return true;
+                float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
+
+                if (targetDistance !< nearestTargetDistance) { continue; }
+
+                nearestTarget = target.gameObject;
+                nearestTargetDistance = targetDistance;
             }
         }
+
+        if (nearestTarget != null)
+        {
+            stateMachine.Attacker.SetCurrentTarget(nearestTarget);
+            return true;
+        }
+
+        foreach (Collider target in possibleTargets)
+        {
+            if (target.gameObject.layer == LayerMask.NameToLayer("Building"))
+            {
+                float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
+
+                if (targetDistance! < nearestTargetDistance) { continue; }
+
+                nearestTarget = target.gameObject;
+                nearestTargetDistance = targetDistance;
+            }
+        }
+
+        if (nearestTarget != null)
+        {
+            stateMachine.Attacker.SetCurrentTarget(nearestTarget);
+            return true;
+        }
+
         return false;
     }
 
@@ -49,7 +97,7 @@ public abstract class AlienBaseState : State
     {
         return Vector3.Distance(stateMachine.transform.position,
             stateMachine.Attacker.GetCurrentTarget().transform.position)
-            <= stateMachine.Attacker.attackRange;
+            <= stateMachine.Attacker.AttackRange;
     }
 
     public void FaceTarget()
@@ -57,6 +105,9 @@ public abstract class AlienBaseState : State
         Vector3 targetPosition = new Vector3();
         targetPosition = stateMachine.Attacker.GetCurrentTarget().transform.position;
 
-        stateMachine.transform.LookAt(targetPosition);
+        if (targetPosition != null)
+        {
+            stateMachine.transform.LookAt(targetPosition);
+        }
     }
 }
