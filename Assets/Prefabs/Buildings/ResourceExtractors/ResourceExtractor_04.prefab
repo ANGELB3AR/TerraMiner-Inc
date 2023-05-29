@@ -9,12 +9,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1861000268222988428, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861000268222988428, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861000268222988428, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861000268222988428, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 19.09
       objectReference: {fileID: 0}
     - target: {fileID: 2013470453197958836, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
       propertyPath: m_Name
       value: ResourceExtractor_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058813155130491993, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058813155130491993, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7414668505262017511, guid: 913d39ba17f9fbf409f367c8c3166af2, type: 3}
       propertyPath: m_RootOrder
