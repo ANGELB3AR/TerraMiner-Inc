@@ -76,20 +76,20 @@ public class Fighter : MonoBehaviour
         isFiring = status;
     }
 
-    public void SetCurrentTarget(Alien target)
+    public void SetCurrentTarget(GameObject target)
     {
         currentTarget = target.GetComponent<Health>();
         aimOffset = new Vector3(0f, target.GetComponent<NavMeshAgent>().height / 2, 0f);
     }
 
-    public Alien GetCurrentTarget()
+    public GameObject GetCurrentTarget()
     {
         if (!currentTarget.IsAlive)
         {
             return null;
         }
 
-        return currentTarget.GetComponent<Alien>();
+        return currentTarget.gameObject;
     }
 
     public void SetAimRigWeights(bool isAiming)

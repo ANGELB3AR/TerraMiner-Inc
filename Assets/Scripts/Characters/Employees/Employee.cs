@@ -226,7 +226,7 @@ public class Employee : MonoBehaviour
         {
             if (target.TryGetComponent<Alien>(out Alien alien))
             {
-                fighter.SetCurrentTarget(alien);
+                //fighter.SetCurrentTarget(alien);
 
                 if (currentState == EmployeeState.Fighting) { return; }
 

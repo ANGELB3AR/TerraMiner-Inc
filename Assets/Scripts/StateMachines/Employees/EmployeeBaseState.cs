@@ -14,4 +14,43 @@ public abstract class EmployeeBaseState : State
     {
         this.stateMachine = stateMachine;
     }
+
+    public bool CheckForTargets()
+    {
+        Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
+
+        GameObject nearestTarget = null;
+        float nearestTargetDistance = float.MaxValue;
+
+        foreach (Collider target in possibleTargets)
+        {
+            if (target.gameObject.layer == LayerMask.NameToLayer("Alien"))
+            {
+                if (!target.GetComponent<Health>().IsAlive) { continue; }
+
+                float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
+
+                if (targetDistance >= nearestTargetDistance) { continue; }
+
+                nearestTarget = target.gameObject;
+                nearestTargetDistance = targetDistance;
+            }
+        }
+
+        if (nearestTarget != null)
+        {
+            stateMachine.Fighter.SetCurrentTarget(nearestTarget);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsWithinAttackRange()
+    {
+        return Vector3.Distance(
+            stateMachine.transform.position, 
+            stateMachine.Fighter.GetCurrentTarget().transform.position) 
+            <= stateMachine.AttackRange;
+    }
 }

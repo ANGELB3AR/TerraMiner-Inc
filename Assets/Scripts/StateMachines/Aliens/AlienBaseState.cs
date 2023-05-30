@@ -15,36 +15,6 @@ public abstract class AlienBaseState : State
         this.stateMachine = stateMachine;
     }
 
-    //public bool CheckForTargetEmployees()
-    //{
-    //    Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
-
-    //    foreach (Collider target in possibleTargets)
-    //    {
-    //        if (target.TryGetComponent<Employee>(out Employee employee))
-    //        {
-    //            stateMachine.Attacker.SetCurrentTarget(employee.gameObject);
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
-    //public bool CheckForTargetBuildings()
-    //{
-    //    Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
-
-    //    foreach (Collider target in possibleTargets)
-    //    {
-    //        if (target.TryGetComponent<Building>(out Building building))
-    //        {
-    //            stateMachine.Attacker.SetCurrentTarget(building.gameObject);
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
     public bool CheckForTargets()
     {
         Collider[] possibleTargets = Physics.OverlapSphere(stateMachine.transform.position, stateMachine.AwarenessDistance);
