@@ -16,6 +16,7 @@ public class AlienIdlingState : AlienBaseState
         if (CheckForTargets())
         {
             stateMachine.SwitchState(new AlienChasingState(stateMachine));
+            return;
         }
 
         wanderWaitTime = Random.Range(
