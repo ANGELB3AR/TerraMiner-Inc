@@ -7,6 +7,8 @@ public class Highlighting : MonoBehaviour
     [SerializeField] Outline selectionOutline = null;
     [SerializeField] Outline hoverOutline = null;
 
+    EmployeeStateMachine employee;
+
     private void OnEnable()
     {
         EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
@@ -17,6 +19,11 @@ public class Highlighting : MonoBehaviour
     {
         EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
         EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
+    }
+
+    private void Start()
+    {
+        employee = GetComponent<EmployeeStateMachine>();
     }
 
     private void OnMouseEnter()
@@ -31,16 +38,16 @@ public class Highlighting : MonoBehaviour
         hoverOutline.enabled = false;
     }
 
-    private void EmployeeSelection_OnEmployeeSelected(Employee employee)
+    private void EmployeeSelection_OnEmployeeSelected(EmployeeStateMachine employee)
     {
-        if (employee != this) { return; }
+        if (employee != this.employee) { return; }
 
         selectionOutline.enabled = true;
     }
 
-    private void EmployeeSelection_OnEmployeeDeselected(Employee employee)
+    private void EmployeeSelection_OnEmployeeDeselected(EmployeeStateMachine employee)
     {
-        if (employee != this) { return; }
+        if (employee != this.employee) { return; }
 
         selectionOutline.enabled = false;
     }

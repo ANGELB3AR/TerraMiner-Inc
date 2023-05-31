@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 public class EmployeeSelection : MonoBehaviour
 {
-    List<Employee> selectedEmployees = new List<Employee>();
+    List<EmployeeStateMachine> selectedEmployees = new List<EmployeeStateMachine>();
     Camera mainCamera;
 
-    public static event Action<Employee> OnEmployeeSelected;
-    public static event Action<Employee> OnEmployeeDeselected;
+    public static event Action<EmployeeStateMachine> OnEmployeeSelected;
+    public static event Action<EmployeeStateMachine> OnEmployeeDeselected;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class EmployeeSelection : MonoBehaviour
         InputReader.LeftClickHitNothing -= InputReader_LeftClickHitNothing;
     }
 
-    private void InputReader_LeftClickHitEmployee(Employee employee)
+    private void InputReader_LeftClickHitEmployee(EmployeeStateMachine employee)
     {
         if (Keyboard.current.ctrlKey.isPressed)
         {
@@ -74,7 +74,7 @@ public class EmployeeSelection : MonoBehaviour
         ClearSelectedEmployees();
     }
 
-    private void SelectEmployee(Employee employee)
+    private void SelectEmployee(EmployeeStateMachine employee)
     {
         selectedEmployees.Add(employee);
         OnEmployeeSelected?.Invoke(employee);
@@ -82,7 +82,7 @@ public class EmployeeSelection : MonoBehaviour
 
     void ClearSelectedEmployees()
     {
-        foreach (Employee employee in selectedEmployees)
+        foreach (EmployeeStateMachine employee in selectedEmployees)
         {
             OnEmployeeDeselected?.Invoke(employee);
         }
@@ -90,15 +90,15 @@ public class EmployeeSelection : MonoBehaviour
     }
     void MoveSelectedEmployees(Vector3 positionToMove)
     {
-        foreach (Employee employee in selectedEmployees)
+        foreach (EmployeeStateMachine employee in selectedEmployees)
         {
-            employee.MoveToPoint(positionToMove);
+            employee.Movement.MoveToPoint(positionToMove);
         }
     }
 
     public void SendEmployeesToConstructBuilding(Building building)
     {
-        foreach (Employee employee in selectedEmployees)
+        foreach (EmployeeStateMachine employee in selectedEmployees)
         {
             employee.ConstructBuilding(building);
         }

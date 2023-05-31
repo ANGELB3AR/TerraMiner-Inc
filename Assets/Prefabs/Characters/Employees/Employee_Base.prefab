@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1985401942285441272}
   - component: {fileID: 3153317858567926490}
   - component: {fileID: -365083827237010316}
+  - component: {fileID: 6543420154770162302}
   - component: {fileID: 2057202073063564351}
   - component: {fileID: 6382252973794682155}
   - component: {fileID: 1524172399}
@@ -81,6 +82,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 3067802551985163751}
   <Movement>k__BackingField: {fileID: 3153317858567926490}
   <Fighter>k__BackingField: {fileID: -365083827237010316}
+  <Builder>k__BackingField: {fileID: 6543420154770162302}
   <Health>k__BackingField: {fileID: 2057202073063564351}
   <AwarenessDistance>k__BackingField: 10
   <AttackRange>k__BackingField: 20
@@ -178,6 +180,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6543420154770162302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc924309fb9f2e49938e5a62cb48d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2057202073063564351
 MonoBehaviour:
   m_ObjectHideFlags: 0

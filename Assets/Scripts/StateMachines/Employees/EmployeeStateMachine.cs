@@ -8,6 +8,7 @@ public class EmployeeStateMachine : StateMachine
     [field: SerializeField] public Animator Animator { get; private set; } = null;
     [field: SerializeField] public Movement Movement { get; private set; } = null;
     [field: SerializeField] public Fighter Fighter { get; private set; } = null;
+    [field: SerializeField] public Builder Builder { get; private set; } = null;
     [field: SerializeField] public Health Health { get; private set; } = null;
 
     [field: Header("Settings")]
@@ -51,4 +52,16 @@ public class EmployeeStateMachine : StateMachine
     {
         SwitchState(new EmployeeDyingState(this));
     }
+
+    #region Public Methods
+
+    public void ConstructBuilding(Building building)
+    {
+        Builder.ConstructBuilding(building);
+        Movement.MoveToPoint(building.transform.position);
+
+        SwitchState(new EmployeeBuildingState(this));
+    }
+
+    #endregion
 }

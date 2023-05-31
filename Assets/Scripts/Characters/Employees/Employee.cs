@@ -51,8 +51,8 @@ public class Employee : MonoBehaviour
 
     private void OnEnable()
     {
-        EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
-        EmployeeSelection.OnEmployeeDeselected += EmployeeSelection_OnEmployeeDeselected;
+        //EmployeeSelection.OnEmployeeSelected += EmployeeSelection_OnEmployeeSelected;
+        //EmployeeSelection.OnEmployeeDeselected += EmployeeSelection_OnEmployeeDeselected;
 
         health.OnDamageTaken += Health_OnDamageTaken;
         health.OnDied += Health_OnDied;
@@ -62,8 +62,8 @@ public class Employee : MonoBehaviour
 
     private void OnDisable()
     {
-        EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
-        EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
+        //EmployeeSelection.OnEmployeeSelected -= EmployeeSelection_OnEmployeeSelected;
+        //EmployeeSelection.OnEmployeeDeselected -= EmployeeSelection_OnEmployeeDeselected;
 
         health.OnDamageTaken -= Health_OnDamageTaken;
         health.OnDied -= Health_OnDied;

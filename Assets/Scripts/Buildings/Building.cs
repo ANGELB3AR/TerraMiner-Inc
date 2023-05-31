@@ -14,12 +14,13 @@ public class Building : MonoBehaviour
     [Tooltip("Icon representing building to appear on menus")]
     [SerializeField] Sprite buildingIcon = null;
 
-    bool isConstructionComplete = false;
+    [field:SerializeField] public float ConstructingDistance { get; private set; } = 2f;
+    public bool isConstructionComplete { get; private set; } = false;
+    
     float currentConstructionProgress = 0f;
     int totalBuildSkill = 0;
     float currentConstructionSpeed = 1f;
 
-    [field:SerializeField] public float ConstructingDistance { get; private set; } = 2f;
 
     public bool GetConstructionCompleteStatus()
     {
@@ -29,11 +30,6 @@ public class Building : MonoBehaviour
     public float GetMaxConstructionProgress()
     {
         return maxConstructionProgress;
-    }
-
-    public float GetCurrentConstructionProgress()
-    {
-        return currentConstructionProgress;
     }
 
     public string GetBuildingName()
@@ -48,29 +44,29 @@ public class Building : MonoBehaviour
 
     private void OnEnable()
     {
-        Employee.OnEmployeeStartedConstruction += AddEmployeeSkill;
-        Employee.OnEmployeeStoppedConstruction += RemoveEmployeeSkill;
+        Builder.OnEmployeeStartedConstruction += AddEmployeeSkill;
+        Builder.OnEmployeeStoppedConstruction += RemoveEmployeeSkill;
     }
 
     private void OnDisable()
     {
-        Employee.OnEmployeeStartedConstruction -= AddEmployeeSkill;
-        Employee.OnEmployeeStoppedConstruction -= RemoveEmployeeSkill;
+        Builder.OnEmployeeStartedConstruction -= AddEmployeeSkill;
+        Builder.OnEmployeeStoppedConstruction -= RemoveEmployeeSkill;
     }
 
-    void AddEmployeeSkill(Employee employee, Building building)
+    void AddEmployeeSkill(EmployeeStateMachine employee, Building building)
     {
         if (building != this) { return; }
 
-        totalBuildSkill += employee.GetConstructionSkill();
+        totalBuildSkill += employee.ConstructionSkill;
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
 
-    void RemoveEmployeeSkill(Employee employee, Building building)
+    void RemoveEmployeeSkill(EmployeeStateMachine employee, Building building)
     {
         if (building != this) { return; }
 
-        totalBuildSkill -= employee.GetConstructionSkill();
+        totalBuildSkill -= employee.ConstructionSkill;
         currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
     }
 
