@@ -48,6 +48,8 @@ public abstract class EmployeeBaseState : State
 
     public bool IsWithinAttackRange()
     {
+        if (stateMachine.Fighter.GetCurrentTarget() == null) { return false; }
+
         return Vector3.Distance(
             stateMachine.transform.position, 
             stateMachine.Fighter.GetCurrentTarget().transform.position) 

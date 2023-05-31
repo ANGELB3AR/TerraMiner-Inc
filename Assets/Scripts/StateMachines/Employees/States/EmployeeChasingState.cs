@@ -7,10 +7,7 @@ public class EmployeeChasingState : EmployeeBaseState
 {
     public EmployeeChasingState(EmployeeStateMachine stateMachine) : base(stateMachine) { }
 
-    public override void Enter()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void Enter() { }
 
     public override void Tick(float deltaTime)
     {
@@ -24,16 +21,13 @@ public class EmployeeChasingState : EmployeeBaseState
         }
     }
 
-    public override void Exit()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void Exit() { }
 
     void ChaseTarget()
     {
         if (IsWithinAttackRange())
         {
-            // Switch to Fighting State
+            stateMachine.SwitchState(new EmployeeFightingState(stateMachine));
         }
         else
         {

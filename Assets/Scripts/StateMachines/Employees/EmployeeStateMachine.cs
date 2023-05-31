@@ -24,8 +24,31 @@ public class EmployeeStateMachine : StateMachine
     public readonly int impact = Animator.StringToHash("Impact");
     public readonly int isDead = Animator.StringToHash("IsDead");
 
+
+    private void OnEnable()
+    {
+        Health.OnDamageTaken += Health_OnDamageTaken;
+        Health.OnDied += Health_OnDied;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnDamageTaken -= Health_OnDamageTaken;
+        Health.OnDied -= Health_OnDied;
+    }
+
     private void Start()
     {
         SwitchState(new EmployeeIdlingState(this));
+    }
+
+    private void Health_OnDamageTaken()
+    {
+        SwitchState(new EmployeeImpactState(this));
+    }
+
+    private void Health_OnDied()
+    {
+        SwitchState(new EmployeeDyingState(this));
     }
 }
