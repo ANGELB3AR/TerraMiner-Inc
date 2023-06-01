@@ -13,7 +13,7 @@ public class AlienImpactState : AlienBaseState
 
     public override void Tick(float deltaTime)
     {
-        if (stateMachine.Animator.GetCurrentAnimatorStateInfo(0).IsName("Impact")) { return; }
+        if (stateMachine.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1) { return; }
 
         stateMachine.SwitchState(new AlienIdlingState(stateMachine));
     }

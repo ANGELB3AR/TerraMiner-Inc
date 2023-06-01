@@ -15,7 +15,7 @@ public class AlienChasingState : AlienBaseState
 
         if (IsWithinAttackRange())
         {
-            if (stateMachine.Attacker.GetCurrentTarget().GetComponent<Employee>())
+            if (stateMachine.Attacker.GetCurrentTarget().GetComponent<EmployeeStateMachine>())
             {
                 stateMachine.SwitchState(new AlienAttackingState(stateMachine));
             }

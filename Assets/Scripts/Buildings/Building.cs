@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Building : MonoBehaviour
     public bool isConstructionComplete { get; private set; } = false;
     
     float currentConstructionProgress = 0f;
-    int totalBuildSkill = 0;
+    int totalConstructionSkill = 0;
     float currentConstructionSpeed = 1f;
 
 
@@ -30,6 +31,11 @@ public class Building : MonoBehaviour
     public float GetMaxConstructionProgress()
     {
         return maxConstructionProgress;
+    }
+
+    public float GetCurrentConstructionProgress()
+    {
+        return currentConstructionProgress;
     }
 
     public string GetBuildingName()
@@ -58,22 +64,23 @@ public class Building : MonoBehaviour
     {
         if (building != this) { return; }
 
-        totalBuildSkill += employee.ConstructionSkill;
-        currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
+        totalConstructionSkill += employee.ConstructionSkill;
+        currentConstructionSpeed = 1f + (totalConstructionSkill / 10f);
     }
 
     void RemoveEmployeeSkill(EmployeeStateMachine employee, Building building)
     {
         if (building != this) { return; }
 
-        totalBuildSkill -= employee.ConstructionSkill;
-        currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
+        totalConstructionSkill -= employee.ConstructionSkill;
+
+        currentConstructionSpeed = (totalConstructionSkill > 0) ? 1f + (totalConstructionSkill / 10f) : 0;
     }
 
     private void Update()
     {
         if (isConstructionComplete) { return; }
-        if (totalBuildSkill == 0) { return; }
+        if (totalConstructionSkill == 0) { return; }
 
         currentConstructionProgress += currentConstructionSpeed * Time.deltaTime;
         currentConstructionProgress = Mathf.Clamp(currentConstructionProgress, 0f, maxConstructionProgress);
