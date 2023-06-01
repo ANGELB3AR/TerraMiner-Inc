@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,13 @@ public class Building : MonoBehaviour
     [Tooltip("Icon representing building to appear on menus")]
     [SerializeField] Sprite buildingIcon = null;
 
-    bool isConstructionComplete = false;
+    [field:SerializeField] public float ConstructingDistance { get; private set; } = 2f;
+    public bool isConstructionComplete { get; private set; } = false;
+    
     float currentConstructionProgress = 0f;
-    int totalBuildSkill = 0;
+    int totalConstructionSkill = 0;
     float currentConstructionSpeed = 1f;
 
-    [field:SerializeField] public float ConstructingDistance { get; private set; } = 2f;
 
     public bool GetConstructionCompleteStatus()
     {
@@ -48,36 +50,37 @@ public class Building : MonoBehaviour
 
     private void OnEnable()
     {
-        Employee.OnEmployeeStartedConstruction += AddEmployeeSkill;
-        Employee.OnEmployeeStoppedConstruction += RemoveEmployeeSkill;
+        Builder.OnEmployeeStartedConstruction += AddEmployeeSkill;
+        Builder.OnEmployeeStoppedConstruction += RemoveEmployeeSkill;
     }
 
     private void OnDisable()
     {
-        Employee.OnEmployeeStartedConstruction -= AddEmployeeSkill;
-        Employee.OnEmployeeStoppedConstruction -= RemoveEmployeeSkill;
+        Builder.OnEmployeeStartedConstruction -= AddEmployeeSkill;
+        Builder.OnEmployeeStoppedConstruction -= RemoveEmployeeSkill;
     }
 
-    void AddEmployeeSkill(Employee employee, Building building)
+    void AddEmployeeSkill(EmployeeStateMachine employee, Building building)
     {
         if (building != this) { return; }
 
-        totalBuildSkill += employee.GetConstructionSkill();
-        currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
+        totalConstructionSkill += employee.ConstructionSkill;
+        currentConstructionSpeed = 1f + (totalConstructionSkill / 10f);
     }
 
-    void RemoveEmployeeSkill(Employee employee, Building building)
+    void RemoveEmployeeSkill(EmployeeStateMachine employee, Building building)
     {
         if (building != this) { return; }
 
-        totalBuildSkill -= employee.GetConstructionSkill();
-        currentConstructionSpeed = 1f + (totalBuildSkill / 10f);
+        totalConstructionSkill -= employee.ConstructionSkill;
+
+        currentConstructionSpeed = (totalConstructionSkill > 0) ? 1f + (totalConstructionSkill / 10f) : 0;
     }
 
     private void Update()
     {
         if (isConstructionComplete) { return; }
-        if (totalBuildSkill == 0) { return; }
+        if (totalConstructionSkill == 0) { return; }
 
         currentConstructionProgress += currentConstructionSpeed * Time.deltaTime;
         currentConstructionProgress = Mathf.Clamp(currentConstructionProgress, 0f, maxConstructionProgress);

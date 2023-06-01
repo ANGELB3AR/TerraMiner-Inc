@@ -13,13 +13,10 @@ public class AlienIdlingState : AlienBaseState
     {
         stateMachine.Movement.StopMoving();
 
-        if (CheckForTargetEmployees())
+        if (CheckForTargets())
         {
             stateMachine.SwitchState(new AlienChasingState(stateMachine));
-        }
-        else if (CheckForTargetBuildings())
-        {
-            stateMachine.SwitchState(new AlienSabotagingState(stateMachine));
+            return;
         }
 
         wanderWaitTime = Random.Range(

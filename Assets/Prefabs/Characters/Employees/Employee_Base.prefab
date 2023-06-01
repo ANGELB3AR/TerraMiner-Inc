@@ -10,14 +10,16 @@ GameObject:
   m_Component:
   - component: {fileID: 3153317858567926492}
   - component: {fileID: 3153317858567926491}
-  - component: {fileID: 1422365171743656098}
+  - component: {fileID: 1985401942285441272}
   - component: {fileID: 3153317858567926490}
   - component: {fileID: -365083827237010316}
-  - component: {fileID: 3153317858567926489}
+  - component: {fileID: 6543420154770162302}
+  - component: {fileID: 2057202073063564351}
+  - component: {fileID: 6382252973794682155}
   - component: {fileID: 1524172399}
   - component: {fileID: 4803966635850032849}
   - component: {fileID: 8060623613959112556}
-  - component: {fileID: 2057202073063564351}
+  - component: {fileID: 3153317858567926489}
   - component: {fileID: 8012214030526103289}
   m_Layer: 6
   m_Name: Employee_Base
@@ -65,7 +67,7 @@ NavMeshAgent:
   m_BaseOffset: -0.03
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1422365171743656098
+--- !u!114 &1985401942285441272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,19 +76,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3153317858567926493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e4501a7ef0a284db3f30a00339b60d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eddaa8d31d592542b0cc5961dbe44a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3067802551985163751}
-  movement: {fileID: 3153317858567926490}
-  fighter: {fileID: -365083827237010316}
-  health: {fileID: 2057202073063564351}
-  selectionOutline: {fileID: 1524172399}
-  hoverOutline: {fileID: 4803966635850032849}
-  awarenessDistance: 8
-  attackRange: 12
-  lookSpeed: 200
-  constructionSkill: 1
+  <Animator>k__BackingField: {fileID: 3067802551985163751}
+  <Movement>k__BackingField: {fileID: 3153317858567926490}
+  <Fighter>k__BackingField: {fileID: -365083827237010316}
+  <Builder>k__BackingField: {fileID: 6543420154770162302}
+  <Health>k__BackingField: {fileID: 2057202073063564351}
+  <AwarenessDistance>k__BackingField: 10
+  <AttackRange>k__BackingField: 20
+  <LookSpeed>k__BackingField: 200
+  <ConstructionSkill>k__BackingField: 1
 --- !u!114 &3153317858567926490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,29 +180,45 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &3153317858567926489
-CapsuleCollider:
+--- !u!114 &6543420154770162302
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153317858567926493}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.37
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc924309fb9f2e49938e5a62cb48d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2057202073063564351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82854968af5dd0d42ab410af545e2a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &6382252973794682155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153317858567926493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fcf286b495c9b44b5e7bb0dc29ad9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionOutline: {fileID: 1524172399}
+  hoverOutline: {fileID: 4803966635850032849}
 --- !u!114 &1524172399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,19 +1506,29 @@ MonoBehaviour:
   <contextMenuTitle>k__BackingField: 
   <contextMenuButtonTypes>k__BackingField: 020000000100000000000000
   <buildingsAvailableToBuild>k__BackingField: []
---- !u!114 &2057202073063564351
-MonoBehaviour:
+--- !u!136 &3153317858567926489
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153317858567926493}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82854968af5dd0d42ab410af545e2a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
+  serializedVersion: 2
+  m_Radius: 0.37
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &8012214030526103289
 Rigidbody:
   m_ObjectHideFlags: 0

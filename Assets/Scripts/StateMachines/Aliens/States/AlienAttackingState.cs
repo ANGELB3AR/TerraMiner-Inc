@@ -15,9 +15,20 @@ public class AlienAttackingState : AlienBaseState
 
     public override void Tick(float deltaTime)
     {
-        FaceTarget();
+        if (stateMachine.Attacker.GetCurrentTarget() != null)
+        {
+            FaceTarget();
+        }
+        else
+        {
+            stateMachine.SwitchState(new AlienIdlingState(stateMachine));
+        }
 
-        if (!IsWithinAttackRange())
+        if (IsWithinAttackRange() && !stateMachine.Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        {
+            stateMachine.SwitchState(new AlienAttackingState(stateMachine));
+        }
+        else if (!IsWithinAttackRange())
         {
             stateMachine.SwitchState(new AlienChasingState(stateMachine));
         }

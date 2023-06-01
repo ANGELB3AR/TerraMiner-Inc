@@ -94,7 +94,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.25
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRaycastOrigin: {fileID: 5501453877382139566}
   attackDamage: 1
+  <AttackRange>k__BackingField: 0.5
 --- !u!195 &6988346850499098585
 NavMeshAgent:
   m_ObjectHideFlags: 0
