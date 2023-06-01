@@ -14,8 +14,6 @@ public class Fighter : MonoBehaviour
     [SerializeField] Transform weaponSlot = null;
     [Header("Aiming")]
     [SerializeField] MultiAimConstraint aimRig = null;
-    [SerializeField] TwoBoneIKConstraint offHandAimRig = null;
-    [SerializeField] TwoBoneIKConstraint offHandIdleRig = null;
     [SerializeField] Transform aimTarget = null;
     [SerializeField] Vector3 aimOffset = new Vector3();
     [SerializeField] AnimationCurve aimRigWeightCurve;
@@ -95,10 +93,7 @@ public class Fighter : MonoBehaviour
     public void SetAimRigWeights(bool isAiming)
     {
         int aimRigWeight = (isAiming) ? 1 : 0;
-        int idleRigWeight = (isAiming) ? 0 : 1;
 
         aimRig.weight = aimRigWeightCurve.Evaluate(aimRigWeight);
-        offHandAimRig.weight = aimRigWeightCurve.Evaluate(aimRigWeight);
-        offHandIdleRig.weight = aimRigWeightCurve.Evaluate(idleRigWeight);
     }
 }
