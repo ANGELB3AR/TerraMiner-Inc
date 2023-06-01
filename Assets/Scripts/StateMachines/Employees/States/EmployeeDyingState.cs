@@ -10,6 +10,8 @@ public class EmployeeDyingState : EmployeeBaseState
     {
         stateMachine.Animator.SetBool(stateMachine.isDead, true);
         stateMachine.Fighter.SetAimRigWeights(false);
+
+        stateMachine.Movement.StopMoving();
     }
 
     public override void Tick(float deltaTime) { }

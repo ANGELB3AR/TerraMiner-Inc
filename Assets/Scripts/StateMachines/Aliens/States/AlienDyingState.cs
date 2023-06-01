@@ -9,6 +9,8 @@ public class AlienDyingState : AlienBaseState
     public override void Enter()
     {
         stateMachine.Animator.SetBool(stateMachine.isDead, true);
+
+        stateMachine.Movement.StopMoving();
     }
 
     public override void Tick(float deltaTime) { }

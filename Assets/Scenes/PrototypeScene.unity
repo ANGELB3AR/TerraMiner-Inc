@@ -2693,6 +2693,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5848216831246394333, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
+      propertyPath: m_Data.m_Offset.y
+      value: -11.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848216831246394333, guid: 0995d90bba8e59f4ca019f18f776e6ba, type: 3}
+      propertyPath: m_Data.m_MaintainOffset
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
