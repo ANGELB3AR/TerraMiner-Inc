@@ -24,6 +24,7 @@ public class EmployeeStateMachine : StateMachine
     public readonly int isAiming = Animator.StringToHash("IsAiming");
     public readonly int impact = Animator.StringToHash("Impact");
     public readonly int isDead = Animator.StringToHash("IsDead");
+    public readonly int isBuilding = Animator.StringToHash("IsBuilding");
 
 
     private void OnEnable()
@@ -51,6 +52,8 @@ public class EmployeeStateMachine : StateMachine
     private void Health_OnDied()
     {
         SwitchState(new EmployeeDyingState(this));
+        
+        gameObject.SetActive(false);
     }
 
     #region Public Methods

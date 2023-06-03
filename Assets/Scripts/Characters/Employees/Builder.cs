@@ -9,6 +9,8 @@ public class Builder : MonoBehaviour
     bool isConstructingBuilding = false;
     EmployeeStateMachine employee;
 
+    public event Action OnStartedConstruction;
+
     public static event Action<EmployeeStateMachine, Building> OnEmployeeStartedConstruction;
     public static event Action<EmployeeStateMachine, Building> OnEmployeeStoppedConstruction;
 
@@ -30,7 +32,6 @@ public class Builder : MonoBehaviour
         if (IsConstructionComplete())
         {
             StopConstruction();
-            buildingToConstruct = null;
         }
     }
 
@@ -38,6 +39,7 @@ public class Builder : MonoBehaviour
     {
         isConstructingBuilding = true;
         OnEmployeeStartedConstruction?.Invoke(employee, buildingToConstruct);
+        OnStartedConstruction?.Invoke();
     }
 
     bool IsWithinConstructionRange()
@@ -54,6 +56,7 @@ public class Builder : MonoBehaviour
     {
         isConstructingBuilding = false;
         OnEmployeeStoppedConstruction?.Invoke(employee, buildingToConstruct);
+        buildingToConstruct = null;
     }
 
     public bool IsConstructionComplete()

@@ -9,7 +9,7 @@ public class EmployeeBuildingState : EmployeeBaseState
 
     public override void Enter() 
     {
-        
+        stateMachine.Builder.OnStartedConstruction += Builder_OnStartedConstruction;
     }
 
     public override void Tick(float deltaTime)
@@ -28,5 +28,16 @@ public class EmployeeBuildingState : EmployeeBaseState
     public override void Exit()
     {
         stateMachine.Builder.StopConstruction();
+
+        stateMachine.Animator.SetBool(stateMachine.isBuilding, false);
+
+        stateMachine.Builder.OnStartedConstruction -= Builder_OnStartedConstruction;
     }
+
+
+    private void Builder_OnStartedConstruction()
+    {
+        stateMachine.Animator.SetBool(stateMachine.isBuilding, true);
+    }
+
 }
