@@ -3108,7 +3108,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   zoomSpeed: 3
-  zoomLimit: {x: 5, y: 75}
+  zoomLimit: {x: 5, y: 100}
   minPanSpeed: 1
   maxPanSpeed: 10
   rotationSpeed: 50
