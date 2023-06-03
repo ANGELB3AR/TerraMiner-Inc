@@ -6,13 +6,17 @@ using System;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float panSpeed = 2f;
+    [SerializeField] AnimationCurve panSpeedCurve = null;
     [SerializeField] float zoomSpeed = 3f;
     [SerializeField] Vector2 zoomLimit = Vector2.zero;
+    [SerializeField] float minPanSpeed = 1f;
+    [SerializeField] float maxPanSpeed = 10f;
+
 
     CinemachineInputProvider inputProvider;
     CinemachineVirtualCamera vCamMain;
     Transform cameraTransform;
+    float panTime = 0;
 
     private void Awake()
     {
@@ -51,9 +55,19 @@ public class CameraController : MonoBehaviour
     {
         Vector3 direction = PanDirection(x, y);
 
+        if (direction == Vector3.zero)
+        {
+            panTime = 0f;
+        }
+        
+        panTime += Time.deltaTime;
+
+        float currentZoom = cameraTransform.position.y;
+        float zoomLevel = Mathf.InverseLerp(zoomLimit.x, zoomLimit.y, currentZoom);
+
         cameraTransform.position = Vector3.Lerp(cameraTransform.position,
                                                 cameraTransform.position + direction,
-                                                panSpeed * Time.deltaTime);
+                                                panSpeedCurve.Evaluate(panTime) * Mathf.Lerp(minPanSpeed, maxPanSpeed, zoomLevel) * Time.deltaTime);
     }
 
     private Vector3 PanDirection(float x, float y)
