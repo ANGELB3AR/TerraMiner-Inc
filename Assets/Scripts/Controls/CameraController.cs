@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
 
     CinemachineVirtualCamera vCamMain;
     Transform cameraTransform;
-    InputControl rotationControl;
     float panTime = 0;
     Vector2 panInput = new Vector2();
     float zoomInput = 0f;
@@ -26,22 +25,11 @@ public class CameraController : MonoBehaviour
     {
         vCamMain = GetComponentInChildren<CinemachineVirtualCamera>();
         cameraTransform = vCamMain.VirtualCameraGameObject.transform;
-        rotationControl = InputSystem.FindControl("RotateCamera");
     }
 
     private void Update()
     {
-        Debug.Log(isRotatingCamera);
-        rotationControl = InputSystem.FindControl("RotateCamera");
-
-        if (rotationControl != null && rotationControl.IsPressed())
-        {
-            isRotatingCamera = true;
-        }
-        else
-        {
-            isRotatingCamera = false;
-        }
+        isRotatingCamera = (Mouse.current.rightButton.IsActuated(0.5f)) ? true : false;
 
         if (panInput.x != 0 || panInput.y != 0)
         {
@@ -68,11 +56,6 @@ public class CameraController : MonoBehaviour
     {
         zoomInput = value.Get<float>();
     }
-
-    //void OnRotateCamera(InputValue value)
-    //{
-    //    isRotatingCamera = value.isPressed;
-    //}
 
     private void ZoomScreen(float increment)
     {
@@ -108,23 +91,26 @@ public class CameraController : MonoBehaviour
 
         if (y >= Screen.height * 0.95f)
         {
-            direction.z += 1f;
+            direction -= cameraTransform.forward;   // Inverted direction to fix obscure bug
         }
         else if (y <= Screen.height * 0.05f)
         {
-            direction.z -= 1f;
+            direction += cameraTransform.forward;   // Inverted direction to fix obscure bug
         }
 
         if (x >= Screen.width * 0.95f)
         {
-            direction.x += 1f;
+            direction += cameraTransform.right;
         }
         else if (x <= Screen.width * 0.05f)
         {
-            direction.x -= 1f;
+            direction -= cameraTransform.right;
         }
 
-        return direction;
+        direction.z = direction.y;
+        direction.y = 0f;
+
+        return direction.normalized;
     }
 
     private void RotateScreen()
@@ -132,9 +118,10 @@ public class CameraController : MonoBehaviour
         Quaternion currentRotation = cameraTransform.rotation;
         float rotationValue = Mathf.Clamp(RotateDirection(), -1f, 1f);
         Quaternion rotationDelta = Quaternion.Euler(0f, rotationValue, 0f);
+
         Quaternion targetRotation = rotationDelta * currentRotation;
 
-        cameraTransform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
+        cameraTransform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     private float RotateDirection()
