@@ -7,6 +7,8 @@ using System;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] float panSpeed = 2f;
+    [SerializeField] float zoomSpeed = 3f;
+    [SerializeField] Vector2 zoomLimit = Vector2.zero;
 
     CinemachineInputProvider inputProvider;
     CinemachineVirtualCamera vCamMain;
@@ -25,9 +27,24 @@ public class CameraController : MonoBehaviour
         float y = inputProvider.GetAxisValue(1);
         float z = inputProvider.GetAxisValue(2);
 
-        if (x == 0 || y == 0) { return; }
+        if (x != 0 || y != 0)
+        {
+            PanScreen(x, y);
+        }
 
-        PanScreen(x, y);
+        if (z != 0)
+        {
+            ZoomScreen(z);
+        }
+    }
+
+    private void ZoomScreen(float increment)
+    {
+        float currentZoom = cameraTransform.position.y;
+        float targetZoom = Mathf.Clamp(currentZoom + increment, zoomLimit.x, zoomLimit.y);
+
+        Vector3 newPosition = new Vector3(cameraTransform.position.x, targetZoom, cameraTransform.position.z);
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, newPosition, zoomSpeed * Time.deltaTime);
     }
 
     void PanScreen(float x, float y)
