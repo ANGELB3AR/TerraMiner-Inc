@@ -3111,6 +3111,7 @@ MonoBehaviour:
   zoomLimit: {x: 5, y: 75}
   minPanSpeed: 1
   maxPanSpeed: 10
+  rotationSpeed: 3
 --- !u!114 &1475191619
 MonoBehaviour:
   m_ObjectHideFlags: 0

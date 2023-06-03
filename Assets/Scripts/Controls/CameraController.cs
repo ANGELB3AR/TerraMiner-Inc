@@ -12,21 +12,37 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 zoomLimit = Vector2.zero;
     [SerializeField] float minPanSpeed = 1f;
     [SerializeField] float maxPanSpeed = 10f;
+    [SerializeField] float rotationSpeed = 3f;
 
     CinemachineVirtualCamera vCamMain;
     Transform cameraTransform;
+    InputControl rotationControl;
     float panTime = 0;
     Vector2 panInput = new Vector2();
     float zoomInput = 0f;
+    bool isRotatingCamera = false;
 
     private void Awake()
     {
         vCamMain = GetComponentInChildren<CinemachineVirtualCamera>();
         cameraTransform = vCamMain.VirtualCameraGameObject.transform;
+        rotationControl = InputSystem.FindControl("RotateCamera");
     }
 
     private void Update()
     {
+        Debug.Log(isRotatingCamera);
+        rotationControl = InputSystem.FindControl("RotateCamera");
+
+        if (rotationControl != null && rotationControl.IsPressed())
+        {
+            isRotatingCamera = true;
+        }
+        else
+        {
+            isRotatingCamera = false;
+        }
+
         if (panInput.x != 0 || panInput.y != 0)
         {
             PanScreen(panInput.x, panInput.y);
@@ -35,6 +51,11 @@ public class CameraController : MonoBehaviour
         if (zoomInput != 0)
         {
             ZoomScreen(zoomInput);
+        }
+
+        if (isRotatingCamera)
+        {
+            RotateScreen();
         }
     }
 
@@ -47,6 +68,11 @@ public class CameraController : MonoBehaviour
     {
         zoomInput = value.Get<float>();
     }
+
+    //void OnRotateCamera(InputValue value)
+    //{
+    //    isRotatingCamera = value.isPressed;
+    //}
 
     private void ZoomScreen(float increment)
     {
@@ -82,20 +108,46 @@ public class CameraController : MonoBehaviour
 
         if (y >= Screen.height * 0.95f)
         {
-            direction.z += 1;
+            direction.z += 1f;
         }
         else if (y <= Screen.height * 0.05f)
         {
-            direction.z -= 1;
+            direction.z -= 1f;
         }
 
         if (x >= Screen.width * 0.95f)
         {
-            direction.x += 1;
+            direction.x += 1f;
         }
         else if (x <= Screen.width * 0.05f)
         {
-            direction.x -= 1;
+            direction.x -= 1f;
+        }
+
+        return direction;
+    }
+
+    private void RotateScreen()
+    {
+        Quaternion currentRotation = cameraTransform.rotation;
+        float rotationValue = Mathf.Clamp(RotateDirection(), -1f, 1f);
+        Quaternion rotationDelta = Quaternion.Euler(0f, rotationValue, 0f);
+        Quaternion targetRotation = rotationDelta * currentRotation;
+
+        cameraTransform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private float RotateDirection()
+    {
+        float direction = 0f;
+
+        if (panInput.x > Screen.width * 0.5f)
+        {
+            direction += 1f;
+        }
+        else if (panInput.x < Screen.width * 0.5f)
+        {
+            direction -= 1f;
         }
 
         return direction;
