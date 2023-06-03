@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -12,34 +13,39 @@ public class CameraController : MonoBehaviour
     [SerializeField] float minPanSpeed = 1f;
     [SerializeField] float maxPanSpeed = 10f;
 
-
-    CinemachineInputProvider inputProvider;
     CinemachineVirtualCamera vCamMain;
     Transform cameraTransform;
     float panTime = 0;
+    Vector2 panInput = new Vector2();
+    float zoomInput = 0f;
 
     private void Awake()
     {
-        inputProvider = GetComponentInChildren<CinemachineInputProvider>();
         vCamMain = GetComponentInChildren<CinemachineVirtualCamera>();
         cameraTransform = vCamMain.VirtualCameraGameObject.transform;
     }
 
     private void Update()
     {
-        float x = inputProvider.GetAxisValue(0);
-        float y = inputProvider.GetAxisValue(1);
-        float z = inputProvider.GetAxisValue(2);
-
-        if (x != 0 || y != 0)
+        if (panInput.x != 0 || panInput.y != 0)
         {
-            PanScreen(x, y);
+            PanScreen(panInput.x, panInput.y);
         }
 
-        if (z != 0)
+        if (zoomInput != 0)
         {
-            ZoomScreen(z);
+            ZoomScreen(zoomInput);
         }
+    }
+
+    void OnPanCamera(InputValue value)
+    {
+        panInput = value.Get<Vector2>();
+    }
+
+    void OnZoomCamera(InputValue value)
+    {
+        zoomInput = value.Get<float>();
     }
 
     private void ZoomScreen(float increment)
