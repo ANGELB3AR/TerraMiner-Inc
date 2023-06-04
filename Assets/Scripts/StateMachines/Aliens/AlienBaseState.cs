@@ -26,7 +26,7 @@ public abstract class AlienBaseState : State
         {
             if (target.gameObject.layer == LayerMask.NameToLayer("Employee"))
             {
-                if (!target.GetComponent<Health>().IsAlive) { continue; }
+                if (!target.GetComponent<Health>()!.IsAlive) { continue; }
 
                 float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
 
@@ -47,7 +47,7 @@ public abstract class AlienBaseState : State
         {
             if (target.gameObject.layer == LayerMask.NameToLayer("Building"))
             {
-                if (!target.GetComponent<Health>().IsAlive) { continue; }
+                if (!target.GetComponent<Health>()!.IsAlive) { continue; }
 
                 float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
 

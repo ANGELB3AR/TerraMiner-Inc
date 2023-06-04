@@ -26,7 +26,7 @@ public abstract class EmployeeBaseState : State
         {
             if (target.gameObject.layer == LayerMask.NameToLayer("Alien"))
             {
-                if (!target.GetComponent<Health>().IsAlive) { continue; }
+                if (!target.GetComponent<Health>()!.IsAlive) { continue; }
 
                 float targetDistance = Vector3.Distance(stateMachine.transform.position, target.transform.position);
 
