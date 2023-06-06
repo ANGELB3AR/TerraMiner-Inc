@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_LongRange
       objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 77096677841d129488bab1bfe148ab28, type: 3}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: Long Ranged Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: detectionRange
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: icon
       value: 

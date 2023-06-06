@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7907880900988562697}
-  - component: {fileID: 7599197416286141645}
+  - component: {fileID: 5653505426998758152}
+  - component: {fileID: -2237185203437703422}
   - component: {fileID: 2393079985910795849}
   - component: {fileID: 3850177551468003006}
   m_Layer: 8
@@ -35,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7599197416286141645
+--- !u!114 &5653505426998758152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,13 +45,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2327458849244726759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1151e0c4dc4a979448de9d4c5471a444, type: 3}
+  m_Script: {fileID: 11500000, guid: c74f539c318b0be4f98f3be0c70426ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxConstructionProgress: 10
+  maxConstructionProgress: 100
   buildingName: 
   buildingIcon: {fileID: 0}
   <ConstructingDistance>k__BackingField: 2
+  raycastWeapon: {fileID: -2237185203437703422}
+  detectionRange: 5
+--- !u!114 &-2237185203437703422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327458849244726759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1785facabc1d849974a2f8758d57c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSO: {fileID: 0}
+  raycastOrigin: {fileID: 0}
 --- !u!114 &2393079985910795849
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -78,6 +78,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_SMG03
       objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 1c10b93dac570ea4aa839b4c6156fddb, type: 3}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: Turret 03
+      objectReference: {fileID: 0}
     - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: icon
       value: 

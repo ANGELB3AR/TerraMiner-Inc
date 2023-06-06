@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("Building Settings")]
     [Tooltip("Maximum time to construct building (seconds)")]
     [SerializeField] float maxConstructionProgress = 100f;
 

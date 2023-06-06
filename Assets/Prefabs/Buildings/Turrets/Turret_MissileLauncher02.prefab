@@ -78,6 +78,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_MissileLauncher02
       objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 800871dfaf2993f41bbd78eb434b9a89, type: 3}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: Missile Launcher 02
+      objectReference: {fileID: 0}
     - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: icon
       value: 
