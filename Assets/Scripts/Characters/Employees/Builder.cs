@@ -37,6 +37,7 @@ public class Builder : MonoBehaviour
 
     void BeginConstruction()
     {
+        employee.Movement.StopMoving();
         isConstructingBuilding = true;
         OnEmployeeStartedConstruction?.Invoke(employee, buildingToConstruct);
         OnStartedConstruction?.Invoke();

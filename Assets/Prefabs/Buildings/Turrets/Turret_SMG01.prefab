@@ -78,6 +78,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_SMG01
       objectReference: {fileID: 0}
+    - target: {fileID: 4882415139445408009, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882415139445408009, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: buildingIcon
       value: 
@@ -85,6 +93,14 @@ PrefabInstance:
     - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: buildingName
       value: Turret 01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998930069095406462, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998930069095406462, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: icon

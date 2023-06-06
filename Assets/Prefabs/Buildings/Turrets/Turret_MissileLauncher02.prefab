@@ -86,6 +86,14 @@ PrefabInstance:
       propertyPath: buildingName
       value: Missile Launcher 02
       objectReference: {fileID: 0}
+    - target: {fileID: 6998930069095406462, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998930069095406462, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7599197416286141645, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: icon
       value: 

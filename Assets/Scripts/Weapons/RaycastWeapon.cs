@@ -52,7 +52,6 @@ public class RaycastWeapon : MonoBehaviour
 
         muzzleFlashEffect = Instantiate(weaponSO.muzzleFlashEffect, raycastOrigin);
         bulletHitEffect = Instantiate(weaponSO.hitEffect, hitInfo.point, Quaternion.identity);
-        
     }
 
     public bool Fire()
