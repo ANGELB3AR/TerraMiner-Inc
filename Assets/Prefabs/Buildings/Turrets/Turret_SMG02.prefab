@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6837918858518583017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2573364514627882964}
+  m_Layer: 0
+  m_Name: RaycastOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2573364514627882964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837918858518583017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.039, z: 2.412}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 607185392938065815}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &568496438742841981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8,10 +39,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2237185203437703422, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: raycastOrigin
+      value: 
+      objectReference: {fileID: 2573364514627882964}
     - target: {fileID: 2327458849244726759, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_Name
       value: Turret_SMG02
       objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: turretPivot
+      value: 
+      objectReference: {fileID: 611217916975495359}
     - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: buildingIcon
       value: 
@@ -88,6 +127,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8245407583386421036, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: e1ca3a2f3378e6d45a6280ef9f87f31a, type: 3}
+    - target: {fileID: 8245407583386421036, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: SMG02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -159,11 +206,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4679944013624156, guid: 121432c6b8493534cb89dae567754a46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2573364514627882964}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 121432c6b8493534cb89dae567754a46, type: 3}
 --- !u!4 &607073965082653681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4860982568591162, guid: 121432c6b8493534cb89dae567754a46, type: 3}
+  m_PrefabInstance: {fileID: 611794141409520843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &607185392938065815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4679944013624156, guid: 121432c6b8493534cb89dae567754a46, type: 3}
+  m_PrefabInstance: {fileID: 611794141409520843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &611217916975495359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1966969390404724, guid: 121432c6b8493534cb89dae567754a46, type: 3}
   m_PrefabInstance: {fileID: 611794141409520843}
   m_PrefabAsset: {fileID: 0}

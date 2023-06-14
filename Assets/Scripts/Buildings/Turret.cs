@@ -3,23 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : Building
+public class Turret : MonoBehaviour
 {
     [Header("Turret Settings")]
     [SerializeField] RaycastWeapon raycastWeapon = null;
     [SerializeField] WeaponSO weaponSO = null;
+    [SerializeField] Building building = null;
+    [SerializeField] GameObject healthBarVisual = null;
+    [SerializeField] GameObject turretPivot = null;
+
     [SerializeField] float detectionRange = 5f;
     [SerializeField] float rotationSpeed = 5f;
 
     GameObject currentTarget = null;
+    bool turretReady = false;
+
+    private void OnEnable()
+    {
+        building.OnConstructionComplete += Building_OnConstructionComplete;
+    }
+
+    private void OnDisable()
+    {
+        building.OnConstructionComplete -= Building_OnConstructionComplete;
+    }
 
     private void Start()
     {
-        raycastWeapon.Initialize(weaponSO);
+        healthBarVisual.SetActive(false);
+        raycastWeapon.enabled = false;
     }
 
     private void Update()
     {
+        if (!turretReady) { return; }
+
         CheckForTargets();
         
         if (currentTarget == null) { return; }
@@ -55,6 +73,17 @@ public class Turret : Building
 
     private void LookAtTarget()
     {
-        Vector3.RotateTowards(transform.forward, currentTarget.transform.position, rotationSpeed * Time.deltaTime, 0.0f);
+        Vector3 direction = (currentTarget.transform.position - turretPivot.transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        turretPivot.transform.rotation = Quaternion.Slerp(turretPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void Building_OnConstructionComplete()
+    {
+        healthBarVisual.SetActive(true);
+        raycastWeapon.enabled = true;
+        raycastWeapon.Initialize(weaponSO);
+        turretReady = true;
     }
 }

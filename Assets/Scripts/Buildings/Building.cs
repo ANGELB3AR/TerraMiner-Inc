@@ -22,6 +22,7 @@ public class Building : MonoBehaviour
     int totalConstructionSkill = 0;
     float currentConstructionSpeed = 1f;
 
+    public event Action OnConstructionComplete;
 
     public bool GetConstructionCompleteStatus()
     {
@@ -88,5 +89,6 @@ public class Building : MonoBehaviour
         if (currentConstructionProgress != maxConstructionProgress) { return; }
 
         isConstructionComplete = true;
+        OnConstructionComplete?.Invoke();
     }
 }

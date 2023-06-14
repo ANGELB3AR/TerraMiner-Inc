@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9067032465914843667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3317425281622599057}
+  m_Layer: 0
+  m_Name: RaycastOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3317425281622599057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067032465914843667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.11, z: 0.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1419262019174922334}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1414995384499498966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,9 +89,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4830735810107272, guid: 9e170f0ec6d303f46b27ec0840b9194d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3317425281622599057}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e170f0ec6d303f46b27ec0840b9194d, type: 3}
+--- !u!1 &1416000833907525198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1609202667612568, guid: 9e170f0ec6d303f46b27ec0840b9194d, type: 3}
+  m_PrefabInstance: {fileID: 1414995384499498966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1419262019174922334 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4830735810107272, guid: 9e170f0ec6d303f46b27ec0840b9194d, type: 3}
+  m_PrefabInstance: {fileID: 1414995384499498966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1419539931605160728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4550628783570126, guid: 9e170f0ec6d303f46b27ec0840b9194d, type: 3}
@@ -74,6 +118,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2237185203437703422, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: raycastOrigin
+      value: 
+      objectReference: {fileID: 3317425281622599057}
     - target: {fileID: 2327458849244726759, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_Name
       value: Turret_MissileLauncher03
@@ -86,6 +134,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: turretPivot
+      value: 
+      objectReference: {fileID: 1416000833907525198}
     - target: {fileID: 5653505426998758152, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: buildingIcon
       value: 
@@ -169,6 +221,14 @@ PrefabInstance:
     - target: {fileID: 7907880900988562697, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245407583386421036, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: c32d9cd2bd9e88a41a0d1a7e14d53304, type: 3}
+    - target: {fileID: 8245407583386421036, guid: faade618e51d7664d87cb2af0574afa7, type: 3}
+      propertyPath: buildingName
+      value: ML03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
